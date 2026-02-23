@@ -105,7 +105,6 @@
 }
 
 .input-group select option {
-    background: var(--bg-dark);
     color: white;
 }
 

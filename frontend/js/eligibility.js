@@ -1,6 +1,6 @@
 /**
  * Yojana.AI - Eligibility Step-Form Logic
- * Handles multi-step navigation, Aadhaar OCR integration, and final profile submission.
+ * Handles multi-step navigation and final profile submission.
  */
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('eligibility-form');

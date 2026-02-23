@@ -1,11 +1,12 @@
 # Yojana.AI 🚜🎓 – Intelligent Government Scheme Assistant
 
-Yojana.AI is a premium, AI-powered platform designed to bridge the information gap between the Indian government and its citizens. It helps users discover eligible schemes, auto-fills forms using OCR, and provides localized guides in multi-languages.
+Yojana.AI is a premium, AI-powered platform designed to bridge the information gap between the Indian government and its citizens. It helps users discover eligible schemes and provides localized guides in multi-languages.
 
 ## ✨ Features
 
 - **🚀 AI Eligibility Engine**: High-accuracy prediction of eligible schemes using Machine Learning (Decision Trees) and a robust rules-based engine.
-- **📸 OCR Aadhaar Integration**: Auto-fill residency and demographic data by simply uploading an Aadhaar card image.
+- [x] **New**: Interactive Particle Hero Background
+- [x] **🌐 Multilingual Support**: Real-time translation of scheme benefits into **Hindi, Bengali, Tamil, and Marathi**.
 - **🌐 Multilingual Support**: Real-time translation of scheme benefits into **Hindi, Bengali, Tamil, and Marathi**.
 - **📄 Personalized PDF Guides**: Download custom "How to Apply" checklists for every eligible scheme.
 - **🎨 Premium Experience**: Professional glassmorphism UI with smooth animations and perfect mobile responsiveness.
@@ -16,13 +17,12 @@ Yojana.AI is a premium, AI-powered platform designed to bridge the information g
 - **Backend**: Python (FastAPI), SQLAlchemy (SQLite)
 - **AI/ML**: Scikit-learn, joblib
 - **Frontend**: Vanilla HTML5, CSS3, Modern JavaScript
-- **Libraries**: `pytesseract` (OCR), `reportlab` (PDF), `deep-translator` (i18n)
+- **Libraries**: `reportlab` (PDF), `deep-translator` (i18n)
 
 ## 📦 Setup & Installation
 
 ### 1. Prerequisites
 - Python 3.8+
-- Tesseract OCR (installed on your system for Aadhaar OCR features)
 
 ### 2. Install Dependencies
 ```bash
@@ -54,7 +54,7 @@ Server will be live at `http://127.0.0.1:8000`.
 
 ## ✍️ Credits & Acknowledgments
 
-- **Lead Developer**: [Souvik Dey](https://github.com/SOUVIK-DEY-2024)
+- **Lead Developer**: [Souvik Dey](https://github.com/Souvik-Dey-2029)
 - **Development Partner**: Built with extensive collaborative assistance from **Antigravity (Google DeepMind)**. This project showcases the synergy between human creativity and advanced AI orchestration in building professional-grade software.
 
 ## 📄 License

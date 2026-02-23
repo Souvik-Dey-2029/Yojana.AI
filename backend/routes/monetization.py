@@ -16,7 +16,7 @@ async def get_plans():
                 "id": "pro",
                 "name": "Pro",
                 "price": 49,
-                "features": ["Personalized PDF Guides", "Unlimited OCR", "SMS Alerts", "Priority Support"]
+                "features": ["Personalized PDF Guides", "Priority AI Consultation", "SMS Alerts", "Priority Support"]
             },
             {
                 "id": "ngo",
