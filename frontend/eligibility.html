@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Eligibility - Yojana.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/eligibility.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <select id="lang-toggle" class="glass"
+                style="padding: 0.5rem 1rem; color: white; border-radius: 1rem; margin-right: 1.5rem; font-size: 0.9rem;">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+                <option value="ta">Tamil</option>
+                <option value="mr">Marathi</option>
+            </select>
+            <a href="eligibility.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 8rem;">
+        <div class="form-container glass">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="ocr-section glass"
+                style="margin-bottom: 2rem; padding: 1.5rem; text-align: center; border-style: dashed;">
+                <p style="font-size: 0.9rem; margin-bottom: 1rem;">🚀 Quick Tip: Upload Aadhaar to Auto-Fill</p>
+                <input type="file" id="ocr-upload" style="display: none;" accept="image/*">
+                <button type="button" class="btn" onclick="document.getElementById('ocr-upload').click()"
+                    style="background: rgba(16, 185, 129, 0.2); color: var(--accent); font-size: 0.9rem;">
+                    Upload Document (OCR)
+                </button>
+                <span id="ocr-status" style="display: block; font-size: 0.8rem; margin-top: 0.5rem;"></span>
+            </div>
+
+            <form id="eligibility-form">
+                <!-- Step 1: Personal -->
+                <div class="step active" id="step-1">
+                    <h2>Personal Information</h2>
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="e.g. 25" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary next-step">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Location -->
+                <div class="step" id="step-2">
+                    <h2>Location & Category</h2>
+                    <div class="input-group">
+                        <label for="state">State</label>
+                        <select id="state" required>
+                            <option value="">Select State</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Other">Other (National)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="General">General</option>
+                            <option value="SC">SC</option>
+                            <option value="ST">ST</option>
+                            <option value="OBC">OBC</option>
+                            <option value="EWS">EWS</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn glass prev-step">Back</button>
+                        <button type="button" class="btn btn-primary next-step">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Finance -->
+                <div class="step" id="step-3">
+                    <h2>Financial Status</h2>
+                    <div class="input-group">
+                        <label for="income">Annual Family Income (in Lakhs)</label>
+                        <input type="number" step="0.1" id="income" placeholder="e.g. 2.5" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Do you own agricultural land?</label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <label><input type="radio" name="land" value="true"> Yes</label>
+                            <label><input type="radio" name="land" value="false" checked> No</label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn glass prev-step">Back</button>
+                        <button type="button" class="btn btn-primary next-step">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Work/Education -->
+                <div class="step" id="step-4">
+                    <h2>Occupation & Education</h2>
+                    <div class="input-group">
+                        <label for="occupation">Current Occupation</label>
+                        <select id="occupation" required>
+                            <option value="Student">Student</option>
+                            <option value="Farmer">Farmer</option>
+                            <option value="Business Owner">Business Owner</option>
+                            <option value="Artisan">Artisan</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Unemployed">Unemployed</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="education">Highest Education</label>
+                        <select id="education" required>
+                            <option value="10th">10th Pass</option>
+                            <option value="12th">12th Pass</option>
+                            <option value="Graduate">Graduate</option>
+                            <option value="Post-Graduate">Post-Graduate</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn glass prev-step">Back</button>
+                        <button type="button" class="btn btn-primary next-step">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Final -->
+                <div class="step" id="step-5">
+                    <h2>Preferences</h2>
+                    <div class="input-group">
+                        <label>Do you have a physical disability?</label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <label><input type="radio" name="disability" value="true"> Yes</label>
+                            <label><input type="radio" name="disability" value="false" checked> No</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="language">Display Results In</label>
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi (हिन्दी)</option>
+                            <option value="bn">Bengali (বাংলা)</option>
+                            <option value="ta">Tamil (தமிழ்)</option>
+                            <option value="mr">Marathi (मराठी)</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn glass prev-step">Back</button>
+                        <button type="submit" class="btn btn-primary">Find Eligible Schemes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/eligibility.js"></script>
+</body>
+
+</html>

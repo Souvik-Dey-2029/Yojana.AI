@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Yojana.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .price-card {
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent);
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: -2rem;
+            background: var(--primary);
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html" class="active">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container"
+        style="padding-top: 10rem; padding-bottom: 6rem; display: flex; flex-direction: column; align-items: center;">
+        <div class="text-center" style="max-width: 800px;">
+            <h1 class="animate-fade-in" style="margin-bottom: 1.5rem;">Investment in <span
+                    class="floating">Information</span>.</h1>
+            <p class="animate-fade-in" style="animation-delay: 0.2s; font-size: 1.25rem;">Choose the professional plan
+                that fits your journey towards accessibility.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Free -->
+            <div class="price-card glass reveal-on-scroll">
+                <h3>Free</h3>
+                <div class="price">₹0<span>/mo</span></div>
+                <ul class="features-list">
+                    <li>Basic Eligibility Check</li>
+                    <li>30+ Schemes Search</li>
+                    <li>Local Language Support</li>
+                    <li>Community Forum</li>
+                </ul>
+                <a href="eligibility.html" class="btn glass" style="width: 100%;">Get Started</a>
+            </div>
+
+            <!-- Pro -->
+            <div class="price-card glass featured reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="badge">POPULAR</div>
+                <h3>Pro</h3>
+                <div class="price">₹49<span>/mo</span></div>
+                <ul class="features-list">
+                    <li>All Free Features</li>
+                    <li>Personalized PDF Guides</li>
+                    <li>OCR Auto-fill (Unlimited)</li>
+                    <li>SMS/Email Deadline Alerts</li>
+                    <li>Priority Chat Support</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Go Pro Now</button>
+            </div>
+
+            <!-- NGO -->
+            <div class="price-card glass reveal-on-scroll" style="transition-delay: 0.4s;">
+                <h3>NGO / Portal</h3>
+                <div class="price">₹499<span>/mo</span></div>
+                <ul class="features-list">
+                    <li>Bulk Eligibility Checks</li>
+                    <li>Village Dashboard</li>
+                    <li>Document Storage (10GB)</li>
+                    <li>White-label Reports</li>
+                    <li>API Access</li>
+                </ul>
+                <button class="btn glass" style="width: 100%;">Contact Sales</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

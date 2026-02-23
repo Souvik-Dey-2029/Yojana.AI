@@ -1,0 +1,21 @@
+age,income_lpa,gender,state,occupation,education,category,land_owned,disability,pm_kisan,swami_vivekananda_scholarship,mudra_loan,kanyashree,ews_scholarship,skill_india,startup_india_seed,pm_awas_yojana
+45,1.2,Male,Punjab,Farmer,10th,General,True,False,1,0,0,0,0,0,0,1
+19,1.5,Female,West Bengal,Student,12th,General,False,False,0,1,0,1,1,0,0,1
+30,5.0,Male,Maharashtra,Business Owner,Graduate,General,False,False,0,0,1,0,0,0,1,1
+22,0.8,Female,West Bengal,Student,Graduate,OBC,False,False,0,1,0,1,0,1,0,1
+50,2.5,Male,Karnataka,Farmer,8th,SC,True,False,1,0,0,0,0,0,0,1
+25,4.0,Female,Delhi,Entrepreneur,Post Graduate,General,False,False,0,0,1,0,0,0,1,1
+18,1.0,Male,Bihar,Student,12th,ST,False,False,0,0,0,0,0,1,0,1
+35,6.0,Male,Gujarat,Business Owner,Post Graduate,General,False,False,0,0,1,0,0,0,1,1
+21,0.5,Female,West Bengal,Student,12th,SC,False,False,0,1,0,1,0,1,0,1
+28,3.0,Male,Tamil Nadu,Unemployed,Graduate,OBC,False,False,0,0,0,0,0,1,0,1
+40,1.5,Female,Uttar Pradesh,Farmer,10th,General,True,False,1,0,0,0,0,0,0,1
+17,2.0,Female,West Bengal,Student,10th,General,False,False,0,1,0,1,1,1,0,1
+55,10.0,Male,Maharashtra,Entrepreneur,Graduate,General,False,False,0,0,1,0,0,0,1,1
+24,1.8,Male,West Bengal,Student,Post Graduate,General,False,False,0,1,0,0,1,1,0,1
+20,0.6,Female,West Bengal,Student,12th,General,False,True,0,1,0,1,1,1,0,1
+60,0.9,Male,Rajasthan,Farmer,Primary,ST,True,False,1,0,0,0,0,1,0,1
+23,12.0,Male,Karnataka,Entrepreneur,Post Graduate,General,False,False,0,0,1,0,0,0,1,0
+19,1.1,Female,West Bengal,Student,12th,OBC,False,False,0,1,0,1,0,1,0,1
+32,4.5,Male,Telangana,Business Owner,Graduate,General,False,False,0,0,1,0,0,0,1,1
+26,1.4,Female,West Bengal,Student,Graduate,General,False,False,0,1,0,0,1,1,0,1

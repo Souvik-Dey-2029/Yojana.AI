@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Eligible Schemes - Yojana.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/results.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <select id="lang-toggle" class="glass"
+                style="padding: 0.5rem 1rem; color: white; border-radius: 1rem; margin-right: 1.5rem; font-size: 0.9rem;">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+                <option value="ta">Tamil</option>
+                <option value="mr">Marathi</option>
+            </select>
+            <a href="eligibility.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <div class="results-container">
+        <header style="margin-bottom: 4rem; text-align: center;">
+            <h1 id="results-headline" class="animate-fade-in">Filtering Schemes for you...</h1>
+            <p id="results-subheadline" class="animate-fade-in" style="animation-delay: 0.2s;">Based on your profile,
+                here are the schemes you can apply for.</p>
+
+            <div class="search-box animate-fade-in"
+                style="animation-delay: 0.4s; margin-top: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                <input type="text" id="scheme-search" placeholder="Search schemes by name or keyword..." class="glass"
+                    style="width: 100%; padding: 1.25rem 2rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none;">
+            </div>
+        </header>
+
+        <div id="schemes-grid" class="schemes-grid">
+            <!-- Cards will be injected here -->
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Analyzing your eligibility...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/results.js"></script>
+</body>
+
+</html>
