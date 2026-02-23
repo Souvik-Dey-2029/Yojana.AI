@@ -1,5 +1,6 @@
 import json
 import os
+from deep_translator import GoogleTranslator
 
 SUPPORTED_LANGUAGES = {
     "en": "english",
@@ -39,12 +40,15 @@ def translate_text(text: str, target_lang: str) -> str:
         return TRANSLATION_CACHE[cache_key]
         
     try:
+        # Simple timeout or error handling for external service
         translated = GoogleTranslator(source='auto', target=target_lang).translate(text)
+        if not translated:
+            return text
         TRANSLATION_CACHE[cache_key] = translated
         save_cache()
         return translated
     except Exception as e:
-        print(f"Translation error: {e}")
+        print(f"Translation error for {target_lang}: {e}")
         return text
 
 def translate_scheme(scheme: dict, target_lang: str) -> dict:

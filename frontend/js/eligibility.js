@@ -102,17 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const formData = {
-            name: document.getElementById('name').value,
-            age: parseInt(document.getElementById('age').value),
-            gender: document.getElementById('gender').value,
-            state: document.getElementById('state').value,
-            category: document.getElementById('category').value,
-            income_lpa: parseFloat(document.getElementById('income').value),
-            land_owned: document.querySelector('input[name="land"]:checked').value === 'true',
-            occupation: document.getElementById('occupation').value,
-            education: document.getElementById('education').value,
-            disability: document.querySelector('input[name="disability"]:checked').value === 'true',
-            language: document.getElementById('language').value
+            name: document.getElementById('name').value || "User",
+            age: parseInt(document.getElementById('age').value) || 0,
+            gender: document.getElementById('gender').value || "Other",
+            state: document.getElementById('state').value || "Other (National)",
+            category: document.getElementById('category').value || "General",
+            income_lpa: parseFloat(document.getElementById('income').value) || 0,
+            land_owned: document.querySelector('input[name="land"]:checked')?.value === 'true',
+            occupation: document.getElementById('occupation').value || "Unemployed",
+            education: document.getElementById('education').value || "10th",
+            disability: document.querySelector('input[name="disability"]:checked')?.value === 'true',
+            language: document.getElementById('language').value || "en"
         };
 
         try {

@@ -106,7 +106,7 @@
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
     </nav>
 
-    <div class="payment-container glass reveal-on-scroll">
+    <div class="payment-container glass reveal-on-scroll" style="opacity: 1; transform: translateY(0); z-index: 10;">
         <div class="gateway-logo">
             <span style="font-size: 1.5rem;">🔒</span> Secure Checkout
         </div>
@@ -146,6 +146,7 @@
         <p style="color: var(--text-secondary);">Connecting to Secure Gateway</p>
     </div>
 
+    <script src="js/main.js"></script>
     <script>
         const tx = JSON.parse(localStorage.getItem('pendingTransaction'));
         if (tx) {
