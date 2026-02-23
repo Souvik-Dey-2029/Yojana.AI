@@ -10,11 +10,24 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Global Dropdown Visibility Fix */
+/* Global Dropdown Visibility Fix - Forced High Contrast */
+select {
+    background-color: var(--bg-card) !important;
+    color: white !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
 select option {
     background-color: #1e293b !important;
     color: white !important;
-    padding: 10px;
+    padding: 12px !important;
+}
+
+/* Ensure secondary dropdowns (like lang-toggle) also follow rules */
+.glass select,
+.glass option {
+    background-color: #0f172a !important;
+    color: white !important;
 }
 
 * {
@@ -272,17 +285,37 @@ nav {
 }
 
 /* Blog Styles */
+.insights {
+    padding: 10rem 2rem !important;
+}
+
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-    margin-bottom: 6rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
 }
 
 .blog-card {
-    padding: 2rem;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.blog-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.blog-image {
+    transition: var(--transition);
+}
+
+.blog-card:hover .blog-image {
+    filter: brightness(1.1);
 }
 
 .blog-tag {

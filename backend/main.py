@@ -37,7 +37,6 @@ app.add_middleware(
 app.include_router(eligibility.router, prefix="/api")
 app.include_router(schemes.router, prefix="/api")
 app.include_router(pdf.router, prefix="/api")
-app.include_router(ocr.router, prefix="/api")
 app.include_router(monetization.router, prefix="/api")
 
 # Serve Frontend
