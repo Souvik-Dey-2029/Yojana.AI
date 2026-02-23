@@ -22,26 +22,25 @@ for path in POSSIBLE_TESS_PATHS:
 
 @router.post("/ocr-extract")
 async def ocr_extract(file: UploadFile = File(...)):
+    print(f"DEBUG: OCR Request received for {file.filename}")
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="Only image files are supported.")
 
     # Check if tesseract is configured/present
     tess_installed = False
-    try:
-        if pytesseract.pytesseract.tesseract_cmd and os.path.exists(pytesseract.pytesseract.tesseract_cmd):
+    if pytesseract.pytesseract.tesseract_cmd and os.path.exists(pytesseract.pytesseract.tesseract_cmd):
+        tess_installed = True
+    else:
+        import shutil
+        if shutil.which("tesseract"):
             tess_installed = True
-        else:
-            import shutil
-            if shutil.which("tesseract"):
-                tess_installed = True
-    except:
-        pass
 
     if not tess_installed:
+        print("DEBUG: Tesseract not found. Returning fallback immediately.")
         return {
             "extracted": {"name": "Souvik Dey", "age": 28, "gender": "Male"},
             "status": "fallback",
-            "warning": "Tesseract OCR engine not found. Providing demo data."
+            "warning": "OCR engine not found. Using intelligent demo data."
         }
 
     try:

@@ -4,105 +4,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Yojana.AI</title>
+    <title>Secure Payment - Yojana.AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <style>
-        .checkout-container {
+        .payment-container {
             max-width: 500px;
-            margin: 10rem auto;
+            margin: 8rem auto;
             padding: 3rem;
-            text-align: center;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .payment-method {
+        .gateway-logo {
             display: flex;
-            gap: 1rem;
+            align-items: center;
             justify-content: center;
-            margin: 2rem 0;
+            gap: 10px;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .order-summary {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            color: white;
+            font-family: inherit;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .method {
             padding: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 1rem;
             cursor: pointer;
-            flex: 1;
             transition: all 0.3s ease;
         }
 
-        .method:hover,
         .method.active {
             border-color: var(--primary);
             background: rgba(99, 102, 241, 0.1);
         }
 
-        .price-display {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 2rem 0;
-            color: var(--accent);
-        }
-
-        #processing-overlay {
+        #processing-screen {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(6, 9, 22, 0.95);
-            display: none;
+            background: var(--bg-dark);
+            z-index: 100;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+        }
+
+        .spinner-large {
+            width: 80px;
+            height: 80px;
+            border: 6px solid rgba(255, 255, 255, 0.1);
+            border-top: 6px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-dark">
     <nav>
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
     </nav>
 
-    <div class="checkout-container glass reveal-on-scroll">
-        <h2 id="plan-name">Complete Your Subscription</h2>
-        <p>You are about to unlock premium government intelligence.</p>
-
-        <div class="price-display" id="plan-price">₹49</div>
-
-        <div class="payment-method">
-            <div class="method active">UPI / GPay</div>
-            <div class="method">Card</div>
+    <div class="payment-container glass reveal-on-scroll">
+        <div class="gateway-logo">
+            <span style="font-size: 1.5rem;">🔒</span> Secure Checkout
         </div>
 
-        <button class="btn btn-primary" style="width: 100%;" onclick="processPayment()">Pay Securely Now</button>
-        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary);">Secure 256-bit SSL Encrypted
-            Transaction</p>
+        <div class="order-summary">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Plan</span>
+                <strong id="summary-plan">Pro</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>Amount</span>
+                <strong style="color: var(--accent);" id="summary-price">₹49/mo</strong>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <div class="method active">UPI / Apps</div>
+            <div class="method">Cards</div>
+        </div>
+
+        <div class="form-group">
+            <label>Cardholder Name / UPI ID</label>
+            <input type="text" placeholder="e.g. souvik@okaxis">
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%; padding: 1.25rem;" onclick="processPayment()">Complete
+            Payment</button>
+
+        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary); opacity: 0.6;">
+            This is a non-functional simulation. No actual money will be charged.
+        </p>
     </div>
 
-    <div id="processing-overlay">
-        <div class="spinner"></div>
-        <h3 style="margin-top: 2rem;">Processing with Razorpay...</h3>
-        <p>Please do not refresh the page.</p>
+    <div id="processing-screen">
+        <div class="spinner-large"></div>
+        <h2 style="margin-top: 2rem;">Verifying Transaction...</h2>
+        <p style="color: var(--text-secondary);">Connecting to Secure Gateway</p>
     </div>
 
     <script>
-        const transaction = JSON.parse(localStorage.getItem('pendingTransaction'));
-        if (transaction) {
-            document.getElementById('plan-name').innerText = `Complete Your ${transaction.plan} Subscription`;
-            document.getElementById('plan-price').innerText = `₹${transaction.price}`;
+        const tx = JSON.parse(localStorage.getItem('pendingTransaction'));
+        if (tx) {
+            document.getElementById('summary-plan').innerText = tx.plan;
+            document.getElementById('summary-price').innerText = `₹${tx.price}/mo`;
         }
 
         function processPayment() {
-            const overlay = document.getElementById('processing-overlay');
-            overlay.style.display = 'flex';
+            const screen = document.getElementById('processing-screen');
+            screen.style.display = 'flex';
 
             setTimeout(() => {
-                overlay.innerHTML = `
-                    <div style="font-size: 4rem;">✅</div>
+                screen.innerHTML = `
+                    <div style="font-size: 5rem;">✅</div>
                     <h2 style="margin-top: 1rem;">Payment Successful!</h2>
-                    <p>Redirecting to your premium dashboard...</p>
+                    <p style="color: var(--text-secondary);">Your subscription is now active.</p>
                 `;
 
                 setTimeout(() => {

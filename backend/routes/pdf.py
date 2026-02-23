@@ -17,10 +17,24 @@ router = APIRouter()
 async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: Session = Depends(get_db)):
     scheme_obj = get_scheme_by_id(db, scheme_id)
     if not scheme_obj:
-        return {"error": "Scheme not found"}
+        print(f"DEBUG: PDF Generation failed - Scheme {scheme_id} not found")
+        return Response(content="Scheme not found", status_code=404)
     
-    scheme = scheme_obj.__dict__
+    # Safely convert to dict
+    try:
+        scheme = {
+            "name": scheme_obj.name,
+            "benefits": scheme_obj.benefits,
+            "required_documents": scheme_obj.required_documents if isinstance(scheme_obj.required_documents, list) else [],
+            "apply_url": scheme_obj.apply_url,
+            "deadline": scheme_obj.deadline,
+            "category": getattr(scheme_obj, 'category', 'General')
+        }
+    except Exception as e:
+        print(f"DEBUG: Mapping error: {e}")
+        return Response(content=f"Error processing scheme data: {str(e)}", status_code=500)
 
+    print(f"DEBUG: Starting PDF generation for {scheme['name']}")
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
