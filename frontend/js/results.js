@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="card-footer" style="flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
                     <span class="deadline" style="width: 100%; margin-bottom: 0.5rem; font-size: 0.8rem; opacity: 0.7;">Deadline: ${scheme.deadline}</span>
                     <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1; text-align: center;">Apply Now</a>
-                    <button onclick="downloadPDFGuide('${scheme.id}', '${userProfile.name}')" id="btn-guide-${scheme.id}" class="btn glass" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1; border-color: var(--primary); color: white;">AI Guide</button>
+                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1; border-color: var(--primary); color: white;">AI Guide</button>
                 </div>
             `;
             grid.appendChild(card);
@@ -102,7 +102,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // PDF Loader (Global)
-async function downloadPDFGuide(schemeId, userName) {
+async function downloadPDFGuide(schemeId) {
+    const profile = JSON.parse(localStorage.getItem('userProfile')) || { name: 'Applicant' };
+    const userName = profile.name;
     const btn = document.getElementById(`btn-guide-${schemeId}`);
     if (!btn) return;
 

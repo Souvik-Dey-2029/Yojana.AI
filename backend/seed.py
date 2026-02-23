@@ -20,7 +20,13 @@ SCHEMES_LIST = [
         "required_documents": ["Aadhaar Card", "Bank Passbook", "Land Records"],
         "deadline": "Rolling",
         "apply_url": "https://pmkisan.gov.in/",
-        "category": "Agriculture"
+        "category": "Agriculture",
+        "guidance_steps": [
+            "Visit the official PM-Kisan portal.",
+            "Click on 'New Farmer Registration' and enter your Aadhaar number.",
+            "Fill in the required land details and upload your passbook.",
+            "Submit and note down your reference number for tracking."
+        ]
     },
     {
         "id": "swami_vivekananda_scholarship",
@@ -36,7 +42,13 @@ SCHEMES_LIST = [
         "required_documents": ["Previous Marksheet", "Income Certificate", "Income Affidavit", "Aadhaar Card"],
         "deadline": "31st Dec",
         "apply_url": "https://svmcm.wbhed.gov.in/",
-        "category": "Education"
+        "category": "Education",
+        "guidance_steps": [
+            "Register on the SVMCM portal with your academic details.",
+            "Login and fill the detailed application form.",
+            "Upload scanned income certificates and marksheets.",
+            "Submit and wait for institutional verification."
+        ]
     },
     {
         "id": "mudra_loan",
@@ -51,7 +63,13 @@ SCHEMES_LIST = [
         "required_documents": ["Identity Proof", "Address Proof", "Business Project Report", "Bank Statement"],
         "deadline": "Monthly",
         "apply_url": "https://www.mudra.org.in/",
-        "category": "Finance"
+        "category": "Finance",
+        "guidance_steps": [
+            "Identify the category (Shishu, Kishore, Tarun) based on loan amount.",
+            "Download the Mudra loan application form from the website.",
+            "Approach your nearest bank branch with the project report.",
+            "Submit documents and complete the KYC process at the bank."
+        ]
     },
     {
         "id": "kanyashree",
@@ -204,10 +222,9 @@ SCHEMES_LIST = [
 def seed_db():
     db = SessionLocal()
     try:
-        # Check if already seeded
-        if db.query(Scheme).count() > 0:
-            print("Database already contains schemes. Skipping seed.")
-            return
+        # Clear and Re-seed to ensure schema updates are applied
+        db.query(Scheme).delete()
+        print("Cleared existing schemes for fresh seed...")
 
         for s_data in SCHEMES_LIST:
             scheme = Scheme(**s_data)

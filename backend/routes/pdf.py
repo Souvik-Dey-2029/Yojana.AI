@@ -28,11 +28,20 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
             "required_documents": scheme_obj.required_documents if isinstance(scheme_obj.required_documents, list) else [],
             "apply_url": scheme_obj.apply_url,
             "deadline": scheme_obj.deadline,
-            "category": getattr(scheme_obj, 'category', 'General')
+            "category": getattr(scheme_obj, 'category', 'General'),
+            "guidance_steps": scheme_obj.guidance_steps if isinstance(scheme_obj.guidance_steps, list) else []
         }
     except Exception as e:
         print(f"DEBUG: Mapping error: {e}")
         return Response(content=f"Error processing scheme data: {str(e)}", status_code=500)
+
+    # Fallback to generic steps if specific guidance isn't found
+    execution_steps = scheme["guidance_steps"] if scheme["guidance_steps"] else [
+        f"1. Secure URL: {scheme['apply_url']}",
+        f"2. Digitization: Ensure all checked documents are scanned clearly.",
+        f"3. Deadline Awareness: Submit latest by {scheme['deadline']}.",
+        "4. Status Monitoring: Use the tracking ID generated upon submission."
+    ]
 
     print(f"DEBUG: Starting PDF generation for {scheme['name']}")
     buffer = BytesIO()
@@ -67,7 +76,7 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
 
     # --- 4. AI Strategic Overview ---
     p.setFont("Helvetica-Bold", 14)
-    p.drawString(0.75 * inch, height - 2.8 * inch, "🤖 AI STRATEGIC OVERVIEW")
+    p.drawString(0.75 * inch, height - 2.8 * inch, "AI STRATEGIC OVERVIEW")
     
     p.setFont("Helvetica", 11)
     p.setFillColorRGB(0.8, 0.8, 0.8)
@@ -78,7 +87,7 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     words = overview_text.split()
     line = ""
     for word in words:
-        if p.stringWidth(line + word + " ") < 6.5 * inch:
+        if p.stringWidth(line + word + " ", "Helvetica", 11) < 6.5 * inch:
             line += word + " "
         else:
             p.drawString(0.75 * inch, y, line)
@@ -90,7 +99,7 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     y -= 40
     p.setFillColor(colors.white)
     p.setFont("Helvetica-Bold", 14)
-    p.drawString(0.75 * inch, y, "🗺️ APPLICATION ROADMAP")
+    p.drawString(0.75 * inch, y, "APPLICATION ROADMAP")
     
     y -= 25
     p.setFont("Helvetica", 11)
@@ -108,19 +117,14 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     y -= 30
     p.setFillColor(colors.white)
     p.setFont("Helvetica-Bold", 14)
-    p.drawString(0.75 * inch, y, "⚙️ EXECUTION STEPS")
+    p.drawString(0.75 * inch, y, "EXECUTION STEPS")
     
     y -= 25
     p.setFont("Helvetica", 11)
     p.setFillColorRGB(0.8, 0.8, 0.8)
-    steps = [
-        f"1. Secure URL: {scheme['apply_url']}",
-        f"2. Digitization: Ensure all checked documents are scanned clearly.",
-        f"3. Deadline Awareness: Submit latest by {scheme['deadline']}.",
-        "4. Status Monitoring: Use the tracking ID generated upon submission."
-    ]
-    for step in steps:
-        p.drawString(0.75 * inch, y, step)
+    for i, step in enumerate(execution_steps):
+        prefix = f"{i+1}. " if not step.startswith(str(i+1)) else ""
+        p.drawString(0.75 * inch, y, f"{prefix}{step}")
         y -= 20
 
     # --- 7. Footer & Security Watermark ---

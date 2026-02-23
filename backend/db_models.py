@@ -22,6 +22,7 @@ class Scheme(Base):
     deadline = Column(String)
     apply_url = Column(String)
     category = Column(String) # e.g., "Education", "Agri", "Social"
+    guidance_steps = Column(JSON) # List of specific application steps
 
 class UserSubscription(Base):
     __tablename__ = "subscriptions"
