@@ -5,7 +5,6 @@ import json
 Base.metadata.create_all(bind=engine)
 
 SCHEMES_LIST = [
-    # --- PHASE 1/2 SCHEMES ---
     {
         "id": "pm_kisan",
         "name": "PM Kisan Samman Nidhi",
@@ -21,6 +20,7 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "https://pmkisan.gov.in/",
         "category": "Agriculture",
+        "popularity": 95,
         "guidance_steps": [
             "Visit the official PM-Kisan portal.",
             "Click on 'New Farmer Registration' and enter your Aadhaar number.",
@@ -43,6 +43,7 @@ SCHEMES_LIST = [
         "deadline": "31st Dec",
         "apply_url": "https://svmcm.wbhed.gov.in/",
         "category": "Education",
+        "popularity": 88,
         "guidance_steps": [
             "Register on the SVMCM portal with your academic details.",
             "Login and fill the detailed application form.",
@@ -64,6 +65,7 @@ SCHEMES_LIST = [
         "deadline": "Monthly",
         "apply_url": "https://www.mudra.org.in/",
         "category": "Finance",
+        "popularity": 92,
         "guidance_steps": [
             "Identify the category (Shishu, Kishore, Tarun) based on loan amount.",
             "Download the Mudra loan application form from the website.",
@@ -87,9 +89,9 @@ SCHEMES_LIST = [
         "required_documents": ["Birth Certificate", "Unmarried Declaration", "Aadhaar Card", "Bank Passbook"],
         "deadline": "Dec 31",
         "apply_url": "https://www.wbkanyashree.gov.in/",
-        "category": "Social Welfare"
+        "category": "Social Welfare",
+        "popularity": 85
     },
-    # --- NEW PHASE 3 SCHEMES (EXPANSION) ---
     {
         "id": "ayushman_bharat",
         "name": "Ayushman Bharat (PM-JAY)",
@@ -103,7 +105,98 @@ SCHEMES_LIST = [
         "required_documents": ["Aadhaar", "Ration Card", "Identity Proof"],
         "deadline": "Open",
         "apply_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1951508",
-        "category": "Health"
+        "category": "Health",
+        "popularity": 98
+    },
+    {
+        "id": "pm_awas_yojana",
+        "name": "PM Awas Yojana (PMAY)",
+        "icon": "🏠",
+        "description": "Housing for all by providing interest subsidies on home loans.",
+        "benefits": "Subsidy up to ₹2.67 Lakhs on home loan interest.",
+        "max_income": 1800000,
+        "eligible_states": ["All"],
+        "eligible_occupations": ["All"],
+        "eligible_categories": ["All"],
+        "required_documents": ["Aadhaar", "Income Proof", "Affidavit of No Pucca House"],
+        "deadline": "Dec 2026",
+        "apply_url": "https://pmaymis.gov.in/",
+        "category": "Housing",
+        "popularity": 96,
+        "guidance_steps": [
+            "Check the eligible category (EWS, LIG, MIG).",
+            "Apply online or through a registered bank/HFC.",
+            "Submit the declaration bahwa you do not own a pucca house.",
+            "Once approved, credit link subsidy will be added to your loan account."
+        ]
+    },
+    {
+        "id": "pm_ujjwala",
+        "name": "PM Ujjwala Yojana",
+        "icon": "🔥",
+        "description": "Providing clean cooking fuel to BPL households.",
+        "benefits": "Free LPG connection and first refill for eligible women.",
+        "max_income": 200000,
+        "eligible_states": ["All"],
+        "eligible_occupations": ["All"],
+        "eligible_categories": ["SC", "ST", "OBC", "General (BPL)"],
+        "gender": "Female",
+        "required_documents": ["Ration Card", "BPL Certificate", "Aadhaar Card"],
+        "deadline": "Ongoing",
+        "apply_url": "https://www.pmuy.gov.in/",
+        "category": "Social Welfare",
+        "popularity": 94
+    },
+    {
+        "id": "mgnrega",
+        "name": "MGNREGA Employment",
+        "icon": "⛏️",
+        "description": "Legal guarantee for at least 100 days of wage employment in a financial year.",
+        "benefits": "Guaranteed minimum wage and unemployment allowance if work not provided.",
+        "max_income": 5000000,
+        "eligible_states": ["All"],
+        "eligible_occupations": ["Artisan", "Unemployed", "Farmer", "Manual Labor"],
+        "eligible_categories": ["All"],
+        "required_documents": ["Job Card", "Aadhaar Card"],
+        "deadline": "Rolling",
+        "apply_url": "https://nrega.nic.in/",
+        "category": "Employment",
+        "popularity": 97
+    },
+    {
+        "id": "pm_shram_yogi",
+        "name": "PM Shram Yogi Maandhan (PM-SYM)",
+        "icon": "👴",
+        "description": "Voluntary and contributory pension scheme for unorganized workers.",
+        "benefits": "Minimum assured pension of ₹3,000 per month after age 60.",
+        "max_income": 180000,
+        "eligible_states": ["All"],
+        "eligible_occupations": ["Artisan", "Self-Employed", "Manual Labor", "Daily Wager"],
+        "eligible_categories": ["All"],
+        "min_age": 18,
+        "max_age": 40,
+        "required_documents": ["Savings Bank Account", "Aadhaar Card"],
+        "deadline": "Ongoing",
+        "apply_url": "https://maandhan.in/",
+        "category": "Social Welfare",
+        "popularity": 82
+    },
+    {
+        "id": "nsap_pension",
+        "name": "National Social Assistance Programme",
+        "icon": "👵",
+        "description": "Support to elderly, widows and disabled persons from BPL households.",
+        "benefits": "Monthly pension ranging from ₹200 to ₹500 (plus state contributions).",
+        "max_income": 100000,
+        "eligible_states": ["All"],
+        "eligible_occupations": ["All"],
+        "eligible_categories": ["General (BPL)"],
+        "min_age": 60,
+        "required_documents": ["BPL Card", "Age Proof", "Disability Certificate (if applicable)"],
+        "deadline": "Ongoing",
+        "apply_url": "https://nsap.nic.in/",
+        "category": "Social Welfare",
+        "popularity": 80
     },
     {
         "id": "pm_matru_vandana",
@@ -119,29 +212,31 @@ SCHEMES_LIST = [
         "required_documents": ["Mother-Child Protection Card", "Bank Account Details"],
         "deadline": "Ongoing",
         "apply_url": "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana",
-        "category": "Health"
+        "category": "Health",
+        "popularity": 86
     },
     {
         "id": "stand_up_india",
         "name": "Stand Up India Scheme",
         "icon": "📈",
-        "description": "Bank loans between ₹10 lakh and ₹1 Crore to at least one SC or ST borrower and at least one woman borrower per bank branch.",
+        "description": "Bank loans between ₹10 lakh and ₹1 Crore to SC/ST and Women entrepreneurs.",
         "benefits": "Accessible financing for setting up greenfield enterprises.",
         "max_income": 5000000,
         "eligible_states": ["All"],
         "eligible_occupations": ["Entrepreneur"],
-        "eligible_categories": ["SC", "ST"],
+        "eligible_categories": ["SC", "ST", "All (if Female)"],
         "required_documents": ["Business Plan", "Caste Certificate", "Bank Statements"],
         "deadline": "Open",
         "apply_url": "https://www.standupmitra.in/",
-        "category": "Finance"
+        "category": "Finance",
+        "popularity": 78
     },
     {
         "id": "pm_vishwakarma",
         "name": "PM Vishwakarma Scheme",
         "icon": "⚒️",
-        "description": "Support for traditional artisans and craftspeople in various sectors.",
-        "benefits": "Skill training, tool kit incentive, and collateral-free credit support.",
+        "description": "Support for traditional artisans and craftspeople.",
+        "benefits": "Skill training, tool kit incentive, and credit support.",
         "max_income": 600000,
         "eligible_states": ["All"],
         "eligible_occupations": ["Artisan", "Carpenter", "Blacksmith", "Potter"],
@@ -149,14 +244,15 @@ SCHEMES_LIST = [
         "required_documents": ["Aadhaar", "Bank Passbook", "Caste Certificate"],
         "deadline": "Open",
         "apply_url": "https://pmvishwakarma.gov.in/",
-        "category": "Skill Development"
+        "category": "Skill Development",
+        "popularity": 89
     },
     {
         "id": "sukanya_samriddhi",
         "name": "Sukanya Samriddhi Yojana",
         "icon": "💰",
-        "description": "Savings scheme for the girl child under the 'Beti Bachao Beti Padhao' campaign.",
-        "benefits": "High interest rate and tax benefits on savings for girl's education/marriage.",
+        "description": "Savings scheme for the girl child education/marriage.",
+        "benefits": "High interest rate and tax benefits.",
         "max_income": 5000000,
         "eligible_states": ["All"],
         "eligible_occupations": ["All"],
@@ -166,13 +262,14 @@ SCHEMES_LIST = [
         "required_documents": ["Birth Certificate", "Aadhaar Card of Parent"],
         "deadline": "Ongoing",
         "apply_url": "https://www.indiapost.gov.in/",
-        "category": "Finance"
+        "category": "Finance",
+        "popularity": 91
     },
     {
         "id": "pm_poshan",
         "name": "PM POSHAN (Mid Day Meal)",
         "icon": "🍲",
-        "description": "Ensuring nutrition and increasing school attendance for primary students.",
+        "description": "Ensuring nutrition for primary students.",
         "benefits": "Free warm nutritious meals in government schools.",
         "max_income": 9999999,
         "eligible_states": ["All"],
@@ -183,14 +280,15 @@ SCHEMES_LIST = [
         "required_documents": ["School ID", "Ration Card"],
         "deadline": "Rolling",
         "apply_url": "https://pmposhan.education.gov.in/",
-        "category": "Social Welfare"
+        "category": "Social Welfare",
+        "popularity": 93
     },
     {
         "id": "startup_india_learning",
         "name": "Startup India Learning Program",
         "icon": "💡",
-        "description": "Free online entrepreneurship program by Startup India.",
-        "benefits": "Entrepreneurship certification and industry mentorship.",
+        "description": "Free online entrepreneurship program.",
+        "benefits": "Certification and mentorship.",
         "max_income": 99999999,
         "eligible_states": ["All"],
         "eligible_occupations": ["Entrepreneur", "Student", "Unemployed"],
@@ -198,14 +296,15 @@ SCHEMES_LIST = [
         "required_documents": ["Email ID"],
         "deadline": "Always Open",
         "apply_url": "https://www.startupindia.gov.in/content/sih/en/learning-and-development_v2.html",
-        "category": "Education"
+        "category": "Education",
+        "popularity": 75
     },
     {
         "id": "atal_pension",
         "name": "Atal Pension Yojana (APY)",
         "icon": "👴",
         "description": "Pension scheme for citizens in the unorganized sector.",
-        "benefits": "Fixed pension of ₹1,000 to ₹5,000 after age 60.",
+        "benefits": "Fixed pension after age 60.",
         "max_income": 800000,
         "eligible_states": ["All"],
         "eligible_occupations": ["All"],
@@ -215,13 +314,17 @@ SCHEMES_LIST = [
         "required_documents": ["Savings Bank Account", "Aadhaar Card"],
         "deadline": "Ongoing",
         "apply_url": "https://npscra.nsdl.co.in/scheme-details.php",
-        "category": "Social Welfare"
+        "category": "Social Welfare",
+        "popularity": 81
     }
 ]
 
 def seed_db():
     db = SessionLocal()
     try:
+        # Create tables first
+        Base.metadata.create_all(bind=engine)
+
         # Clear and Re-seed to ensure schema updates are applied
         db.query(Scheme).delete()
         print("Cleared existing schemes for fresh seed...")
@@ -237,6 +340,9 @@ def seed_db():
         db.rollback()
     finally:
         db.close()
+
+if __name__ == "__main__":
+    seed_db()
 
 if __name__ == "__main__":
     seed_db()

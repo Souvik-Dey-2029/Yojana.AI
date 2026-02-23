@@ -106,7 +106,8 @@ class EligibilityEngine:
                     benefits=scheme["benefits"],
                     required_documents=scheme["required_documents"],
                     deadline=scheme["deadline"],
-                    apply_url=scheme["apply_url"]
+                    apply_url=scheme["apply_url"],
+                    popularity=scheme.get("popularity", 0)
                 ))
         
         return final_eligible_schemes

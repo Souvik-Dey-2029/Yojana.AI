@@ -22,6 +22,7 @@ class Scheme(Base):
     deadline = Column(String)
     apply_url = Column(String)
     category = Column(String) # e.g., "Education", "Agri", "Social"
+    popularity = Column(Integer, default=0) # Integration of sorting feature
     guidance_steps = Column(JSON) # List of specific application steps
 
 class UserSubscription(Base):

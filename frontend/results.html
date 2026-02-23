@@ -27,10 +27,20 @@
             <p id="results-subheadline" class="animate-fade-in" style="animation-delay: 0.2s;">Based on your profile,
                 here are the schemes you can apply for.</p>
 
-            <div class="search-box animate-fade-in"
-                style="animation-delay: 0.4s; margin-top: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-                <input type="text" id="scheme-search" placeholder="Search schemes by name or keyword..." class="glass"
-                    style="width: 100%; padding: 1.25rem 2rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none;">
+            <div class="filter-controls animate-fade-in"
+                style="animation-delay: 0.4s; margin-top: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center;">
+                <div class="search-box" style="flex: 2; min-width: 300px;">
+                    <input type="text" id="scheme-search" placeholder="Search schemes by name or keyword..."
+                        class="glass"
+                        style="width: 100%; padding: 1.25rem 2rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none;">
+                </div>
+                <div class="sort-box" style="flex: 1; min-width: 150px;">
+                    <select id="scheme-sort" class="glass"
+                        style="width: 100%; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
+                        <option value="relevance">Sort: Relevance</option>
+                        <option value="popularity">Sort: Popularity</option>
+                    </select>
+                </div>
             </div>
         </header>
 

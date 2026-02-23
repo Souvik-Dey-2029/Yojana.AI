@@ -23,6 +23,7 @@ class SchemeResult(BaseModel):
     required_documents: List[str]
     deadline: str
     apply_url: str
+    popularity: int = 0
 
 class EligibilityResponse(BaseModel):
     eligible_schemes: List[SchemeResult]

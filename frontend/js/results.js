@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // Set initial language toggle
-    langToggle.value = userProfile.language || 'en';
+    let currentSchemes = []; // Local cache of eligible schemes
 
     async function fetchResults(profile) {
         console.log("DEBUG: Fetching results for:", profile.name, "Lang:", profile.language);
@@ -35,12 +34,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) throw new Error('API Error');
 
             const data = await response.json();
-            console.log("DEBUG: Received schemes:", data.eligible_schemes.length);
-            renderSchemes(data.eligible_schemes);
+            currentSchemes = data.eligible_schemes;
+            console.log("DEBUG: Received schemes:", currentSchemes.length);
+            applyFiltersAndRender();
         } catch (error) {
             console.error("DEBUG: Fetch Error:", error);
             grid.innerHTML = '<p style="color:#ef4444; grid-column:1/-1; text-align:center;">❌ Error connecting to Yojana AI engine. Please refresh or check your connection.</p>';
         }
+    }
+
+    function applyFiltersAndRender() {
+        const term = searchInput.value.toLowerCase();
+        const sortCriteria = document.getElementById('scheme-sort').value;
+
+        // 1. Search Filter
+        let filtered = currentSchemes.filter(s =>
+            s.name.toLowerCase().includes(term) ||
+            s.description.toLowerCase().includes(term) ||
+            s.benefits.toLowerCase().includes(term)
+        );
+
+        // 2. Sort
+        if (sortCriteria === 'popularity') {
+            filtered.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+        }
+
+        renderSchemes(filtered);
     }
 
     function renderSchemes(schemes) {
@@ -56,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         schemes.forEach((scheme, index) => {
             const card = document.createElement('div');
             card.className = 'scheme-card glass animate-fade-in';
-            card.style.animationDelay = `${index * 0.1}s`;
+            card.style.animationDelay = `${index * 0.05}s`; // Faster cascade for more items
             card.innerHTML = `
                 <div class="scheme-icon-wrapper">${scheme.icon || '📜'}</div>
                 <h3>${scheme.name}</h3>
@@ -78,14 +97,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Search Logic
     if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase();
-            const cards = document.querySelectorAll('.scheme-card');
-            cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(term) ? 'flex' : 'none';
-            });
-        });
+        searchInput.addEventListener('input', applyFiltersAndRender);
+    }
+
+    // Sort Logic
+    const sortSelect = document.getElementById('scheme-sort');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', applyFiltersAndRender);
     }
 
     // Language Logic
@@ -99,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initial load
     fetchResults(userProfile);
+});
 });
 
 // PDF Loader (Global)
