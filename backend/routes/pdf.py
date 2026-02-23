@@ -82,6 +82,12 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     p.setFillColorRGB(0.8, 0.8, 0.8)
     overview_text = f"Based on our algorithmic analysis, the {scheme['name']} is a high-impact initiative categorized under {scheme.get('category', 'Social Welfare')}. This scheme is specifically optimized to provide {scheme['benefits']}. Our engine has flagged this as a Top Match for your profile."
     
+    # Help function for safe string drawing
+    def safe_draw(canvas_obj, x_pos, y_pos, text):
+        # Remove any non-latin1 characters that Helvetica can't handle
+        clean_text = "".join(c for c in str(text) if ord(c) < 256)
+        canvas_obj.drawString(x_pos, y_pos, clean_text)
+
     # Simple text wrapping for overview
     y = height - 3.1 * inch
     words = overview_text.split()
@@ -90,10 +96,10 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
         if p.stringWidth(line + word + " ", "Helvetica", 11) < 6.5 * inch:
             line += word + " "
         else:
-            p.drawString(0.75 * inch, y, line)
+            safe_draw(p, 0.75 * inch, y, line)
             line = word + " "
             y -= 15
-    p.drawString(0.75 * inch, y, line)
+    safe_draw(p, 0.75 * inch, y, line)
 
     # --- 5. Application Roadmap (Checklist) ---
     y -= 40
@@ -110,7 +116,7 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     for doc in scheme["required_documents"]:
         p.setStrokeColor(colors.white)
         p.rect(0.8 * inch, y - 2, 10, 10, stroke=1, fill=0) # Checkbox
-        p.drawString(1.1 * inch, y, doc)
+        safe_draw(p, 1.1 * inch, y, doc)
         y -= 20
 
     # --- 6. Execution Steps ---
@@ -124,7 +130,7 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     p.setFillColorRGB(0.8, 0.8, 0.8)
     for i, step in enumerate(execution_steps):
         prefix = f"{i+1}. " if not step.startswith(str(i+1)) else ""
-        p.drawString(0.75 * inch, y, f"{prefix}{step}")
+        safe_draw(p, 0.75 * inch, y, f"{prefix}{step}")
         y -= 20
 
     # --- 7. Footer & Security Watermark ---
