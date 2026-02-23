@@ -8,6 +8,5 @@ python-multipart
 python-dotenv
 aiofiles
 reportlab
-pytesseract
 Pillow
 sqlalchemy

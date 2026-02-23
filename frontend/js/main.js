@@ -111,27 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // --- Language Toggle Sync ---
-    const langToggle = document.getElementById('lang-toggle');
-    if (langToggle) {
-        // Load initial
-        const savedLang = localStorage.getItem('userLanguage') || 'en';
-        langToggle.value = savedLang;
-
-        langToggle.addEventListener('change', (e) => {
-            const selected = e.target.value;
-            localStorage.setItem('userLanguage', selected);
-
-            // Also update userProfile if it exists to maintain sync
-            const profile = JSON.parse(localStorage.getItem('userProfile'));
-            if (profile) {
-                profile.language = selected;
-                localStorage.setItem('userProfile', JSON.stringify(profile));
-            }
-
-            console.log("DEBUG: Home language synced to:", selected);
-        });
-    }
 
     // Live Pulse Notification System
     const pulseToast = document.getElementById('live-pulse');

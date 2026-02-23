@@ -7,7 +7,7 @@ routing, and static file serving.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from backend.routes import eligibility, schemes, pdf, ocr, monetization
+from backend.routes import eligibility, schemes, pdf, monetization
 from backend.database import engine, Base
 from backend import db_models
 from backend.seed import seed_db
