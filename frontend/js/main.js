@@ -111,4 +111,32 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
+    // --- Language Toggle Sync ---
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+        // Load initial
+        const savedLang = localStorage.getItem('userLanguage') || 'en';
+        langToggle.value = savedLang;
+
+        langToggle.addEventListener('change', (e) => {
+            const selected = e.target.value;
+            localStorage.setItem('userLanguage', selected);
+
+            // Also update userProfile if it exists to maintain sync
+            const profile = JSON.parse(localStorage.getItem('userProfile'));
+            if (profile) {
+                profile.language = selected;
+                localStorage.setItem('userProfile', JSON.stringify(profile));
+            }
+
+            console.log("DEBUG: Home language synced to:", selected);
+        });
+    }
+
+    // Observe Blog Cards
+    document.querySelectorAll('.blog-card').forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.15}s`;
+        observer.observe(card);
+    });
+
 });
