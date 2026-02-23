@@ -55,10 +55,15 @@ def translate_scheme(scheme: dict, target_lang: str) -> dict:
     if target_lang == "en":
         return scheme
     
+    # Start with a full copy to preserve id, icon, deadline, apply_url, etc.
     translated_scheme = scheme.copy()
-    translated_scheme["name"] = translate_text(scheme["name"], target_lang)
-    translated_scheme["description"] = translate_text(scheme["description"], target_lang)
-    translated_scheme["benefits"] = translate_text(scheme["benefits"], target_lang)
-    translated_scheme["required_documents"] = [translate_text(doc, target_lang) for doc in scheme["required_documents"]]
+    
+    # Translate specific string fields
+    translated_scheme["name"] = translate_text(scheme.get("name", ""), target_lang)
+    translated_scheme["description"] = translate_text(scheme.get("description", ""), target_lang)
+    translated_scheme["benefits"] = translate_text(scheme.get("benefits", ""), target_lang)
+    
+    if "required_documents" in scheme and isinstance(scheme["required_documents"], list):
+        translated_scheme["required_documents"] = [translate_text(doc, target_lang) for doc in scheme["required_documents"]]
     
     return translated_scheme
