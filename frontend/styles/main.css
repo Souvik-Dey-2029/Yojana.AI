@@ -264,6 +264,58 @@ nav {
     filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
 }
 
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    nav {
+        padding: 1rem 5%;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a:not(.btn) {
+        display: none;
+        /* Hide text links on mobile for simplicity */
+    }
+
+    .hero {
+        padding-top: 5rem;
+    }
+
+    .features {
+        padding: 4rem 1rem;
+        grid-template-columns: 1fr;
+    }
+
+    #hero-canvas {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .monetization .container {
+        padding: 2rem;
+    }
+}
+
 /* Layout Utilities */
 .flex-center {
     display: flex;

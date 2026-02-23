@@ -131,3 +131,24 @@
 .btn-group button {
     flex: 1;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding-top: 5rem;
+        margin-top: 60px;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .step h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+}

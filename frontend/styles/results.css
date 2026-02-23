@@ -129,3 +129,22 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 768px) {
+    .results-container {
+        margin-top: 6rem;
+        padding: 0 1rem;
+    }
+
+    .schemes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .scheme-card {
+        padding: 1.5rem;
+    }
+
+    .scheme-card h3 {
+        font-size: 1.2rem;
+    }
+}

@@ -33,71 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // OCR Auto-fill
-    const ocrUpload = document.getElementById('ocr-upload');
-    const ocrStatus = document.getElementById('ocr-status');
-
-    ocrUpload.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        ocrStatus.innerText = "Extracting data... Please wait.";
-        ocrStatus.style.color = "var(--primary)";
-        console.log("DEBUG: Starting OCR Extraction for file:", file.name);
-
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-            // Add a timeout controller
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-            const response = await fetch('/api/ocr-extract', {
-                method: 'POST',
-                body: formData,
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId);
-
-            const result = await response.json();
-            console.log("DEBUG: OCR Backend Response:", result);
-
-            if (result.extracted) {
-                const data = result.extracted;
-                console.log("DEBUG: Auto-filling fields:", data);
-                if (data.name) document.getElementById('name').value = data.name;
-                if (data.age) document.getElementById('age').value = data.age;
-                if (data.gender) document.getElementById('gender').value = data.gender;
-
-                if (result.status === "fallback") {
-                    ocrStatus.innerText = "⚠️ Using Intelligent Demo Data (OCR engine not linked yet).";
-                    ocrStatus.style.color = "#f59e0b"; // Amber
-                } else {
-                    ocrStatus.innerText = "✅ AI OCR: Form auto-filled successfully!";
-                    ocrStatus.style.color = "var(--accent)";
-                }
-            } else if (result.status === "error") {
-                console.error("DEBUG: OCR Backend Error:", result.message);
-                ocrStatus.innerText = "❌ " + result.message;
-                ocrStatus.style.color = "#ef4444";
-            }
-        } catch (error) {
-            console.error("DEBUG: OCR Frontend Error:", error);
-            if (error.name === 'AbortError') {
-                ocrStatus.innerText = "⚠️ OCR Timed out. Setting demo data for speed.";
-                // Trigger demo data locally if timeout happens
-                document.getElementById('name').value = "Souvik Dey";
-                document.getElementById('age').value = 28;
-                document.getElementById('gender').value = "Male";
-                ocrStatus.style.color = "#f59e0b";
-            } else {
-                ocrStatus.innerText = "❌ Network Error: Could not reach OCR engine.";
-                ocrStatus.style.color = "#ef4444";
-            }
-        }
-    });
-
+    // Submit Logic
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
