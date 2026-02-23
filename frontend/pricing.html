@@ -117,7 +117,8 @@
                     <li>SMS/Email Deadline Alerts</li>
                     <li>Priority Chat Support</li>
                 </ul>
-                <button class="btn btn-primary" style="width: 100%;">Go Pro Now</button>
+                <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Go Pro
+                    Now</button>
             </div>
 
             <!-- NGO -->
@@ -131,12 +132,19 @@
                     <li>White-label Reports</li>
                     <li>API Access</li>
                 </ul>
-                <button class="btn glass" style="width: 100%;">Contact Sales</button>
+                <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Get NGO
+                    Access</button>
             </div>
         </div>
     </main>
 
     <script src="js/main.js"></script>
+    <script>
+        function startCheckout(plan, price) {
+            localStorage.setItem('pendingTransaction', JSON.stringify({ plan, price }));
+            window.location.href = 'checkout.html';
+        }
+    </script>
 </body>
 
 </html>

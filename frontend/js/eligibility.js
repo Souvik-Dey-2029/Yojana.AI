@@ -48,10 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('file', file);
 
         try {
+            // Add a timeout controller
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
             const response = await fetch('/api/ocr-extract', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                signal: controller.signal
             });
+            clearTimeout(timeoutId);
+
             const result = await response.json();
 
             if (result.extracted) {
@@ -60,17 +67,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.age) document.getElementById('age').value = data.age;
                 if (data.gender) document.getElementById('gender').value = data.gender;
 
-                ocrStatus.innerText = "✅ Form auto-filled successfully!";
-                ocrStatus.style.color = "var(--accent)";
-            }
-            if (result.warning) {
-                console.warn(result.warning);
-                ocrStatus.innerText = "⚠️ " + result.warning;
+                if (result.status === "fallback") {
+                    ocrStatus.innerText = "⚠️ Using Intelligent Demo Data (OCR engine not linked yet).";
+                    ocrStatus.style.color = "#f59e0b"; // Amber
+                } else {
+                    ocrStatus.innerText = "✅ AI OCR: Form auto-filled successfully!";
+                    ocrStatus.style.color = "var(--accent)";
+                }
+            } else if (result.status === "error") {
+                ocrStatus.innerText = "❌ " + result.message;
+                ocrStatus.style.color = "#ef4444";
             }
         } catch (error) {
             console.error("OCR Error:", error);
-            ocrStatus.innerText = "❌ OCR extraction failed.";
-            ocrStatus.style.color = "#ef4444";
+            if (error.name === 'AbortError') {
+                ocrStatus.innerText = "⚠️ OCR Timed out. Setting demo data for speed.";
+                // Trigger demo data locally if timeout happens
+                document.getElementById('name').value = "Souvik Dey";
+                document.getElementById('age').value = 28;
+                document.getElementById('gender').value = "Male";
+                ocrStatus.style.color = "#f59e0b";
+            } else {
+                ocrStatus.innerText = "❌ Network Error: Could not reach OCR engine.";
+                ocrStatus.style.color = "#ef4444";
+            }
         }
     });
 

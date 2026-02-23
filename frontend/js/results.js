@@ -64,12 +64,48 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="card-footer" style="flex-wrap: wrap; gap: 0.5rem;">
                     <span class="deadline" style="width: 100%; margin-bottom: 0.5rem;">Deadline: ${scheme.deadline}</span>
                     <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1;">Apply Now</a>
-                    <a href="/api/download-guide/${scheme.id}?name=${encodeURIComponent(userProfile.name)}" class="btn glass" style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1; border-color: var(--primary); color: white;">Download Guide</a>
+                    <button onclick="downloadPDFGuide('${scheme.id}', '${userProfile.name}')" id="btn-guide-${scheme.id}" class="btn glass" style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1; border-color: var(--primary); color: white;">Download Guide</button>
                 </div>
             `;
             grid.appendChild(card);
         });
     }
+
+    // PDF Download Helper
+    window.downloadPDFGuide = async (schemeId, userName) => {
+        const btn = document.getElementById(`btn-guide-${schemeId}`);
+        const originalText = btn.innerText;
+        btn.innerText = "Generating...";
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(`/api/download-guide/${schemeId}?name=${encodeURIComponent(userName)}`);
+            if (!response.ok) throw new Error("PDF generation failed");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${schemeId}_AI_Guide.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            btn.innerText = "Check your downloads!";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }, 3000);
+        } catch (error) {
+            console.error(error);
+            btn.innerText = "❌ Error";
+            btn.style.borderColor = "#ef4444";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.style.borderColor = "var(--primary)";
+            }, 3000);
+        }
+    };
 
     // Search Functionality
     const searchInput = document.getElementById('scheme-search');

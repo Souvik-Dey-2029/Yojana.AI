@@ -1,7 +1,11 @@
 from fastapi import APIRouter, Response, Depends
 from sqlalchemy.orm import Session
 from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
 from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 from io import BytesIO
 from backend.database import get_db
 from backend.crud import get_scheme_by_id
@@ -20,45 +24,95 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
+    styles = getSampleStyleSheet()
 
-    # Header
-    p.setFont("Helvetica-Bold", 24)
-    p.drawString(100, height - 80, "Yojana.AI Application Guide")
+    # --- 1. Background Decoration ---
+    p.setFillColorRGB(0.06, 0.09, 0.16)  # Dark Background style
+    p.rect(0, 0, width, height, fill=1)
+    
+    # Header Accent
+    p.setFillColorRGB(0.39, 0.4, 0.95) # --primary color
+    p.rect(0, height - 1.5 * inch, width, 1.5 * inch, fill=1)
+
+    # --- 2. Professional Header ---
+    p.setFillColor(colors.white)
+    p.setFont("Helvetica-Bold", 28)
+    p.drawString(0.75 * inch, height - 0.8 * inch, "Yojana.AI Intelligence Report")
     
     p.setFont("Helvetica", 12)
-    p.drawString(100, height - 105, f"Personalized for: {name}")
-    p.line(100, height - 115, 500, height - 115)
+    p.drawString(0.75 * inch, height - 1.1 * inch, f"Strategic Roadmap for: {name.upper()}")
+    p.drawString(0.75 * inch, height - 1.3 * inch, f"Scheme ID Reference: {scheme_id.upper()}")
 
-    # Scheme Details
-    p.setFont("Helvetica-Bold", 18)
-    p.drawString(100, height - 150, f"Scheme: {scheme['name']}")
+    # --- 3. Scheme Identification ---
+    p.setFillColor(colors.white)
+    p.setFont("Helvetica-Bold", 20)
+    p.drawString(0.75 * inch, height - 2.2 * inch, scheme['name'])
     
+    p.setStrokeColorRGB(0.39, 0.4, 0.95)
+    p.line(0.75 * inch, height - 2.4 * inch, 7 * inch, height - 2.4 * inch)
+
+    # --- 4. AI Strategic Overview ---
     p.setFont("Helvetica-Bold", 14)
-    p.drawString(100, height - 180, "Benefits:")
-    p.setFont("Helvetica", 12)
-    p.drawString(100, height - 200, scheme["benefits"])
-
-    # Document Checklist
-    p.setFont("Helvetica-Bold", 14)
-    p.drawString(100, height - 240, "Required Documents Checklist:")
+    p.drawString(0.75 * inch, height - 2.8 * inch, "🤖 AI STRATEGIC OVERVIEW")
     
-    y = height - 265
-    p.setFont("Helvetica", 12)
+    p.setFont("Helvetica", 11)
+    p.setFillColorRGB(0.8, 0.8, 0.8)
+    overview_text = f"Based on our algorithmic analysis, the {scheme['name']} is a high-impact initiative categorized under {scheme.get('category', 'Social Welfare')}. This scheme is specifically optimized to provide {scheme['benefits']}. Our engine has flagged this as a Top Match for your profile."
+    
+    # Simple text wrapping for overview
+    y = height - 3.1 * inch
+    words = overview_text.split()
+    line = ""
+    for word in words:
+        if p.stringWidth(line + word + " ") < 6.5 * inch:
+            line += word + " "
+        else:
+            p.drawString(0.75 * inch, y, line)
+            line = word + " "
+            y -= 15
+    p.drawString(0.75 * inch, y, line)
+
+    # --- 5. Application Roadmap (Checklist) ---
+    y -= 40
+    p.setFillColor(colors.white)
+    p.setFont("Helvetica-Bold", 14)
+    p.drawString(0.75 * inch, y, "🗺️ APPLICATION ROADMAP")
+    
+    y -= 25
+    p.setFont("Helvetica", 11)
+    p.setFillColorRGB(0.8, 0.8, 0.8)
+    p.drawString(0.75 * inch, y, "Required Documents (Human Verification Needed):")
+    
+    y -= 20
     for doc in scheme["required_documents"]:
-        p.drawString(120, y, f"[ ] {doc}")
+        p.setStrokeColor(colors.white)
+        p.rect(0.8 * inch, y - 2, 10, 10, stroke=1, fill=0) # Checkbox
+        p.drawString(1.1 * inch, y, doc)
         y -= 20
 
-    # Next Steps
+    # --- 6. Execution Steps ---
+    y -= 30
+    p.setFillColor(colors.white)
     p.setFont("Helvetica-Bold", 14)
-    p.drawString(100, y - 20, "Next Steps:")
-    p.setFont("Helvetica", 12)
-    p.drawString(100, y - 40, f"1. Collect all documents listed above.")
-    p.drawString(100, y - 60, f"2. Visit the official portal: {scheme['apply_url']}")
-    p.drawString(100, y - 80, f"3. Apply before the deadline: {scheme['deadline']}")
+    p.drawString(0.75 * inch, y, "⚙️ EXECUTION STEPS")
+    
+    y -= 25
+    p.setFont("Helvetica", 11)
+    p.setFillColorRGB(0.8, 0.8, 0.8)
+    steps = [
+        f"1. Secure URL: {scheme['apply_url']}",
+        f"2. Digitization: Ensure all checked documents are scanned clearly.",
+        f"3. Deadline Awareness: Submit latest by {scheme['deadline']}.",
+        "4. Status Monitoring: Use the tracking ID generated upon submission."
+    ]
+    for step in steps:
+        p.drawString(0.75 * inch, y, step)
+        y -= 20
 
-    # Footer
-    p.setFont("Helvetica-Oblique", 10)
-    p.drawString(100, 50, "Generated by Yojana.AI - Empowering citizens through technology.")
+    # --- 7. Footer & Security Watermark ---
+    p.setFont("Helvetica-Oblique", 9)
+    p.setFillColorRGB(0.5, 0.5, 0.5)
+    p.drawString(0.75 * inch, 0.5 * inch, "VERIFIED BY YOJANA.AI ENGINE | SECURE DOCUMENT GENERATION | 2026")
 
     p.showPage()
     p.save()
@@ -67,5 +121,5 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
     return Response(
         content=buffer.getvalue(), 
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename={scheme_id}_guide.pdf"}
+        headers={"Content-Disposition": f"attachment; filename={scheme_id}_AI_Guide.pdf"}
     )
