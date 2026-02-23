@@ -133,7 +133,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Observe Blog Cards
+    // Live Pulse Notification System
+    const pulseToast = document.getElementById('live-pulse');
+    const pulseContent = document.getElementById('pulse-content');
+
+    const pulseMessages = [
+        "Did you know? Over 450+ central schemes are active right now.",
+        "Success! A user in Maharashtra just found 4 eligible schemes.",
+        "Tip: Use the 'Check Eligibility' tool for 98% more accurate matches.",
+        "Update: PM-Kisan portal is now processing February payments.",
+        "Fun Fact: Yojana.AI supports translation in 10+ Indian languages!"
+    ];
+
+    let messageIdx = 0;
+    const showPulse = () => {
+        if (!pulseToast) return;
+        pulseContent.innerText = pulseMessages[messageIdx];
+        pulseToast.classList.add('active');
+
+        setTimeout(() => {
+            pulseToast.classList.remove('active');
+            messageIdx = (messageIdx + 1) % pulseMessages.length;
+        }, 5000);
+    };
+
+    // Show initial pulse after 3 seconds, then every 15 seconds
+    setTimeout(() => {
+        showPulse();
+        setInterval(showPulse, 15000);
+    }, 3000);
+
+    // Observe Blog Cards & Fact Boxes
     document.querySelectorAll('.blog-card, .fact-box').forEach((card, index) => {
         card.style.transitionDelay = `${index * 0.15}s`;
         observer.observe(card);
