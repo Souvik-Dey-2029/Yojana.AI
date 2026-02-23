@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initial load
     fetchResults(userProfile);
 });
-});
 
 // PDF Loader (Global)
 async function downloadPDFGuide(schemeId) {
