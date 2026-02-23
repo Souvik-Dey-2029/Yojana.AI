@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ocrStatus.innerText = "Extracting data... Please wait.";
         ocrStatus.style.color = "var(--primary)";
+        console.log("DEBUG: Starting OCR Extraction for file:", file.name);
 
         const formData = new FormData();
         formData.append('file', file);
@@ -60,9 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(timeoutId);
 
             const result = await response.json();
+            console.log("DEBUG: OCR Backend Response:", result);
 
             if (result.extracted) {
                 const data = result.extracted;
+                console.log("DEBUG: Auto-filling fields:", data);
                 if (data.name) document.getElementById('name').value = data.name;
                 if (data.age) document.getElementById('age').value = data.age;
                 if (data.gender) document.getElementById('gender').value = data.gender;
@@ -75,11 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     ocrStatus.style.color = "var(--accent)";
                 }
             } else if (result.status === "error") {
+                console.error("DEBUG: OCR Backend Error:", result.message);
                 ocrStatus.innerText = "❌ " + result.message;
                 ocrStatus.style.color = "#ef4444";
             }
         } catch (error) {
-            console.error("OCR Error:", error);
+            console.error("DEBUG: OCR Frontend Error:", error);
             if (error.name === 'AbortError') {
                 ocrStatus.innerText = "⚠️ OCR Timed out. Setting demo data for speed.";
                 // Trigger demo data locally if timeout happens

@@ -71,72 +71,95 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // PDF Download Helper
-    window.downloadPDFGuide = async (schemeId, userName) => {
-        const btn = document.getElementById(`btn-guide-${schemeId}`);
-        const originalText = btn.innerText;
-        btn.innerText = "Generating...";
-        btn.disabled = true;
-
-        try {
-            const response = await fetch(`/api/download-guide/${schemeId}?name=${encodeURIComponent(userName)}`);
-            if (!response.ok) throw new Error("PDF generation failed");
-
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${schemeId}_AI_Guide.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            btn.innerText = "Check your downloads!";
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }, 3000);
-        } catch (error) {
-            console.error(error);
-            btn.innerText = "❌ Error";
-            btn.style.borderColor = "#ef4444";
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.disabled = false;
-                btn.style.borderColor = "var(--primary)";
-            }, 3000);
-        }
-    };
-
-    // Search Functionality
-    const searchInput = document.getElementById('scheme-search');
-
-    function applySearchFilter() {
-        const term = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll('.scheme-card');
-        cards.forEach(card => {
-            const name = card.querySelector('h3').innerText.toLowerCase();
-            const desc = card.querySelector('p').innerText.toLowerCase();
-            if (name.includes(term) || desc.includes(term)) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', applySearchFilter);
-    }
-
-    // Translation logic
-    langToggle.addEventListener('change', async (e) => {
-        const selectedLang = langToggle.value;
-        userProfile.language = selectedLang;
-        localStorage.setItem('userProfile', JSON.stringify(userProfile));
-        localStorage.setItem('userLanguage', selectedLang);
-        fetchResults(userProfile);
-    });
-
     // Initial fetch
     fetchResults(userProfile);
+});
+
+// PDF Download Helper - Moved to global scope for reliable access
+async function downloadPDFGuide(schemeId, userName) {
+    console.log(`DEBUG: Initiating PDF download for Scheme: ${schemeId}, User: ${userName}`);
+    const btn = document.getElementById(`btn-guide-${schemeId}`);
+    if (!btn) {
+        console.error("DEBUG: Download button not found!");
+        return;
+    }
+
+    const originalText = btn.innerText;
+    btn.innerText = "Generating...";
+    btn.disabled = true;
+
+    try {
+        const url = `/api/download-guide/${schemeId}?name=${encodeURIComponent(userName || 'User')}`;
+        console.log(`DEBUG: Fetching URL: ${url}`);
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`PDF generation failed: ${errorText}`);
+        }
+
+        const blob = await response.blob();
+        console.log(`DEBUG: Received blob of size ${blob.size}`);
+
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = `${schemeId}_AI_Guide.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+
+        btn.innerText = "Success! (Check Downloads)";
+        btn.style.borderColor = "var(--accent)";
+
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.style.borderColor = "var(--primary)";
+        }, 5000);
+    } catch (error) {
+        console.error("DEBUG: PDF Download Error:", error);
+        btn.innerText = "❌ Download Error";
+        btn.style.borderColor = "#ef4444";
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.style.borderColor = "var(--primary)";
+        }, 3000);
+    }
+}
+
+// Search Functionality
+const searchInput = document.getElementById('scheme-search');
+
+function applySearchFilter() {
+    const term = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll('.scheme-card');
+    cards.forEach(card => {
+        const name = card.querySelector('h3').innerText.toLowerCase();
+        const desc = card.querySelector('p').innerText.toLowerCase();
+        if (name.includes(term) || desc.includes(term)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+if (searchInput) {
+    searchInput.addEventListener('input', applySearchFilter);
+}
+
+// Translation logic
+langToggle.addEventListener('change', async (e) => {
+    const selectedLang = langToggle.value;
+    userProfile.language = selectedLang;
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
+    localStorage.setItem('userLanguage', selectedLang);
+    fetchResults(userProfile);
+});
+
+// Initial fetch
+fetchResults(userProfile);
 });
