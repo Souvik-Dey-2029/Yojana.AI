@@ -44,15 +44,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function applyFiltersAndRender() {
+        if (!searchInput) return;
         const term = searchInput.value.toLowerCase();
-        const sortCriteria = document.getElementById('scheme-sort').value;
+        const sortSelect = document.getElementById('scheme-sort');
+        const sortCriteria = sortSelect ? sortSelect.value : 'relevance';
+
+        console.log("DEBUG: Applying filters. Term:", term, "Sort:", sortCriteria);
 
         // 1. Search Filter
-        let filtered = currentSchemes.filter(s =>
-            s.name.toLowerCase().includes(term) ||
-            s.description.toLowerCase().includes(term) ||
-            s.benefits.toLowerCase().includes(term)
-        );
+        let filtered = currentSchemes.filter(s => {
+            const name = (s.name || "").toLowerCase();
+            const desc = (s.description || "").toLowerCase();
+            const benefits = (s.benefits || "").toLowerCase();
+            return name.includes(term) || desc.includes(term) || benefits.includes(term);
+        });
 
         // 2. Sort
         if (sortCriteria === 'popularity') {
@@ -116,7 +121,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Initial load
-    fetchResults(userProfile);
+    try {
+        console.log("DEBUG: Initializing results page...");
+        if (!grid || !headline || !langToggle || !searchInput) {
+            console.error("DEBUG: Missing critical elements!");
+            return;
+        }
+        fetchResults(userProfile);
+    } catch (err) {
+        console.error("DEBUG: Initialization Error:", err);
+    }
 });
 
 // PDF Loader (Global)
