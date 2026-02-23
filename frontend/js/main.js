@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Observe Blog Cards
-    document.querySelectorAll('.blog-card').forEach((card, index) => {
+    document.querySelectorAll('.blog-card, .fact-box').forEach((card, index) => {
         card.style.transitionDelay = `${index * 0.15}s`;
         observer.observe(card);
     });
