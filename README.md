@@ -4,19 +4,20 @@ Yojana.AI is a premium, AI-powered platform designed to bridge the information g
 
 ## ✨ Features
 
-- **🚀 AI Eligibility Engine**: High-accuracy prediction of eligible schemes using Machine Learning (Decision Trees) and a robust rules-based engine.
-- [x] **New**: Interactive Particle Hero Background
-- [x] **🌐 Multilingual Support**: Real-time translation of scheme benefits into **Hindi, Bengali, Tamil, and Marathi**.
-- **🌐 Multilingual Support**: Real-time translation of scheme benefits into **Hindi, Bengali, Tamil, and Marathi**.
-- **📄 Personalized PDF Guides**: Download custom "How to Apply" checklists for every eligible scheme.
-- **🎨 Premium Experience**: Professional glassmorphism UI with smooth animations and perfect mobile responsiveness.
-- **💳 Monetization Ready**: Tiered access models (Free, Pro, NGO) with a subscription-ready landing page.
+- **🚀 Advanced Eligibility Engine**: High-accuracy, robust matching logic with **Decision Tree ML** and rules-based filtering. Now with 100% case-insensitivity and specialized category checks (SC/ST/OBC/General).
+- **📊 Expanded Database**: Includes **31+ verified high-impact schemes** covering Finance, Agriculture, Education, Health, and Skill Development.
+- **⚡ High-Performance Translation**: Real-time parallel translation using `ThreadPoolExecutor`, making multilingual results (Hindi, Bengali, Tamil, etc.) appear instantly.
+- **📄 Personalized PDF Roadmaps**: Instant generation of professional application guides with step-by-step checklists.
+- **🎨 Premium UX/UI**: Professional glassmorphism design with interactive particle backgrounds, form validation animations, and real-time loading states.
+- **📱 Mobile Responsive**: Fully optimized for a seamless experience across all devices.
+- **🛡️ Secure & Reliable**: Built with FastAPI and SQLAlchemy for a high-performance, secure backend.
 
 ## 🛠️ Tech Stack
 
 - **Backend**: Python (FastAPI), SQLAlchemy (SQLite)
-- **AI/ML**: Scikit-learn, joblib
-- **Frontend**: Vanilla HTML5, CSS3, Modern JavaScript
+- **AI/ML**: Scikit-Learn, Joblib
+- **Frontend**: Modern JavaScript, HTML5, Vanilla CSS3 (Glassmorphism)
+- **Concurrency**: Python `concurrent.futures` (ThreadPoolExecutor)
 - **Libraries**: `reportlab` (PDF), `deep-translator` (i18n)
 
 ## 📦 Setup & Installation
@@ -31,8 +32,8 @@ pip install -r requirements.txt
 
 ### 3. Initialize & Seed Database
 ```bash
-# Set up the SQLite database and load 30+ verified schemes
-python backend/seed.py
+# Set up the SQLite database and load 31+ verified schemes
+python -m backend.seed
 ```
 
 ### 4. Train the ML Engine (Optional)
