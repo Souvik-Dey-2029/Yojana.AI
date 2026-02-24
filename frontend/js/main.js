@@ -83,4 +83,34 @@ document.addEventListener('DOMContentLoaded', () => {
             setInterval(showPulse, 20000);
         }, 3000);
     }
+    // --- Footer Date Management ---
+    const footerDate = document.querySelector('.footer-last-updated');
+    if (footerDate) {
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        }).replace(/\//g, '-');
+        footerDate.textContent = `Last updated: ${dateStr}`;
+    }
+
+    // --- Mobile Menu Toggle ---
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+    }
 });
