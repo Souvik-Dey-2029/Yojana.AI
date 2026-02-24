@@ -1,5 +1,6 @@
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from deep_translator import GoogleTranslator
 
 SUPPORTED_LANGUAGES = {
@@ -55,15 +56,28 @@ def translate_scheme(scheme: dict, target_lang: str) -> dict:
     if target_lang == "en":
         return scheme
     
-    # Start with a full copy to preserve id, icon, deadline, apply_url, etc.
     translated_scheme = scheme.copy()
     
-    # Translate specific string fields
-    translated_scheme["name"] = translate_text(scheme.get("name", ""), target_lang)
-    translated_scheme["description"] = translate_text(scheme.get("description", ""), target_lang)
-    translated_scheme["benefits"] = translate_text(scheme.get("benefits", ""), target_lang)
+    # Fields to translate
+    fields_to_translate = ["name", "description", "benefits"]
     
-    if "required_documents" in scheme and isinstance(scheme["required_documents"], list):
-        translated_scheme["required_documents"] = [translate_text(doc, target_lang) for doc in scheme["required_documents"]]
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        # 1. Translate string fields
+        future_to_field = {executor.submit(translate_text, scheme.get(field, ""), target_lang): field for field in fields_to_translate}
+        
+        # 2. Translate documents list if it exists
+        docs_future = None
+        if "required_documents" in scheme and isinstance(scheme["required_documents"], list):
+            docs = scheme["required_documents"]
+            docs_future = [executor.submit(translate_text, doc, target_lang) for doc in docs]
+
+        # Collect string fields
+        for future in future_to_field:
+            field = future_to_field[future]
+            translated_scheme[field] = future.result()
+
+        # Collect documents
+        if docs_future:
+            translated_scheme["required_documents"] = [f.result() for f in docs_future]
     
     return translated_scheme

@@ -15,11 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
         progressBar.style.width = `${(currentStep / steps.length) * 100}%`;
     };
 
+    const validateStep = (stepNum) => {
+        const currentStepEl = document.getElementById(`step-${stepNum}`);
+        const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value) {
+                input.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                input.style.borderColor = 'var(--glass-border)';
+            }
+        });
+        return isValid;
+    };
+
     document.querySelectorAll('.next-step').forEach(btn => {
         btn.addEventListener('click', () => {
-            if (currentStep < steps.length) {
-                currentStep++;
-                updateUI();
+            if (validateStep(currentStep)) {
+                if (currentStep < steps.length) {
+                    currentStep++;
+                    updateUI();
+                }
+            } else {
+                const activeStep = document.querySelector('.step.active');
+                activeStep.classList.add('shake');
+                setTimeout(() => activeStep.classList.remove('shake'), 500);
             }
         });
     });
@@ -36,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submit Logic
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Analyzing your profile...";
 
         const formData = {
             name: document.getElementById('name').value || "User",
@@ -58,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(formData)
             });
 
+            if (!response.ok) throw new Error('API Error');
+
             const result = await response.json();
 
             // Store profile for personalized guide names and API fetch
@@ -69,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
             alert('Something went wrong. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
     });
 });

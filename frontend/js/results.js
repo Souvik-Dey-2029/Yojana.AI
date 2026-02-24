@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const langToggle = document.getElementById('lang-toggle');
     const searchInput = document.getElementById('scheme-search');
 
+    if (!grid || !headline) {
+        console.error("DEBUG: Essential elements (grid or headline) missing. Aborting.");
+        return;
+    }
+
     let userProfile = JSON.parse(localStorage.getItem('userProfile'));
 
     if (!userProfile) {
@@ -35,7 +40,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const data = await response.json();
             currentSchemes = data.eligible_schemes;
-            console.log("DEBUG: Received schemes:", currentSchemes.length);
             applyFiltersAndRender();
         } catch (error) {
             console.error("DEBUG: Fetch Error:", error);
@@ -112,24 +116,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Language Logic
-    langToggle.addEventListener('change', async () => {
-        const selectedLang = langToggle.value;
-        userProfile.language = selectedLang;
-        localStorage.setItem('userProfile', JSON.stringify(userProfile));
-        localStorage.setItem('userLanguage', selectedLang);
-        fetchResults(userProfile);
-    });
+    if (langToggle) {
+        langToggle.addEventListener('change', async () => {
+            const selectedLang = langToggle.value;
+            userProfile.language = selectedLang;
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            localStorage.setItem('userLanguage', selectedLang);
+            fetchResults(userProfile);
+        });
+    }
 
     // Initial load
     try {
-        console.log("DEBUG: Initializing results page...");
-        if (!grid || !headline || !langToggle || !searchInput) {
-            console.error("DEBUG: Missing critical elements!");
-            return;
-        }
         fetchResults(userProfile);
     } catch (err) {
-        console.error("DEBUG: Initialization Error:", err);
+        console.error("Initialization Error:", err);
     }
 });
 

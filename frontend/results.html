@@ -34,11 +34,19 @@
                         class="glass"
                         style="width: 100%; padding: 1.25rem 2rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none;">
                 </div>
-                <div class="sort-box" style="flex: 1; min-width: 150px;">
+                <div class="sort-box" style="flex: 1; min-width: 150px; display: flex; gap: 0.5rem;">
                     <select id="scheme-sort" class="glass"
-                        style="width: 100%; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
+                        style="flex: 2; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
                         <option value="relevance">Sort: Relevance</option>
                         <option value="popularity">Sort: Popularity</option>
+                    </select>
+                    <select id="lang-toggle" class="glass"
+                        style="flex: 1; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
+                        <option value="en">EN</option>
+                        <option value="hi">HI</option>
+                        <option value="bn">BN</option>
+                        <option value="ta">TA</option>
+                        <option value="mr">MR</option>
                     </select>
                 </div>
             </div>

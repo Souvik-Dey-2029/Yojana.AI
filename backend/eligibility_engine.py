@@ -1,6 +1,7 @@
 import os
 import joblib
 import pandas as pd
+from typing import List, Optional
 from backend.db_models import Scheme
 from backend.models import UserProfile, SchemeResult
 from sqlalchemy.orm import Session
@@ -21,7 +22,7 @@ class EligibilityEngine:
             except Exception as e:
                 print(f"Error loading model: {e}")
 
-    def predict_eligibility(self, profile: UserProfile, db: Session) -> list:
+    def predict_eligibility(self, profile: UserProfile, db: Session) -> List[SchemeResult]:
         eligible_ids = []
         
         # 1. ML Prediction (Primary)
@@ -75,25 +76,35 @@ class EligibilityEngine:
                 is_eligible = False
             
             # Rule: State check
-            if scheme["eligible_states"] and "All" not in scheme["eligible_states"] and profile.state not in scheme["eligible_states"]:
+            user_state = (profile.state or "").strip().lower()
+            if is_eligible and scheme["eligible_states"] and "All" not in scheme["eligible_states"] and \
+               not any(s.strip().lower() == user_state for s in scheme["eligible_states"]):
                 is_eligible = False
                 
             # Rule: Occupation check
-            if scheme["eligible_occupations"] and "All" not in scheme["eligible_occupations"] and profile.occupation not in scheme["eligible_occupations"]:
+            user_occ = (profile.occupation or "").strip().lower()
+            if is_eligible and scheme["eligible_occupations"] and "All" not in scheme["eligible_occupations"] and \
+               not any(o.strip().lower() == user_occ for o in scheme["eligible_occupations"]):
+                is_eligible = False
+
+            # Rule: Category check
+            user_cat = (profile.category or "").strip().lower()
+            if is_eligible and scheme.get("eligible_categories") and "All" not in scheme["eligible_categories"] and \
+               not any(c.strip().lower() == user_cat for c in scheme["eligible_categories"]):
                 is_eligible = False
 
             # Rule: Gender check
-            if scheme.get("gender") and scheme["gender"] != profile.gender:
+            if is_eligible and scheme.get("gender") and scheme["gender"] != profile.gender:
                 is_eligible = False
                 
             # Rule: Age check
-            if scheme.get("min_age") and profile.age < scheme["min_age"]:
+            if is_eligible and scheme.get("min_age") and profile.age < scheme["min_age"]:
                 is_eligible = False
-            if scheme.get("max_age") and profile.age > scheme["max_age"]:
+            if is_eligible and scheme.get("max_age") and profile.age > scheme["max_age"]:
                 is_eligible = False
                 
             # Rule: Land owned
-            if scheme.get("land_owned_required", False) and not profile.land_owned:
+            if is_eligible and scheme.get("land_owned_required", False) and not profile.land_owned:
                 is_eligible = False
 
             if is_eligible:
