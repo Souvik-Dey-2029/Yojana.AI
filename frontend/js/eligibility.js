@@ -12,8 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
         steps.forEach((step, idx) => {
             step.classList.toggle('active', idx + 1 === currentStep);
         });
-        progressBar.style.width = `${(currentStep / steps.length) * 100}%`;
+        if (progressBar) {
+            const progress = (currentStep / steps.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
     };
+
+    updateUI(); // Initial call to show progress for step 1
 
     const validateStep = (stepNum) => {
         const currentStepEl = document.getElementById(`step-${stepNum}`);
