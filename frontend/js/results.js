@@ -215,6 +215,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const result = await res.json();
                 schemeScores = result.scores; // { scheme_id: { score, risk_level, suggestions } }
 
+                // [FIX] Persist scores for the details page
+                localStorage.setItem('schemeScores', JSON.stringify(schemeScores));
 
                 // Refresh rendering with new per-scheme data
                 applyFiltersAndRender();
@@ -447,48 +449,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.getSchemeCompliance = (schemeId) => schemeScores ? schemeScores[schemeId] : null;
 });
 
-// PDF Loader (Global)
-async function downloadPDFGuide(schemeId) {
-    const profile = JSON.parse(localStorage.getItem('userProfile')) || { name: 'Applicant', language: 'en' };
-    // Get the specific compliance data for THIS scheme
-    const compliance = window.getSchemeCompliance ? window.getSchemeCompliance(schemeId) : null;
-
-    const langLocalizations = {
-        hi: { generating: "उत्पन्न किया जा रहा है...", failed: "विफल रहा", success: "सफलता!" },
-        bn: { generating: "তৈরি করা হচ্ছে...", failed: "ব্যর্থ হয়েছে", success: "সফল!" }
-    };
-
-    const l = langLocalizations[profile.language] || { generating: "Generating...", failed: "Failed", success: "Success!" };
-
-    const userName = profile.name;
-    const btn = document.getElementById(`btn-guide-${schemeId}`);
-    if (!btn) return;
-
-    const originalText = btn.innerText;
-    btn.innerText = l.generating;
-    btn.disabled = true;
-
-    try {
-        let url = `/api/download-guide/${schemeId}?name=${encodeURIComponent(userName || 'User')}`;
-        if (compliance) {
-            url += `&score=${compliance.score}&risk_level=${compliance.risk_level}&suggestions=${encodeURIComponent(compliance.suggestions.join(','))}`;
-        }
-
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Failed");
-
-        const blob = await res.blob();
-        const downloadUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = `${schemeId}_AI_Guide.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(downloadUrl);
-        btn.innerText = l.success;
-        setTimeout(() => { btn.innerText = originalText; btn.disabled = false; }, 3000);
-    } catch (e) {
-        btn.innerText = "❌ " + l.failed;
-        setTimeout(() => { btn.innerText = originalText; btn.disabled = false; }, 3000);
-    }
-}
+// Note: downloadPDFGuide is now managed by pdf-utils.js

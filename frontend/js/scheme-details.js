@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             support_text: "हमारे एआई एजेंट सत्यापन प्रक्रिया में आपकी मदद करने के लिए तैयार हैं।",
             support_link: "सहायता केंद्र पर जाएँ",
             recommended: "अनुशंसित",
-            official_welfare: "आधिकारिक कल्याण"
+            official_welfare: "आधिकारिक कल्याण",
+            risk_low: "कम",
+            risk_medium: "मध्यम",
+            risk_high: "उच्च"
         },
         bn: {
             overview: "স্কিমের ওভারভিউ",
@@ -42,7 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             support_text: "আমাদের এআই এজেন্টরা আপনাকে যাচাইকরণ প্রক্রিয়ায় সাহায্য করার জন্য প্রস্তুত।",
             support_link: "সাপোর্ট সেন্টারে যান",
             recommended: "প্রস্তাবিত",
-            official_welfare: "অফিসিয়াল কল্যাণ"
+            official_welfare: "অফিসিয়াল কল্যাণ",
+            risk_low: "কম",
+            risk_medium: "মাঝারি",
+            risk_high: "উচ্চ"
         },
         ta: {
             overview: "திட்டத்தின் மேலோட்டம்",
@@ -60,7 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             support_text: "எங்கள் AI முகவர்கள் சரிபார்ப்பு செயல்பாட்டில் உங்களுக்கு உதவ தயாராக உள்ளனர்.",
             support_link: "ஆதரவு மையத்தைப் பார்வையிடவும்",
             recommended: "பரிந்துரைக்கப்படுகிறது",
-            official_welfare: "அதிகாரப்பூர்வ நலன்"
+            official_welfare: "அதிகாரப்பூர்வ நலன்",
+            risk_low: "குறைந்த",
+            risk_medium: "நடுத்தர",
+            risk_high: "அதிக"
         },
         mr: {
             overview: "योजनेचे विहंगावलोकन",
@@ -78,7 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
             support_text: "आमचे AI एजंट पडताळणी प्रक्रियेत तुम्हाला मदत करण्यास तयार आहेत.",
             support_link: "सपोर्ट सेंटरला भेट द्या",
             recommended: "शिफारस केलेले",
-            official_welfare: "अधिकृत कल्याण"
+            official_welfare: "अधिकृत कल्याण",
+            risk_low: "कमी",
+            risk_medium: "मध्यम",
+            risk_high: "उच्च"
         }
     };
 
@@ -187,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="approval-meter-fill-premium" style="width: ${sScore.score}%; background: ${statusColor}; height: 100%;"></div>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-weight: 600;">
-                    ${l.risk_level || 'Condition'}: <span style="color: ${statusColor}">${sScore.risk_level} RISK</span>
+                    ${l.risk_level || 'Condition'}: <span style="color: ${statusColor}">${l['risk_' + sScore.risk_level.toLowerCase()] || sScore.risk_level} ${l.risk_text || 'RISK'}</span>
                 </p>
             `;
 
@@ -228,11 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderData();
 
     // Guide Button
-    document.getElementById('guide-btn').addEventListener('click', () => {
-        if (typeof window.downloadPDFGuide === 'function') {
-            window.downloadPDFGuide(schemeId);
-        } else {
-            alert("Guide feature is ready. Try clicking again in a moment.");
-        }
+    document.getElementById('guide-btn').addEventListener('click', (e) => {
+        window.downloadPDFGuide(schemeId, e.currentTarget);
     });
 });
