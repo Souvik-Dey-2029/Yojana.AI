@@ -53,8 +53,8 @@ class EligibilityEngine:
                 # In production, we'd fetch these IDs from a Config/DB table
                 scheme_ids = [
                     'pm_kisan', 'swami_vivekananda_scholarship', 'mudra_loan', 
-                    'kanyashree', 'ews_scholarship', 'skill_india', 
-                    'startup_india_seed', 'pm_awas_yojana'
+                    'kanyashree', 'ayushman_bharat', 'pm_ujjwala', 
+                    'startup_india_learning', 'pm_awas_yojana'
                 ]
                 
                 for idx, val in enumerate(preds[0]):
@@ -118,7 +118,8 @@ class EligibilityEngine:
                     required_documents=scheme["required_documents"],
                     deadline=scheme["deadline"],
                     apply_url=scheme["apply_url"],
-                    popularity=scheme.get("popularity", 0)
+                    popularity=scheme.get("popularity", 0),
+                    is_ml_recommended=(scheme["id"] in eligible_ids)
                 ))
         
         return final_eligible_schemes

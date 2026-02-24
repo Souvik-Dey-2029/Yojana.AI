@@ -24,6 +24,7 @@ class SchemeResult(BaseModel):
     deadline: str
     apply_url: str
     popularity: int = 0
+    is_ml_recommended: bool = False
 
 class EligibilityResponse(BaseModel):
     eligible_schemes: List[SchemeResult]

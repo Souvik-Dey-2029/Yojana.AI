@@ -6,8 +6,8 @@ Yojana.AI is a premium, AI-powered platform designed to bridge the information g
 
 - **🚀 Advanced Eligibility Engine**: High-accuracy, robust matching logic with **Decision Tree ML** and rules-based filtering. Now with 100% case-insensitivity and specialized category checks (SC/ST/OBC/General).
 - **🧠 Application Success Predictor (NEW)**: High-fidelity risk analysis using a **Random Forest Classifier** to calculate approval probability based on document compliance (Aadhaar match, certificate validity, etc.).
-- **📊 Expanded Database**: Includes **31+ verified high-impact schemes** covering Finance, Agriculture, Education, Health, and Skill Development.
-- **⚡ High-Performance Translation**: Real-time parallel translation using `ThreadPoolExecutor`, making multilingual results (Hindi, Bengali, Tamil, etc.) appear instantly.
+- **📊 Expanded Database**: Includes **52 verified high-impact schemes** covering Finance, Agriculture, Education, Health, and Skill Development.
+- **⚡ High-Performance Translation**: Real-time parallel translation using `ThreadPoolExecutor`, making multilingual results (Hindi, Bengali, Tamil, Marathi, and English) appear instantly.
 - **📄 Intelligent PDF Roadmaps**: Instant generation of professional application guides now featuring **Application Success Analysis** with AI compliance suggestions.
 - **🎨 Premium UX/UI**: Professional glassmorphism design with interactive particle backgrounds, compliance questionnaire flow, and real-time risk badges (LOW/MEDIUM/HIGH).
 - **📱 Mobile Responsive**: Fully optimized for a seamless experience across all devices.
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### 3. Initialize & Seed Database
 ```bash
-# Set up the SQLite database and load 31+ verified schemes
+# Set up the SQLite database and load 52 verified schemes
 python -m backend.seed
 ```
 

@@ -8,9 +8,9 @@ async def get_plans():
         "plans": [
             {
                 "id": "free",
-                "name": "Free",
+                "name": "Vikas (Free)",
                 "price": 0,
-                "features": ["Eligibility Check", "30+ Schemes", "Multi-language"]
+                "features": ["Access to 50+ Central Schemes", "Basic Matching", "Native Support"]
             },
             {
                 "id": "pro",

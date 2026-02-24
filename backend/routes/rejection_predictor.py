@@ -171,6 +171,111 @@ SCHEME_PROFILES = {
         "base_acceptance": 55,
         "doc_count": 3,
     },
+    "pm_daksh": {
+        "fields": ["aadhaar_name_match", "income_certificate_valid", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 72,
+        "doc_count": 3,
+    },
+    "national_overseas_scholarship": {
+        "fields": ["aadhaar_name_match", "category_certificate_valid", "photo_correct", "self_attested_docs"],
+        "base_acceptance": 45,
+        "doc_count": 4,
+    },
+    "pm_fasal_bima": {
+        "fields": ["aadhaar_name_match", "address_match", "bank_account_seeded"],
+        "base_acceptance": 85,
+        "doc_count": 3,
+    },
+    "pm_kusum": {
+        "fields": ["aadhaar_name_match", "address_match", "bank_account_seeded"],
+        "base_acceptance": 78,
+        "doc_count": 3,
+    },
+    "e_shram": {
+        "fields": ["aadhaar_name_match", "mobile_linked", "bank_account_seeded"],
+        "base_acceptance": 96,
+        "doc_count": 2,
+    },
+    "onorc": {
+        "fields": ["aadhaar_name_match", "address_match"],
+        "base_acceptance": 94,
+        "doc_count": 1,
+    },
+    "beti_bachao_beti_padhao": {
+        "fields": ["aadhaar_name_match", "address_match"],
+        "base_acceptance": 91,
+        "doc_count": 1,
+    },
+    "janani_suraksha": {
+        "fields": ["aadhaar_name_match", "bank_account_seeded", "category_certificate_valid"],
+        "base_acceptance": 88,
+        "doc_count": 2,
+    },
+    "mission_indradhanush": {
+        "fields": ["aadhaar_name_match", "address_match"],
+        "base_acceptance": 93,
+        "doc_count": 1,
+    },
+    "pm_devine": {
+        "fields": ["aadhaar_name_match", "address_match", "self_attested_docs"],
+        "base_acceptance": 62,
+        "doc_count": 2,
+    },
+    "sagy": {
+        "fields": ["aadhaar_name_match", "address_match"],
+        "base_acceptance": 85,
+        "doc_count": 1,
+    },
+    "swachh_bharat_token": {
+        "fields": ["aadhaar_name_match", "address_match", "bank_account_seeded"],
+        "base_acceptance": 90,
+        "doc_count": 2,
+    },
+    "pm_wani": {
+        "fields": ["aadhaar_name_match"],
+        "base_acceptance": 95,
+        "doc_count": 1,
+    },
+    "nats_apprenticeship": {
+        "fields": ["aadhaar_name_match", "photo_correct", "self_attested_docs"],
+        "base_acceptance": 75,
+        "doc_count": 2,
+    },
+    "nmms_scholarship": {
+        "fields": ["aadhaar_name_match", "income_certificate_valid", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 68,
+        "doc_count": 3,
+    },
+    "pre_matric_minority": {
+        "fields": ["aadhaar_name_match", "income_certificate_valid", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 76,
+        "doc_count": 3,
+    },
+    "post_matric_minority": {
+        "fields": ["aadhaar_name_match", "income_certificate_valid", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 74,
+        "doc_count": 3,
+    },
+    "merit_cum_means_minority": {
+        "fields": ["aadhaar_name_match", "income_certificate_valid", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 70,
+        "doc_count": 3,
+    },
+    "usttad_scheme": {
+        "fields": ["aadhaar_name_match", "category_certificate_valid", "self_attested_docs"],
+        "base_acceptance": 66,
+        "doc_count": 2,
+    },
+    "svamitva_scheme": {
+        "fields": ["aadhaar_name_match", "address_match"],
+        "base_acceptance": 89,
+        "doc_count": 1,
+    },
+    "pm_kisan_maandhan": {
+        "fields": ["aadhaar_name_match", "bank_account_seeded", "self_attested_docs"],
+        "base_acceptance": 84,
+        "doc_count": 2,
+    },
 }
 
 # Default profile for unknown schemes
