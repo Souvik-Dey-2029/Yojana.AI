@@ -14,10 +14,12 @@
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
         <div class="nav-links">
             <select id="lang-toggle"
-                style="padding: 0.4rem; border-radius: 6px; background: white; border: 1px solid var(--border-soft); font-family: inherit;">
+                style="padding: 0.4rem; border-radius: 6px; background: white; border: 1px solid var(--border-soft); font-family: inherit; margin-right: 1rem;">
                 <option value="en">English</option>
-                <option value="hi">Hindi</option>
-                <option value="bn">Bengali</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="ta">Tamil (தமிழ்)</option>
+                <option value="mr">Marathi (मराठी)</option>
             </select>
             <a href="index.html">Home</a>
             <a href="pricing.html">Pricing</a>
@@ -32,33 +34,39 @@
         </div>
     </div>
 
-    <header id="hero-premium"
-        style="padding: 140px 0 60px; background: radial-gradient(circle at top right, #FFF5EB, #FAFAF5); border-bottom: 1px solid var(--border-soft); text-align: center;">
+    <header id="hero-premium" class="scroll-reveal"
+        style="padding: 140px 0 60px; background: none; text-align: center;">
         <div class="container">
-            <h1 id="results-headline" style="font-size: 3rem; margin-bottom: 1rem;">Analyzing Your Benefits</h1>
-            <p id="results-subheadline" style="color: #4B5563; font-size: 1.1rem;">Discovering schemes tailored to your
-                profile and location.</p>
+            <h1 id="results-headline" style="font-size: 3rem; margin-bottom: 1rem; color: var(--ashoka-navy);">Benefits
+                Assessment Dashboard</h1>
+            <p id="results-subheadline" style="color: #4B5563; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                Official eligibility overview and personalized scheme discovery portal for Indian citizens.</p>
         </div>
     </header>
 
     <main class="container" style="padding-bottom: 80px;">
         <div class="results-layout" style="display: block;">
-            <!-- Top Section: Success Analyzer -->
-            <section id="analyzer-section" class="analyzer-card-top animate-fade-in"
-                style="display: none; margin-bottom: 3rem;">
+
+            <!-- Top Section: Assessment Panel -->
+            <section id="analyzer-section" class="analyzer-card-top scroll-reveal"
+                style="display: none; margin-bottom: 3rem; background: linear-gradient(90deg, rgba(255,122,0,0.05), rgba(4,106,56,0.05));">
                 <div class="analyzer-header"
-                    style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+                    style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
                     <div>
-                        <h2 style="margin: 0;"><span style="font-size: 1.5rem;">🧠</span> Citizen Success Analyzer</h2>
-                        <p style="margin: 0.5rem 0 0; opacity: 0.8;">Verify document compliance to see application
-                            probability across all schemes.</p>
+                        <h2
+                            style="margin: 0; display: flex; align-items: center; gap: 0.75rem; border-left: 5px solid var(--gov-green); padding-left: 1rem;">
+                            <span style="font-size: 1.5rem;">📊</span> Assessment Panel
+                        </h2>
+                        <p style="margin: 0.5rem 0 0; color: #4B5563; font-size: 0.95rem;">Verify document compliance to
+                            calculate approval probability across all national schemes.</p>
                     </div>
-                    <button type="button" id="run-analysis" class="btn btn-primary" style="padding: 1rem 2rem;">Apply
-                        Document Filter</button>
+                    <button type="button" id="run-analysis" class="btn btn-primary">Process Assessment</button>
                 </div>
 
+                <hr class="panel-divider">
+
                 <form id="compliance-form" class="analyzer-grid-top">
-                    <!-- Questions will be styled in a grid in CSS -->
+                    <!-- Row 1 -->
                     <div class="q-group-sidebar">
                         <span>Aadhaar name match?</span>
                         <select name="aadhaar_name_match">
@@ -87,6 +95,7 @@
                             <option value="0">No</option>
                         </select>
                     </div>
+                    <!-- Row 2 -->
                     <div class="q-group-sidebar">
                         <span>Category cert valid?</span>
                         <select name="category_certificate_valid">
@@ -95,38 +104,49 @@
                         </select>
                     </div>
                     <div class="q-group-sidebar">
-                        <span>Photos match guidelines?</span>
+                        <span>Passport photo correct?</span>
                         <select name="photo_correct">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
                     <div class="q-group-sidebar">
-                        <span>Aadhaar-Mobile linked?</span>
+                        <span>Aadhaar mobile linked?</span>
                         <select name="mobile_linked">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
                     <div class="q-group-sidebar">
-                        <span>Self-attested copies?</span>
+                        <span>Self-attested docs ready?</span>
                         <select name="self_attested_docs">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
                 </form>
+
+                <div class="info-callout" style="margin-top: 1.5rem;">
+                    <strong>Next Step:</strong> Ensure you have the original documents ready. High probability matches
+                    will be prioritized in your generated roadmap.
+                </div>
             </section>
 
             <!-- Main Content: Filters & Schemes -->
-            <div class="results-main">
-                <div class="filter-bar animate-fade-in" style="margin-bottom: 2rem;">
-                    <input type="text" id="scheme-search" placeholder="Search by scheme name or benefit..."
-                        style="flex: 2;">
-                    <select id="scheme-sort">
-                        <option value="relevance">Sort by Relevance</option>
-                        <option value="popularity">Sort by Popularity</option>
-                    </select>
+            <div class="results-main scroll-reveal">
+                <div class="institutional-panel">
+                    <div class="filter-bar" style="display: flex; gap: 1rem; align-items: center;">
+                        <div style="flex: 2; position: relative;">
+                            <input type="text" id="scheme-search" placeholder="Search by scheme name or benefit..."
+                                style="width: 100%; padding-left: 2.5rem;">
+                            <span
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
+                        </div>
+                        <select id="scheme-sort" style="min-width: 200px;">
+                            <option value="relevance">Priority Matches</option>
+                            <option value="popularity">Scheme Popularity</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Scheme Results Grid -->

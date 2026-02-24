@@ -89,6 +89,14 @@
     <nav>
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
         <div class="nav-links">
+            <select id="lang-toggle"
+                style="padding: 0.4rem; border-radius: 6px; background: white; border: 1px solid var(--border-soft); font-family: inherit; margin-right: 1rem;">
+                <option value="en">English</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="ta">Tamil (தமிழ்)</option>
+                <option value="mr">Marathi (मराठी)</option>
+            </select>
             <a href="index.html">Home</a>
             <a href="index.html#features">Features</a>
             <a href="pricing.html" class="active">Pricing</a>
@@ -96,54 +104,63 @@
         </div>
     </nav>
 
-    <main class="container text-center" style="padding: 120px 0 80px;">
-        <h1 class="animate-fade-in">Fair & Transparent <span>Support</span></h1>
-        <p class="animate-fade-in" style="animation-delay: 0.1s; margin-top: 1rem;">Choose a plan that helps you
-            navigate public benefits with full AI assistance.</p>
+    <main class="container text-center" style="padding: 140px 0 80px;">
+        <div class="scroll-reveal">
+            <h1 class="animate-fade-in" style="font-size: 3rem; color: var(--ashoka-navy);">Fair & Transparent
+                <span>Support</span>
+            </h1>
+            <p class="animate-fade-in"
+                style="color: #4B5563; font-size: 1.1rem; max-width: 600px; margin: 1rem auto 3rem;">Choose a plan that
+                helps you navigate public benefits with official assistance and compliance tools.</p>
+        </div>
 
-        <div class="pricing-grid animate-fade-in" style="animation-delay: 0.2s; margin-left: auto; margin-right: auto;">
-            <!-- Free -->
-            <div class="price-card premium-card">
-                <h3>Vikas (Basic)</h3>
-                <div class="price">₹0<span>/mo</span></div>
-                <ul class="features-list">
-                    <li>Access to 30+ Central Schemes</li>
-                    <li>Basic Eligibility Matching</li>
-                    <li>Native Language Support</li>
-                    <li>Community News Portal</li>
-                </ul>
-                <a href="eligibility.html" class="btn glass" style="width: 100%;">Start Free</a>
-            </div>
+        <div class="institutional-panel scroll-reveal">
+            <div class="pricing-grid"
+                style="margin-left: auto; margin-right: auto; grid-template-columns: repeat(3, 1fr);">
+                <!-- Free -->
+                <div class="price-card premium-card">
+                    <h3>Vikas (Basic)</h3>
+                    <div class="price">₹0<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Access to 50+ Central Schemes</li>
+                        <li>Basic Eligibility Matching</li>
+                        <li>Native Language Support</li>
+                        <li>Community News Portal</li>
+                    </ul>
+                    <a href="eligibility.html" class="btn glass" style="width: 100%;">Start Free</a>
+                </div>
 
-            <!-- Pro -->
-            <div class="price-card featured premium-card glass-panel" style="border: 3px solid var(--gov-green);">
-                <div class="price-badge">Most Popular</div>
-                <h3>Sewa Plus (Pro)</h3>
-                <div class="price">₹49<span>/mo</span></div>
-                <ul class="features-list">
-                    <li><strong>Approval Success Predictor</strong></li>
-                    <li><strong>Personalized Application PDF</strong></li>
-                    <li>Document Compliance Feedback</li>
-                    <li>Mobile Deadline Alerts</li>
-                    <li>Direct Digital Consultation</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Subscribe
-                    Securely</button>
-            </div>
+                <!-- Pro -->
+                <div class="price-card featured premium-card"
+                    style="border: 3px solid var(--gov-green); background: #f0faf4;">
+                    <div class="price-badge">Most Popular</div>
+                    <h3>Sewa Plus (Pro)</h3>
+                    <div class="price">₹49<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li><strong>Approval Success Predictor</strong></li>
+                        <li><strong>Personalized Application PDF</strong></li>
+                        <li>Document Compliance Feedback</li>
+                        <li>Mobile Deadline Alerts</li>
+                        <li>Direct Digital Consultation</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Subscribe
+                        Securely</button>
+                </div>
 
-            <!-- NGO -->
-            <div class="price-card premium-card">
-                <h3>Jan Sewa (Portal)</h3>
-                <div class="price">₹499<span>/mo</span></div>
-                <ul class="features-list">
-                    <li>Multi-Citizen Analysis Tool</li>
-                    <li>Village Progress Dashboard</li>
-                    <li>Bulk PDF Checklist Exports</li>
-                    <li>Institutional Verification Hub</li>
-                    <li>Full Civic Data API Access</li>
-                </ul>
-                <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Contact for
-                    Portals</button>
+                <!-- NGO -->
+                <div class="price-card premium-card">
+                    <h3>Jan Sewa (Portal)</h3>
+                    <div class="price">₹499<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Multi-Citizen Analysis Tool</li>
+                        <li>Village Progress Dashboard</li>
+                        <li>Bulk PDF Checklist Exports</li>
+                        <li>Institutional Verification Hub</li>
+                        <li>Full Civic Data API Access</li>
+                    </ul>
+                    <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Contact for
+                        Portals</button>
+                </div>
             </div>
         </div>
     </main>
