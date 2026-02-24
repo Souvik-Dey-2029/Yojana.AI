@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Form Questions
             const form = document.getElementById('compliance-form');
             if (form) {
-                const groups = form.querySelectorAll('.q-group');
+                const groups = form.querySelectorAll('.q-group, .q-group-sidebar');
                 const qKeys = ['q_aadhaar_name', 'q_income_valid', 'q_bank_dbt', 'q_address_match', 'q_category_valid', 'q_photo_correct', 'q_mobile_linked', 'q_self_attested'];
                 groups.forEach((group, i) => {
                     const span = group.querySelector('span');
@@ -245,36 +245,49 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (lang === 'en') {
-            headline.innerText = `${schemes.length} Schemes Found`;
+            headline.innerText = `${schemes.length} Premium Schemes Found`;
         }
 
         grid.innerHTML = '';
 
         schemes.forEach((scheme, index) => {
             const card = document.createElement('div');
-            card.className = 'scheme-card glass animate-fade-in';
-            card.style.animationDelay = `${index * 0.05}s`;
+            card.className = 'scheme-card animate-fade-in';
+            card.style.animationDelay = `${index * 0.08}s`;
 
-            let riskBadge = '';
+            let approvalUI = '';
             let suggestionBox = '';
+            let matchStatusText = "Eligibility Guaranteed";
+            let statusColor = "var(--gov-green)";
 
-            // Use per-scheme score if available — each scheme gets its own unique %
-            if (schemeScores && schemeScores[scheme.id]) {
+            // Default state without analysis
+            if (!schemeScores || !schemeScores[scheme.id]) {
+                matchStatusText = "Scan to Verify";
+                statusColor = "var(--ashoka-navy)";
+            } else {
                 const sData = schemeScores[scheme.id];
-                const color = sData.risk_level === 'LOW' ? '#22c55e' : (sData.risk_level === 'MEDIUM' ? '#eab308' : '#ef4444');
-                riskBadge = `
-                    <div class="risk-badge" style="position: absolute; top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; border-radius: 1rem; background: ${color}22; border: 1px solid ${color}; color: ${color}; font-size: 0.75rem; font-weight: 600;">
-                        ${sData.score}% ${l.approval}
+                statusColor = sData.risk_level === 'LOW' ? 'var(--gov-green)' : (sData.risk_level === 'MEDIUM' ? 'var(--medium-saffron)' : 'var(--danger-red)');
+                matchStatusText = sData.risk_level === 'LOW' ? "High Probability" : (sData.risk_level === 'MEDIUM' ? "Moderate Match" : "Attention Required");
+
+                approvalUI = `
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; color: ${statusColor}; margin-bottom: 0.4rem;">
+                            <span>${l.approval} Probability</span>
+                            <span>${sData.score}%</span>
+                        </div>
+                        <div class="approval-meter-premium">
+                            <div class="approval-meter-fill-premium" style="width: ${sData.score}%; background: ${statusColor};"></div>
+                        </div>
                     </div>
                 `;
 
                 if (sData.risk_level !== 'LOW' && sData.suggestions.length > 0) {
                     suggestionBox = `
-                        <div class="ai-suggestions" style="margin-top: 1rem; padding: 0.8rem; border-radius: 0.8rem; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1);">
-                            <div style="font-size: 0.7rem; color: ${color}; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem;">
-                                <span>⚡</span> ${l.ai_suggestions}
+                        <div class="ai-suggestions" style="margin-top: 1.25rem; padding: 1.25rem; border-radius: 12px; background: rgba(255, 122, 0, 0.05); border: 1px dashed var(--primary-saffron); border-left: 4px solid var(--primary-saffron);">
+                            <div style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase;">
+                                <span>📋</span> ${l.ai_suggestions}
                             </div>
-                            <ul style="font-size: 0.7rem; opacity: 0.8; padding-left: 1rem; margin: 0;">
+                            <ul style="font-size: 0.8rem; color: #4B5563; padding-left: 1.2rem; margin: 0; line-height: 1.4;">
                                 ${sData.suggestions.map(s => `<li>${s}</li>`).join('')}
                             </ul>
                         </div>
@@ -283,20 +296,38 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             card.innerHTML = `
-                ${riskBadge}
-                <div class="scheme-icon-wrapper">${scheme.icon || '📜'}</div>
-                <h3>${scheme.name}</h3>
-                <p>${scheme.description}</p>
-                <div class="benefits">${scheme.benefits}</div>
+                <div class="scheme-match-badge" style="background: ${statusColor}">${matchStatusText}</div>
+                <div class="scheme-icon-wrapper" style="font-size: 3rem; background: #f8fafc; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 1.5rem;">${scheme.icon || '🏛️'}</div>
+                
+                <h3 style="margin: 0; font-size: 1.4rem; line-height: 1.3;">${scheme.name}</h3>
+                <p style="font-size: 0.95rem; color: #6B7280; margin: 0.75rem 0 1.25rem;">${scheme.description}</p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <div class="benefit-pill">
+                        <span>💰</span> ${scheme.benefits}
+                    </div>
+                </div>
+
+                ${approvalUI}
                 ${suggestionBox}
-                <div class="docs-title">${l.required_docs}</div>
-                <ul class="docs-list">
-                    ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
-                </ul>
-                <div class="card-footer" style="flex-wrap: wrap; gap: 0.5rem; margin-top: auto;">
-                    <span class="deadline" style="width: 100%; margin-bottom: 0.5rem; font-size: 0.8rem; opacity: 0.7;">${l.deadline}: ${scheme.deadline}</span>
-                    <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1; text-align: center;">${l.apply_now}</a>
-                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1; border-color: var(--primary); color: white;">${l.ai_guide}</button>
+
+                <div style="margin-top: 1.5rem; border-top: 1px solid #f3f4f6; padding-top: 1.5rem;">
+                    <div class="docs-title">${l.required_docs}</div>
+                    <ul class="docs-list" style="columns: 2; column-gap: 1rem; margin-bottom: 1.5rem;">
+                        ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="card-footer" style="display: flex; gap: 0.75rem; margin-top: auto; padding-top: 1rem;">
+                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span>📄</span> ${l.ai_guide}
+                    </button>
+                    <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="flex: 1.2; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span>Apply</span> <span>🚀</span>
+                    </a>
+                </div>
+                <div style="font-size: 0.75rem; color: #9CA3AF; margin-top: 1rem; text-align: center; font-weight: 500;">
+                    ${l.deadline}: ${scheme.deadline}
                 </div>
             `;
             grid.appendChild(card);
