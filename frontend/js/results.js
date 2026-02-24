@@ -127,7 +127,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Application Success Analyzer Logic
     const analyzerSection = document.getElementById('analyzer-section');
     const runAnalysisBtn = document.getElementById('run-analysis');
-    let complianceData = null;
+    // Per-scheme scores: { scheme_id: { score, risk_level, suggestions } }
+    let schemeScores = null;
 
     if (runAnalysisBtn) {
         runAnalysisBtn.addEventListener('click', async () => {
@@ -137,21 +138,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = {};
             formData.forEach((value, key) => data[key] = parseInt(value));
 
+            // Include all currently visible scheme IDs so backend can score each one
+            data.scheme_ids = currentSchemes.map(s => s.id);
+
             runAnalysisBtn.innerText = l.analyzing_btn || "Analyzing Risks...";
             runAnalysisBtn.disabled = true;
 
             try {
-                const res = await fetch('/api/predict-application-success', {
+                const res = await fetch('/api/predict-scheme-scores', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
                 if (!res.ok) throw new Error("Prediction API Error");
 
-                complianceData = await res.json();
-                console.log("DEBUG: Compliance Data received:", complianceData);
+                const result = await res.json();
+                schemeScores = result.scores; // { scheme_id: { score, risk_level, suggestions } }
+                console.log("DEBUG: Per-scheme scores received:", schemeScores);
 
-                // Refresh rendering with new data
+                // Refresh rendering with new per-scheme data
                 applyFiltersAndRender();
                 runAnalysisBtn.innerText = l.recalculate_btn || "Re-Calculate Probability";
             } catch (e) {
@@ -253,22 +258,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             let riskBadge = '';
             let suggestionBox = '';
 
-            if (complianceData) {
-                const color = complianceData.risk_level === 'LOW' ? '#22c55e' : (complianceData.risk_level === 'MEDIUM' ? '#eab308' : '#ef4444');
+            // Use per-scheme score if available — each scheme gets its own unique %
+            if (schemeScores && schemeScores[scheme.id]) {
+                const sData = schemeScores[scheme.id];
+                const color = sData.risk_level === 'LOW' ? '#22c55e' : (sData.risk_level === 'MEDIUM' ? '#eab308' : '#ef4444');
                 riskBadge = `
                     <div class="risk-badge" style="position: absolute; top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; border-radius: 1rem; background: ${color}22; border: 1px solid ${color}; color: ${color}; font-size: 0.75rem; font-weight: 600;">
-                        ${complianceData.score}% ${l.approval}
+                        ${sData.score}% ${l.approval}
                     </div>
                 `;
 
-                if (complianceData.risk_level !== 'LOW' && complianceData.suggestions.length > 0) {
+                if (sData.risk_level !== 'LOW' && sData.suggestions.length > 0) {
                     suggestionBox = `
                         <div class="ai-suggestions" style="margin-top: 1rem; padding: 0.8rem; border-radius: 0.8rem; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1);">
                             <div style="font-size: 0.7rem; color: ${color}; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem;">
                                 <span>⚡</span> ${l.ai_suggestions}
                             </div>
                             <ul style="font-size: 0.7rem; opacity: 0.8; padding-left: 1rem; margin: 0;">
-                                ${complianceData.suggestions.map(s => `<li>${s}</li>`).join('')}
+                                ${sData.suggestions.map(s => `<li>${s}</li>`).join('')}
                             </ul>
                         </div>
                     `;
@@ -327,13 +334,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Global Success Data (to be used by download function)
-    window.getCurrentCompliance = () => complianceData;
+    // Returns the score for a specific scheme, or null if scores not yet computed
+    window.getSchemeCompliance = (schemeId) => schemeScores ? schemeScores[schemeId] : null;
 });
 
 // PDF Loader (Global)
 async function downloadPDFGuide(schemeId) {
     const profile = JSON.parse(localStorage.getItem('userProfile')) || { name: 'Applicant', language: 'en' };
-    const compliance = window.getCurrentCompliance ? window.getCurrentCompliance() : null;
+    // Get the specific compliance data for THIS scheme
+    const compliance = window.getSchemeCompliance ? window.getSchemeCompliance(schemeId) : null;
 
     const langLocalizations = {
         hi: { generating: "उत्पन्न किया जा रहा है...", failed: "विफल रहा", success: "सफलता!" },
