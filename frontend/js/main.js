@@ -8,14 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
     // Observe animatable elements
-    document.querySelectorAll('.animate-fade-in, .feature-card, .blog-card, .fact-box, .price-card').forEach((el, index) => {
-        el.style.transitionDelay = `${(index % 3) * 0.15}s`;
+    document.querySelectorAll('.scroll-reveal, .animate-fade-in').forEach((el, index) => {
+        // Only add delay if not already specified in CSS
+        if (!el.style.animationDelay) {
+            el.style.transitionDelay = `${(index % 4) * 0.1}s`;
+        }
         observer.observe(el);
     });
 

@@ -317,17 +317,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.className = 'scheme-card animate-fade-in';
             card.style.animationDelay = `${index * 0.08}s`;
 
-            const aiMatchBadge = scheme.is_ml_recommended ? `<span class="badge badge-ai" style="background: var(--gov-green); color: white; margin-left: 0.5rem; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px;">${aiMatchLabel}</span>` : '';
+            const aiMatchBadge = scheme.is_ml_recommended ? `<span class="badge-ai">${aiMatchLabel}</span>` : '';
 
             /* TOP RIGHT STATUS TAG (Official Badge Style) */
             let topStatusTag = '';
-            const badgeStyle = 'style="background: rgba(4, 106, 56, 0.12); color: #046A38; padding: 4px 10px; border-radius: 6px; font-size: 12px;"';
             if (scheme.is_recommended) {
-                topStatusTag = `<span class="status-badge" ${badgeStyle}>Recommended</span>`;
+                topStatusTag = `<span class="status-badge">Recommended</span>`;
             } else if (schemeScores && schemeScores[scheme.id] && schemeScores[scheme.id].score > 80) {
-                topStatusTag = `<span class="status-badge" ${badgeStyle}>High Approval Chance</span>`;
+                topStatusTag = `<span class="status-badge">High Approval Chance</span>`;
             } else {
-                topStatusTag = `<span class="status-badge" ${badgeStyle}>Eligible</span>`;
+                topStatusTag = `<span class="status-badge">Eligible</span>`;
             }
 
             let approvalUI = '';
@@ -345,8 +344,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 matchStatusText = sData.risk_level === 'LOW' ? "High Probability" : (sData.risk_level === 'MEDIUM' ? "Moderate Match" : "Attention Required");
 
                 approvalUI = `
-                    <div style="margin-top: 1rem;">
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; color: ${statusColor}; margin-bottom: 0.4rem;">
+                    <div style="margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 800; color: ${statusColor}; margin-bottom: 0.5rem;">
                             <span>${l.approval} Probability</span>
                             <span>${sData.score}%</span>
                         </div>
@@ -358,11 +357,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (sData.risk_level !== 'LOW' && sData.suggestions.length > 0) {
                     suggestionBox = `
-                        <div class="ai-suggestions" style="margin-top: 1.25rem; padding: 1.25rem; border-radius: 12px; background: rgba(255, 122, 0, 0.05); border: 1px dashed var(--primary-saffron); border-left: 4px solid var(--primary-saffron);">
-                            <div style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase;">
+                        <div class="ai-suggestions">
+                            <div style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
                                 <span>📋</span> ${l.ai_suggestions}
                             </div>
-                            <ul style="font-size: 0.8rem; color: #4B5563; padding-left: 1.2rem; margin: 0; line-height: 1.4;">
+                            <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
                                 ${sData.suggestions.map(s => `<li>${s}</li>`).join('')}
                             </ul>
                         </div>
@@ -372,13 +371,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             card.innerHTML = `
                 ${topStatusTag}
-                <div class="scheme-match-badge" style="background: ${statusColor}; border-radius: 4px; font-weight: 800; font-size: 0.7rem;">${matchStatusText}</div>
-                <div class="scheme-icon-wrapper" style="font-size: 3rem; background: #f8fafc; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.03);">${scheme.icon || '🏛️'}</div>
+                <div class="scheme-match-badge" style="background: ${statusColor};">${matchStatusText}</div>
+                <div class="scheme-icon-wrapper">${scheme.icon || '🏛️'}</div>
                 
-                <h3 style="margin: 0; font-size: 1.4rem; line-height: 1.3; color: var(--ashoka-navy);">${scheme.name}</h3>
-                <p style="font-size: 0.95rem; color: #6B7280; margin: 0.75rem 0 1.25rem;">${scheme.description}</p>
+                <h3 style="margin: 0; font-size: 1.5rem; line-height: 1.3; color: var(--ashoka-navy);">${scheme.name}${aiMatchBadge}</h3>
+                <p style="font-size: 1rem; color: var(--text-muted); margin: 1rem 0 1.5rem;">${scheme.description}</p>
                 
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
                     <div class="benefit-pill">
                         <span>💰</span> ${scheme.benefits}
                     </div>
@@ -387,9 +386,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${approvalUI}
                 ${suggestionBox}
 
-                <div style="margin-top: 1.5rem; border-top: 1px solid #f3f4f6; padding-top: 1.5rem;">
-                    <div class="docs-title" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 0.75rem;">${l.required_docs}</div>
-                    <ul class="docs-list" style="columns: 2; column-gap: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #4B5563;">
+                <div style="margin-top: 2rem; border-top: 1px solid var(--border-soft); padding-top: 1.5rem;">
+                    <div class="docs-title" style="font-size: 0.8rem; font-weight: 800; color: var(--ashoka-navy); text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-bottom: 1rem;">${l.required_docs}</div>
+                    <ul class="docs-list">
                         ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
                     </ul>
                 </div>
