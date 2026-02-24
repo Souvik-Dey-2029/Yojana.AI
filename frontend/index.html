@@ -9,71 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
-    <style>
-        .blog-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            border-bottom: 1px solid var(--border-soft);
-        }
-
-        .blog-content {
-            padding: 1.5rem;
-        }
-
-        .blog-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--primary-saffron);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: 1rem;
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--gov-green);
-            border-radius: 2px;
-        }
-
-        .features,
-        .quick-facts,
-        .insights {
-            padding: 6rem 0;
-        }
-
-        .blog-grid,
-        .features-grid,
-        .facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-    </style>
 </head>
 
 <body>
     <nav>
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
         <div class="nav-links">
-            <select id="lang-toggle"
-                style="padding: 0.4rem; border-radius: 6px; background: white; border: 1px solid var(--border-soft); font-family: inherit; margin-right: 1rem;">
+            <select id="lang-toggle" class="premium-select" style="margin-right: 1rem;">
                 <option value="en">English</option>
                 <option value="hi">Hindi (हिन्दी)</option>
                 <option value="bn">Bengali (বাংলা)</option>
@@ -88,17 +30,21 @@
     </nav>
 
     <main>
-        <section class="hero scroll-reveal" id="hero-section">
-            <h1 class="animate-fade-in">Trusted <span>Public Assistance</span> Simple for Every Citizen.</h1>
-            <p class="animate-fade-in"
-                style="margin: 1.5rem 0 2.5rem; max-width: 750px; font-size: 1.25rem; color: #374151;">
-                Discover and apply for 50+ life-changing government schemes.
-                Our platform analysis helps you understand your <strong>Application Success Probability</strong> with
-                clarity and trust.
-            </p>
-            <div class="animate-fade-in">
-                <a href="eligibility.html" class="btn btn-primary"
-                    style="font-size: 1.1rem; padding: 1rem 2.5rem;">Start Your Eligibility Check</a>
+        <section class="hero" id="hero-section">
+            <div class="animate-fade-in" style="display: flex; flex-direction: column; align-items: center;">
+                <h1 style="margin-bottom: 1.5rem;">Trusted <span>Public Assistance</span> Simple for Every Citizen.</h1>
+                <p
+                    style="margin: 0 0 3rem; max-width: 800px; font-size: 1.35rem; color: var(--text-muted); font-weight: 500;">
+                    Discover and apply for 50+ life-changing government schemes.
+                    Our AI matching technology helps you understand your <strong>Success Probability</strong> with
+                    clarity and trust.
+                </p>
+                <div style="display: flex; gap: 1.5rem; align-items: center;">
+                    <a href="eligibility.html" class="btn btn-primary"
+                        style="font-size: 1.1rem; padding: 1.1rem 2.8rem;">Start Eligibility Check</a>
+                    <a href="#features" class="btn glass" style="font-size: 1.1rem; padding: 1.1rem 2.8rem;">Learn
+                        More</a>
+                </div>
             </div>
         </section>
 
@@ -109,30 +55,30 @@
             </div>
         </div>
 
-        <section id="features" class="container features scroll-reveal">
-            <div class="institutional-panel">
+        <section id="features" class="container features">
+            <div class="institutional-panel scroll-reveal">
                 <div class="text-center">
                     <h2 class="section-title">Why Trust Yojana.AI?</h2>
                 </div>
 
-                <div class="blog-grid" style="margin-top: 3rem;">
+                <div class="features-grid" style="margin-top: 3.5rem;">
                     <div class="feature-card premium-card">
-                        <span class="feature-icon">🏛️</span>
+                        <span class="feature-icon floating">🏛️</span>
                         <h3>Governance Focused</h3>
                         <p>Designed to provide clear, reliable information on government welfare programs.</p>
                     </div>
                     <div class="feature-card premium-card">
-                        <span class="feature-icon">📑</span>
+                        <span class="feature-icon floating" style="animation-delay: 0.5s;">📑</span>
                         <h3>Eligibility Analysis</h3>
                         <p>Objective matching based on official criteria to save you time and effort.</p>
                     </div>
                     <div class="feature-card premium-card">
-                        <span class="feature-icon">🗣️</span>
+                        <span class="feature-icon floating" style="animation-delay: 1s;">🗣️</span>
                         <h3>Native Support</h3>
                         <p>Get explanations in your own language: Hindi, Bengali, Tamil, Marathi, and English.</p>
                     </div>
                     <div class="feature-card premium-card">
-                        <span class="feature-icon">📥</span>
+                        <span class="feature-icon floating" style="animation-delay: 1.5s;">📥</span>
                         <h3>Guidance Manuals</h3>
                         <p>Download step-by-step checklists to ensure your application process is smooth.</p>
                     </div>
@@ -140,22 +86,22 @@
             </div>
         </section>
 
-        <section class="container quick-facts text-center scroll-reveal">
-            <div class="institutional-panel">
+        <section class="container quick-facts text-center">
+            <div class="institutional-panel scroll-reveal">
                 <h2 class="section-title">Citizen Impact Facts</h2>
-                <div class="facts-grid" style="margin-top: 3rem;">
+                <div class="facts-grid" style="margin-top: 3.5rem;">
                     <div class="fact-box premium-card">
-                        <div class="feature-icon">📈</div>
+                        <div class="feature-icon floating">📈</div>
                         <h4>50+ Schemes</h4>
                         <p>Live national welfare programs now available for analysis and discovery.</p>
                     </div>
                     <div class="fact-box premium-card">
-                        <div class="feature-icon">👨‍🌾</div>
+                        <div class="feature-icon floating" style="animation-delay: 0.7s;">👨‍🌾</div>
                         <h4>12 Crore+</h4>
                         <p>Farmers currently enrolled in national agricultural support programs.</p>
                     </div>
                     <div class="fact-box premium-card">
-                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-icon floating" style="animation-delay: 1.4s;">🛡️</div>
                         <h4>Real-Time Sync</h4>
                         <p>Data refreshed weekly from official government sources for accuracy.</p>
                     </div>
@@ -210,8 +156,99 @@
         <div id="pulse-content" style="font-size: 0.9rem; font-weight: 600; color: var(--ashoka-navy);"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Yojana.AI - Empowering citizens through trusted digital assistance.</p>
+    <footer class="mega-footer">
+        <div class="footer-quick-access">
+            <div class="container">
+                <div class="quick-access-grid">
+                    <a href="#" class="footer-card">
+                        <div class="footer-card-icon">🏛️</div>
+                        <div class="footer-card-text">Government<br>Services</div>
+                        <span style="opacity: 0.5;">→</span>
+                    </a>
+                    <a href="#" class="footer-card">
+                        <div class="footer-card-icon">🎯</div>
+                        <div class="footer-card-text">Scheme<br>Analytics</div>
+                        <span style="opacity: 0.5;">→</span>
+                    </a>
+                    <a href="#" class="footer-card">
+                        <div class="footer-card-icon">🛡️</div>
+                        <div class="footer-card-text">Direct Benefit<br>Transfer</div>
+                        <span style="opacity: 0.5;">→</span>
+                    </a>
+                    <a href="#" class="footer-card">
+                        <div class="footer-card-icon">🌍</div>
+                        <div class="footer-card-text">State Specific<br>Portals</div>
+                        <span style="opacity: 0.5;">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1.5rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine empowering Indian citizens through transparent data and AI-driven
+                    eligibility checks.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                    <a href="#" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">yt</a>
+                </div>
+                <div class="footer-last-updated">Last updated: 24-02-2026</div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                    <li><a href="results.html">Discovery Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">User Guide</a></li>
+                    <li><a href="#">AI Methodology</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Data Protection</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p>Digital Empowerment Division</p>
+                    <p>MeitY HQ, CGO Complex,</p>
+                    <p>Lodhi Road, New Delhi-110003</p>
+                    <p>India</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-grid">
+                <p>&copy; 2026 Yojana.AI - Indian Citizen Digital Empowerment.</p>
+                <div class="footer-legal-links">
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
