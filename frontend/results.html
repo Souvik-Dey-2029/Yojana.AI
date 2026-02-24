@@ -50,6 +50,96 @@
                     </select>
                 </div>
             </div>
+
+            <!-- Application Success Analyzer Section -->
+            <div id="analyzer-section" class="glass animate-fade-in"
+                style="display: none; margin-top: 3rem; padding: 2.5rem; border-radius: 2rem; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 2rem;">🧠</span> Application Success Analyzer
+                </h2>
+                <p style="opacity: 0.8; margin-bottom: 2rem;">Answer these 8 simple questions to predict your approval
+                    likelihood for each scheme based on document compliance.</p>
+
+                <form id="compliance-form"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Aadhaar name same across documents?</span>
+                        <select name="aadhaar_name_match" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Income Certificate issued within 12 months?</span>
+                        <select name="income_certificate_valid" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Bank Account DBT Enabled?</span>
+                        <select name="bank_account_seeded" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Address matches across Aadhaar & Ration?</span>
+                        <select name="address_match" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Category Certificate valid?</span>
+                        <select name="category_certificate_valid" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Passport size photo as per guidelines?</span>
+                        <select name="photo_correct" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Aadhaar linked with mobile?</span>
+                        <select name="mobile_linked" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="q-group"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
+                        <span>Self-attested documents ready?</span>
+                        <select name="self_attested_docs" class="glass"
+                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </form>
+                <div style="margin-top: 2rem; text-align: right;">
+                    <button id="run-analysis" class="btn btn-primary" style="padding: 1rem 2.5rem;">Calculate Approval
+                        Probability</button>
+                </div>
+            </div>
         </header>
 
         <div id="schemes-grid" class="schemes-grid">

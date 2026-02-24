@@ -14,7 +14,14 @@ from typing import Optional
 router = APIRouter()
 
 @router.get("/download-guide/{scheme_id}")
-async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: Session = Depends(get_db)):
+async def download_guide(
+    scheme_id: str, 
+    name: Optional[str] = "Applicant", 
+    score: Optional[float] = 100.0,
+    risk_level: Optional[str] = "LOW",
+    suggestions: Optional[str] = "", # Comma-separated
+    db: Session = Depends(get_db)
+):
     scheme_obj = get_scheme_by_id(db, scheme_id)
     if not scheme_obj:
         print(f"DEBUG: PDF Generation failed - Scheme {scheme_id} not found")
@@ -100,6 +107,33 @@ async def download_guide(scheme_id: str, name: Optional[str] = "Applicant", db: 
             line = word + " "
             y -= 15
     safe_draw(p, 0.75 * inch, y, line)
+
+    # --- 4b. Application Success Analysis ---
+    y -= 35
+    p.setFillColor(colors.white)
+    p.setFont("Helvetica-Bold", 14)
+    p.drawString(0.75 * inch, y, "APPLICATION SUCCESS ANALYSIS")
+    
+    y -= 25
+    p.setFont("Helvetica-Bold", 11)
+    # Color based on risk
+    if risk_level == "LOW":
+        p.setFillColorRGB(0.2, 0.8, 0.2)
+    elif risk_level == "MEDIUM":
+        p.setFillColorRGB(1.0, 0.7, 0.0)
+    else:
+        p.setFillColorRGB(0.9, 0.3, 0.3)
+        
+    p.drawString(0.75 * inch, y, f"Approval Likelihood: {score}% | Risk Level: {risk_level}")
+    
+    if suggestions:
+        y -= 20
+        p.setFont("Helvetica-Oblique", 10)
+        p.setFillColorRGB(0.7, 0.7, 0.7)
+        suggestion_list = [s.strip() for s in suggestions.split(",") if s.strip()]
+        for sug in suggestion_list[:3]:
+            safe_draw(p, 0.75 * inch, y, f"* AI Suggestion: {sug}")
+            y -= 15
 
     # --- 5. Application Roadmap (Checklist) ---
     y -= 40

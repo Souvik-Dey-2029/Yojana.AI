@@ -21,6 +21,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let currentSchemes = []; // Local cache of eligible schemes
 
+    // Application Success Analyzer Logic
+    const analyzerSection = document.getElementById('analyzer-section');
+    const runAnalysisBtn = document.getElementById('run-analysis');
+    let complianceData = null;
+
+    if (runAnalysisBtn) {
+        runAnalysisBtn.addEventListener('click', async () => {
+            const form = document.getElementById('compliance-form');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = parseInt(value));
+
+            runAnalysisBtn.innerText = "Analyzing Risks...";
+            runAnalysisBtn.disabled = true;
+
+            try {
+                const res = await fetch('/api/predict-application-success', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error("Prediction API Error");
+
+                complianceData = await res.json();
+                console.log("DEBUG: Compliance Data received:", complianceData);
+
+                // Refresh rendering with new data
+                applyFiltersAndRender();
+                runAnalysisBtn.innerText = "Re-Calculate Probability";
+            } catch (e) {
+                console.error("DEBUG: Prediction Error:", e);
+                runAnalysisBtn.innerText = "❌ Error. Try Again";
+            } finally {
+                runAnalysisBtn.disabled = false;
+            }
+        });
+    }
+
     async function fetchResults(profile) {
         console.log("DEBUG: Fetching results for:", profile.name, "Lang:", profile.language);
         grid.innerHTML = `
@@ -40,6 +78,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const data = await response.json();
             currentSchemes = data.eligible_schemes;
+
+            // Show analyzer section if schemes found
+            if (currentSchemes.length > 0 && analyzerSection) {
+                analyzerSection.style.display = 'block';
+            }
+
             applyFiltersAndRender();
         } catch (error) {
             console.error("DEBUG: Fetch Error:", error);
@@ -75,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!schemes || schemes.length === 0) {
             headline.innerText = "No Schemes Found";
             grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding: 3rem; opacity: 0.7;">Sorry, we couldn\'t find any matching schemes for your profile currently. Try adjusting your details.</p>';
+            if (analyzerSection) analyzerSection.style.display = 'none';
             return;
         }
 
@@ -84,12 +129,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         schemes.forEach((scheme, index) => {
             const card = document.createElement('div');
             card.className = 'scheme-card glass animate-fade-in';
-            card.style.animationDelay = `${index * 0.05}s`; // Faster cascade for more items
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            let riskBadge = '';
+            let suggestionBox = '';
+
+            if (complianceData) {
+                const color = complianceData.risk_level === 'LOW' ? '#22c55e' : (complianceData.risk_level === 'MEDIUM' ? '#eab308' : '#ef4444');
+                riskBadge = `
+                    <div class="risk-badge" style="position: absolute; top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; border-radius: 1rem; background: ${color}22; border: 1px solid ${color}; color: ${color}; font-size: 0.75rem; font-weight: 600;">
+                        ${complianceData.score}% Approval
+                    </div>
+                `;
+
+                if (complianceData.risk_level !== 'LOW' && complianceData.suggestions.length > 0) {
+                    suggestionBox = `
+                        <div class="ai-suggestions" style="margin-top: 1rem; padding: 0.8rem; border-radius: 0.8rem; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1);">
+                            <div style="font-size: 0.7rem; color: ${color}; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem;">
+                                <span>⚡</span> AI COMPLIANCE SUGGESTIONS
+                            </div>
+                            <ul style="font-size: 0.7rem; opacity: 0.8; padding-left: 1rem; margin: 0;">
+                                ${complianceData.suggestions.map(s => `<li>${s}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+
             card.innerHTML = `
+                ${riskBadge}
                 <div class="scheme-icon-wrapper">${scheme.icon || '📜'}</div>
                 <h3>${scheme.name}</h3>
                 <p>${scheme.description}</p>
                 <div class="benefits">${scheme.benefits}</div>
+                ${suggestionBox}
                 <div class="docs-title">Required Documents</div>
                 <ul class="docs-list">
                     ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
@@ -132,11 +205,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         console.error("Initialization Error:", err);
     }
+
+    // Global Success Data (to be used by download function)
+    window.getCurrentCompliance = () => complianceData;
 });
 
 // PDF Loader (Global)
 async function downloadPDFGuide(schemeId) {
     const profile = JSON.parse(localStorage.getItem('userProfile')) || { name: 'Applicant' };
+    const compliance = window.getCurrentCompliance ? window.getCurrentCompliance() : null;
+
     const userName = profile.name;
     const btn = document.getElementById(`btn-guide-${schemeId}`);
     if (!btn) return;
@@ -146,17 +224,22 @@ async function downloadPDFGuide(schemeId) {
     btn.disabled = true;
 
     try {
-        const res = await fetch(`/api/download-guide/${schemeId}?name=${encodeURIComponent(userName || 'User')}`);
+        let url = `/api/download-guide/${schemeId}?name=${encodeURIComponent(userName || 'User')}`;
+        if (compliance) {
+            url += `&score=${compliance.score}&risk_level=${compliance.risk_level}&suggestions=${encodeURIComponent(compliance.suggestions.join(','))}`;
+        }
+
+        const res = await fetch(url);
         if (!res.ok) throw new Error("Failed");
 
         const blob = await res.blob();
-        const url = window.URL.createObjectURL(blob);
+        const downloadUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
+        a.href = downloadUrl;
         a.download = `${schemeId}_AI_Guide.pdf`;
         document.body.appendChild(a);
         a.click();
-        window.URL.revokeObjectURL(url);
+        window.URL.revokeObjectURL(downloadUrl);
         btn.innerText = "Success!";
         setTimeout(() => { btn.innerText = originalText; btn.disabled = false; }, 3000);
     } catch (e) {

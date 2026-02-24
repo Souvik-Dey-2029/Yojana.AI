@@ -7,7 +7,7 @@ routing, and static file serving.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from backend.routes import eligibility, schemes, pdf, monetization
+from backend.routes import eligibility, schemes, pdf, monetization, rejection_predictor
 from backend.database import engine, Base
 from backend import db_models
 from backend.seed import seed_db
@@ -38,6 +38,7 @@ app.include_router(eligibility.router, prefix="/api")
 app.include_router(schemes.router, prefix="/api")
 app.include_router(pdf.router, prefix="/api")
 app.include_router(monetization.router, prefix="/api")
+app.include_router(rejection_predictor.router, prefix="/api")
 
 # Serve Frontend
 frontend_path = os.path.join(os.getcwd(), "frontend")
