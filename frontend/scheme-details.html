@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheme Details - Yojana.AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .details-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+            margin-top: -60px;
+        }
+
+        .details-main-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-soft);
+        }
+
+        .details-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .benefit-highlight {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gov-green);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--ashoka-navy);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .doc-item:hover {
+            border-color: var(--gov-green);
+            background: #f0fdf4;
+            transform: translateX(5px);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--ashoka-navy);
+        }
+
+        @media (max-width: 1024px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                margin-top: 0;
+            }
+
+            .sticky-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="nav-links">
+            <select id="lang-toggle" class="lang-selector"
+                style="background: rgba(255,255,255,0.8); border: 1px solid var(--border-soft); padding: 0.5rem; border-radius: 8px; font-weight: 700; color: var(--ashoka-navy); cursor: pointer; outline: none;">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="bn">বাংলা (Bengali)</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+                <option value="mr">मराठी (Marathi)</option>
+            </select>
+            <a href="results.html">Back to Results</a>
+            <a href="index.html">Home</a>
+            <a href="eligibility.html" class="btn btn-primary">New Check</a>
+        </div>
+    </nav>
+
+    <header class="details-hero">
+        <div class="container">
+            <a href="results.html" class="back-link">← Back to Assessment Dashboard</a>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <div id="scheme-icon" class="scheme-icon-circle" style="width: 100px; height: 100px; font-size: 3rem;">
+                    🏛️</div>
+                <div>
+                    <h1 id="scheme-name" style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--ashoka-navy);">
+                        Scheme Loading...</h1>
+                    <div id="scheme-tags" style="display: flex; gap: 1rem;">
+                        <!-- Tags injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-bottom: 100px;">
+        <div class="details-grid">
+            <div class="details-main-card animate-fade-in">
+                <h2 style="margin-bottom: 1.5rem;">Scheme Overview</h2>
+                <p id="scheme-description"
+                    style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 3rem;">
+                    Fetching detailed information from Bharat Gateway...
+                </p>
+
+                <div class="benefit-highlight">
+                    <span>✨</span> Primary Benefits
+                </div>
+                <div id="scheme-benefits"
+                    style="font-size: 1.25rem; font-weight: 600; color: var(--ashoka-navy); padding: 2rem; background: #f0fdf4; border-radius: 20px; border-left: 6px solid var(--gov-green); margin-bottom: 3rem;">
+                    --
+                </div>
+
+                <h2 style="margin-bottom: 1.5rem;">Required Documentation</h2>
+                <div id="docs-list">
+                    <!-- Docs injected by JS -->
+                </div>
+
+                <div id="ai-analysis-box" style="margin-top: 4rem; display: none;">
+                    <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 1.5rem;">🤖</span> AI Eligibility Analysis
+                    </h2>
+                    <div id="ai-analysis-content">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <aside class="details-sidebar">
+                <div class="sticky-sidebar">
+                    <div class="sidebar-card animate-fade-in" style="animation-delay: 0.1s;">
+                        <h3 style="margin-bottom: 1.5rem;">Application Status</h3>
+                        <div id="probability-widget">
+                            <!-- Widget injected by JS -->
+                        </div>
+                        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-soft);">
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <a id="apply-btn" href="#" target="_blank" class="btn btn-primary"
+                                style="padding: 1.25rem; text-align: center; font-size: 1.1rem; font-weight: 800;">
+                                Official Application 🚀
+                            </a>
+                            <button id="guide-btn" class="btn glass" style="padding: 1.25rem; font-weight: 700;">
+                                Download AI Guide (PDF) 📄
+                            </button>
+                        </div>
+                        <p id="deadline-text"
+                            style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem; font-weight: 600;">
+                            Deadline: Loading...
+                        </p>
+                    </div>
+
+                    <div class="sidebar-card animate-fade-in"
+                        style="animation-delay: 0.2s; background: var(--ashoka-navy); color: white;">
+                        <h4 style="margin-bottom: 1rem; color: var(--primary-saffron);">Need Assistance?</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 1.5rem;">Our AI agents are ready to
+                            help you with the verification process.</p>
+                        <a href="faq.html" style="color: white; font-weight: 700; text-decoration: underline;">Visit
+                            Support Center</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-grid">
+                    <p>&copy; 2026 Yojana.AI • Developed by Souvik Dey</p>
+                    <div class="footer-legal-links">
+                        <a href="terms.html">Terms</a>
+                        <a href="privacy.html">Privacy</a>
+                        <a href="disclaimer.html">Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/scheme-details.js"></script>
+</body>
+
+</html>
