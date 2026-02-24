@@ -4,11 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yojana.AI - Intelligent Scheme Assistant</title>
+    <title>Yojana.AI - National Public Assistance Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .blog-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary-saffron);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 1rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gov-green);
+            border-radius: 2px;
+        }
+
+        .features,
+        .quick-facts,
+        .insights {
+            padding: 6rem 0;
+        }
+
+        .blog-grid,
+        .features-grid,
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,144 +81,125 @@
 
     <main>
         <section class="hero" id="hero-section">
-            <canvas id="hero-canvas"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></canvas>
-            <h1 class="animate-fade-in">Discover <span class="floating">Government Schemes</span> Made Simple.</h1>
+            <h1 class="animate-fade-in">Trusted <span>Public Assistance</span> Simple for Every Citizen.</h1>
             <p class="animate-fade-in"
-                style="margin: 1.5rem 0 2.5rem; max-width: 700px; font-size: 1.3rem; animation-delay: 0.2s;">
-                Yojana.AI uses state-of-the-art intelligence to match you with 30+ life-changing schemes and calculate
-                your
-                <strong>Application Success Probability</strong> in seconds.
+                style="margin: 1.5rem 0 2.5rem; max-width: 750px; font-size: 1.25rem; color: #374151; animation-delay: 0.2s;">
+                Discover and apply for 30+ life-changing government schemes.
+                Our platform analysis helps you understand your <strong>Application Success Probability</strong> with
+                clarity and trust.
             </p>
             <div class="animate-fade-in" style="animation-delay: 0.4s;">
-                <a href="eligibility.html" class="btn btn-primary shadow-pulse"
-                    style="font-size: 1.2rem; padding: 1.25rem 3rem;">Start Free Eligibility Check</a>
+                <a href="eligibility.html" class="btn btn-primary"
+                    style="font-size: 1.1rem; padding: 1rem 2.5rem;">Start Your Eligibility Check</a>
             </div>
         </section>
 
-        <div class="pulse-ticker-wrapper glass">
+        <div class="pulse-ticker-wrapper">
             <div class="pulse-ticker" id="pulse-ticker">
-                🚀 **NEW: Application Success Analyzer Engine Live!** • PM-Kisan 16th Installment released! • AI Guide
-                engine updated for 2026 • Multi-lingual support now covers 15+ dialects
+                🇮🇳 <strong>Direct Benefit Transfers reaching millions!</strong> • PM-Kisan 16th Installment released!
+                • New
+                education grants added for 2026 • Platform updated with latest civil standards
             </div>
         </div>
 
-        <section id="features" class="features container">
-            <h2 class="section-title reveal-on-scroll"
-                style="text-align: center; width: 100%; grid-column: 1 / -1; margin-bottom: 4rem;">Why Choose Yojana.AI?
-            </h2>
+        <section id="features" class="container features">
+            <div class="text-center">
+                <h2 class="section-title animate-fade-in">Why Trust Yojana.AI?</h2>
+            </div>
 
-            <div class="feature-card glass">
-                <span class="feature-icon">🤖</span>
-                <h3>Eligibility AI</h3>
-                <p>Advanced ML models predict your eligibility based on real-world datasets and dynamic criteria.</p>
-            </div>
-            <div class="feature-card glass">
-                <span class="feature-icon">⚡</span>
-                <h3>Instant Discovery</h3>
-                <p>Find eligible schemes across 15+ categories in seconds with our optimized search engine.</p>
-            </div>
-            <div class="feature-card glass">
-                <span class="feature-icon">🌍</span>
-                <h3>Native Support</h3>
-                <p>Get instant explanations in Hindi, Bengali, Tamil, Marathi, and many more local dialects.</p>
-            </div>
-            <div class="feature-card glass">
-                <span class="feature-icon">📄</span>
-                <h3>Premium Guides</h3>
-                <p>Download personalized "How to Apply" PDF checklists for every eligible scheme you find.</p>
-            </div>
-            <div class="feature-card glass" style="border: 1px solid var(--primary);">
-                <span class="feature-icon">🧠</span>
-                <div class="badge"
-                    style="position: absolute; top: 1rem; right: 1rem; background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.6rem; font-weight: 800; z-index: 2;">
-                    NEW</div>
-                <h3>Success Predictor</h3>
-                <p>Advanced AI that calculates your approval probability based on document compliance analysis.</p>
+            <div class="blog-grid" style="margin-top: 3rem;">
+                <div class="feature-card premium-card animate-fade-in" style="animation-delay: 0.1s;">
+                    <span class="feature-icon">🏛️</span>
+                    <h3>Governance Focused</h3>
+                    <p>Designed to provide clear, reliable information on government welfare programs.</p>
+                </div>
+                <div class="feature-card premium-card animate-fade-in" style="animation-delay: 0.2s;">
+                    <span class="feature-icon">📑</span>
+                    <h3>Eligibility Analysis</h3>
+                    <p>Objective matching based on official criteria to save you time and effort.</p>
+                </div>
+                <div class="feature-card premium-card animate-fade-in" style="animation-delay: 0.3s;">
+                    <span class="feature-icon">🗣️</span>
+                    <h3>Native Support</h3>
+                    <p>Get explanations in your own language: Hindi, Bengali, Tamil, and more.</p>
+                </div>
+                <div class="feature-card premium-card animate-fade-in" style="animation-delay: 0.4s;">
+                    <span class="feature-icon">📥</span>
+                    <h3>Guidance Manuals</h3>
+                    <p>Download step-by-step checklists to ensure your application process is smooth.</p>
+                </div>
             </div>
         </section>
 
-        <section class="quick-facts container reveal-on-scroll" style="margin-top: 6rem;">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Did You Know?</h2>
-            <div class="facts-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <div class="fact-box glass">
-                    <div class="fact-icon">📊</div>
-                    <div class="fact-content">
-                        <h4>30,000+ Cr</h4>
-                        <p>Total funds disbursed through direct benefit transfers in 2023 alone.</p>
-                    </div>
+        <section class="container quick-facts text-center">
+            <h2 class="section-title animate-fade-in">Citizen Impact Facts</h2>
+            <div class="facts-grid" style="margin-top: 3rem;">
+                <div class="fact-box premium-card animate-fade-in" style="animation-delay: 0.15s;">
+                    <div class="feature-icon">📈</div>
+                    <h4>30,000+ Cr</h4>
+                    <p>Directly transferred to citizens through various welfare schemes in 2023.</p>
                 </div>
-                <div class="fact-box glass">
-                    <div class="fact-icon">🌾</div>
-                    <div class="fact-content">
-                        <h4>12 Crore+</h4>
-                        <p>Number of farmers benefitting from PM-Kisan across India today.</p>
-                    </div>
+                <div class="fact-box premium-card animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="feature-icon">👨‍🌾</div>
+                    <h4>12 Crore+</h4>
+                    <p>Farmers currently enrolled in national agricultural support programs.</p>
                 </div>
-                <div class="fact-box glass">
-                    <div class="fact-icon">🎓</div>
-                    <div class="fact-content">
-                        <h4>Real-Time Sync</h4>
-                        <p>Our database synchronizes weekly with official portals to ensure data accuracy.</p>
-                    </div>
+                <div class="fact-box premium-card animate-fade-in" style="animation-delay: 0.45s;">
+                    <div class="feature-icon">🛡️</div>
+                    <h4>Real-Time Sync</h4>
+                    <p>Data refreshed weekly from official government sources for accuracy.</p>
                 </div>
             </div>
         </section>
-        <section class="insights" id="insights" style="padding: 12rem 0;">
-            <div class="container">
-                <h2 class="section-title reveal-on-scroll"
-                    style="text-align: center; margin-bottom: 5rem; font-size: 3rem;">Insights & Public Updates</h2>
-                <div class="blog-grid">
-                    <article class="blog-card glass reveal-on-scroll">
-                        <div class="blog-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-tag">Economics</div>
-                            <h3>Understanding PM-Kisan 2024</h3>
-                            <p>Detailed analysis of new criteria for small farmers and how to update your e-KYC status
-                                instantly.</p>
-                            <a href="#" class="btn-text">Read Analysis →</a>
-                        </div>
-                    </article>
-                    <article class="blog-card glass reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <div class="blog-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-tag">Digital India</div>
-                            <h3>The Future of Yojana.AI</h3>
-                            <p>How we're deploying high-fidelity generative AI models to simplify complex government
-                                scheme guidelines.</p>
-                            <a href="#" class="btn-text">Read Roadmap →</a>
-                        </div>
-                    </article>
-                    <article class="blog-card glass reveal-on-scroll" style="transition-delay: 0.4s;">
-                        <div class="blog-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-tag">Social Welfare</div>
-                            <h3>Empowering Indian Students</h3>
-                            <p>A curated list of top scholarsips and grants every student in India should monitor for
-                                2024-25.</p>
-                            <a href="#" class="btn-text">View Guide →</a>
-                        </div>
-                    </article>
-                </div>
+
+        <section class="container insights">
+            <div class="text-center">
+                <h2 class="section-title animate-fade-in">Public Service Updates</h2>
+            </div>
+            <div class="blog-grid" style="margin-top: 3rem;">
+                <article class="blog-card premium-card animate-fade-in">
+                    <div class="blog-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Economy</div>
+                        <h3>PM-Kisan 2024 Guidelines</h3>
+                        <p>A comprehensive guide on e-KYC updates and enrollment for small-scale farmers.</p>
+                    </div>
+                </article>
+                <article class="blog-card premium-card animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="blog-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Digital India</div>
+                        <h3>Civil Platform Mission</h3>
+                        <p>How digital tools are ensuring transparency in public service delivery.</p>
+                    </div>
+                </article>
+                <article class="blog-card premium-card animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="blog-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-tag">Welfare</div>
+                        <h3>Student Education Grants</h3>
+                        <p>Monitor key deadlines for national scholarships for the 2024-25 academic year.</p>
+                    </div>
+                </article>
             </div>
         </section>
     </main>
 
-    <footer style="padding: 4rem 2rem; text-align: center; border-top: 1px solid var(--glass-border);">
-        <p>&copy; 2026 Yojana.AI - Empowering citizens through technology.</p>
-    </footer>
-
-    <div id="live-pulse" class="live-pulse-toast glass">
+    <!-- Citizen Pulse Toast -->
+    <div id="live-pulse">
         <div class="pulse-dot"></div>
-        <div id="pulse-content">New scheme update detected...</div>
+        <div id="pulse-content" style="font-size: 0.9rem; font-weight: 600; color: var(--ashoka-navy);"></div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Yojana.AI - Empowering citizens through trusted digital assistance.</p>
+    </footer>
 
     <script src="js/main.js"></script>
 </body>
