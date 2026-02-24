@@ -113,4 +113,74 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Hero Carousel Implementation (Tasks 5, 8) ---
+    const initHeroCarousel = () => {
+        const slider = document.getElementById('hero-slider');
+        const dotsContainer = document.getElementById('slider-dots');
+        if (!slider) return;
+
+        const slides = slider.querySelectorAll('.hero-slide');
+        let currentIdx = 0;
+        let slideInterval;
+
+        // Create Dots
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (idx === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(idx));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('.dot');
+
+        const goToSlide = (idx) => {
+            slides[currentIdx].classList.remove('active');
+            dots[currentIdx].classList.remove('active');
+            currentIdx = idx;
+            slides[currentIdx].classList.add('active');
+            dots[currentIdx].classList.add('active');
+            resetInterval();
+        };
+
+        const nextSlide = () => {
+            let nextIdx = (currentIdx + 1) % slides.length;
+            goToSlide(nextIdx);
+        };
+
+        const resetInterval = () => {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 4000);
+        };
+
+        // Pause on Hover
+        slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        slider.addEventListener('mouseleave', resetInterval);
+
+        // Preload Images (Task 8)
+        const preloadImages = () => {
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                if (img && img.src) {
+                    const nextImg = new Image();
+                    nextImg.src = img.src;
+                }
+            });
+        };
+
+        preloadImages();
+        resetInterval();
+
+        // Simple Swipe Support (Task 5)
+        let touchStartX = 0;
+        slider.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        slider.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) goToSlide((currentIdx + 1) % slides.length);
+            if (touchEndX - touchStartX > 50) goToSlide((currentIdx - 1 + slides.length) % slides.length);
+        }, { passive: true });
+    };
+
+    initHeroCarousel();
 });
