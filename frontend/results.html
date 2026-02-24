@@ -7,149 +7,146 @@
     <title>Your Eligible Schemes - Yojana.AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/results.css">
 </head>
 
 <body>
     <nav>
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
         <div class="nav-links">
+            <select id="lang-toggle"
+                style="padding: 0.4rem; border-radius: 6px; background: white; border: 1px solid var(--border-soft); font-family: inherit;">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+            </select>
             <a href="index.html">Home</a>
-            <a href="index.html#features">Features</a>
             <a href="pricing.html">Pricing</a>
-            <a href="eligibility.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">Check Eligibility</a>
+            <a href="eligibility.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">New Check</a>
         </div>
     </nav>
 
-    <div class="results-container">
-        <header style="margin-bottom: 4rem; text-align: center;">
-            <h1 id="results-headline" class="animate-fade-in">Filtering Schemes for you...</h1>
-            <p id="results-subheadline" class="animate-fade-in" style="animation-delay: 0.2s;">Based on your profile,
-                here are the schemes you can apply for.</p>
+    <div class="pulse-ticker-wrapper">
+        <div class="pulse-ticker" id="pulse-ticker">
+            🇮🇳 <strong>Digital Public Infrastructure helping millions!</strong> • Real-time scheme updates active •
+            Sector-wise grants announced for 2026 • Secured by Bharat Gateway
+        </div>
+    </div>
 
-            <div class="filter-controls animate-fade-in"
-                style="animation-delay: 0.4s; margin-top: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center;">
-                <div class="search-box" style="flex: 2; min-width: 300px;">
-                    <input type="text" id="scheme-search" placeholder="Search schemes by name or keyword..."
-                        class="glass"
-                        style="width: 100%; padding: 1.25rem 2rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none;">
+    <header id="hero-premium"
+        style="padding: 140px 0 60px; background: radial-gradient(circle at top right, #FFF5EB, #FAFAF5); border-bottom: 1px solid var(--border-soft); text-align: center;">
+        <div class="container">
+            <h1 id="results-headline" style="font-size: 3rem; margin-bottom: 1rem;">Analyzing Your Benefits</h1>
+            <p id="results-subheadline" style="color: #4B5563; font-size: 1.1rem;">Discovering schemes tailored to your
+                profile and location.</p>
+        </div>
+    </header>
+
+    <main class="container" style="padding-bottom: 80px;">
+        <div class="results-layout" style="display: block;">
+            <!-- Top Section: Success Analyzer -->
+            <section id="analyzer-section" class="analyzer-card-top animate-fade-in"
+                style="display: none; margin-bottom: 3rem;">
+                <div class="analyzer-header"
+                    style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+                    <div>
+                        <h2 style="margin: 0;"><span style="font-size: 1.5rem;">🧠</span> Citizen Success Analyzer</h2>
+                        <p style="margin: 0.5rem 0 0; opacity: 0.8;">Verify document compliance to see application
+                            probability across all schemes.</p>
+                    </div>
+                    <button type="button" id="run-analysis" class="btn btn-primary" style="padding: 1rem 2rem;">Apply
+                        Document Filter</button>
                 </div>
-                <div class="sort-box" style="flex: 1; min-width: 150px; display: flex; gap: 0.5rem;">
-                    <select id="scheme-sort" class="glass"
-                        style="flex: 2; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
-                        <option value="relevance">Sort: Relevance</option>
-                        <option value="popularity">Sort: Popularity</option>
-                    </select>
-                    <select id="lang-toggle" class="glass"
-                        style="flex: 1; padding: 1.25rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05);">
-                        <option value="en">EN</option>
-                        <option value="hi">HI</option>
-                        <option value="bn">BN</option>
-                        <option value="ta">TA</option>
-                        <option value="mr">MR</option>
-                    </select>
-                </div>
-            </div>
 
-            <!-- Application Success Analyzer Section -->
-            <div id="analyzer-section" class="glass animate-fade-in"
-                style="display: none; margin-top: 3rem; padding: 2.5rem; border-radius: 2rem; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="font-size: 2rem;">🧠</span> Application Success Analyzer
-                </h2>
-                <p style="opacity: 0.8; margin-bottom: 2rem;">Answer these 8 simple questions to predict your approval
-                    likelihood for each scheme based on document compliance.</p>
-
-                <form id="compliance-form"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Aadhaar name same across documents?</span>
-                        <select name="aadhaar_name_match" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                <form id="compliance-form" class="analyzer-grid-top">
+                    <!-- Questions will be styled in a grid in CSS -->
+                    <div class="q-group-sidebar">
+                        <span>Aadhaar name match?</span>
+                        <select name="aadhaar_name_match">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Income Certificate issued within 12 months?</span>
-                        <select name="income_certificate_valid" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Income cert valid?</span>
+                        <select name="income_certificate_valid">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Bank Account DBT Enabled?</span>
-                        <select name="bank_account_seeded" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Bank DBT enabled?</span>
+                        <select name="bank_account_seeded">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Address matches across Aadhaar & Ration?</span>
-                        <select name="address_match" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Address match?</span>
+                        <select name="address_match">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Category Certificate valid?</span>
-                        <select name="category_certificate_valid" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Category cert valid?</span>
+                        <select name="category_certificate_valid">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Passport size photo as per guidelines?</span>
-                        <select name="photo_correct" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Photos match guidelines?</span>
+                        <select name="photo_correct">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Aadhaar linked with mobile?</span>
-                        <select name="mobile_linked" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Aadhaar-Mobile linked?</span>
+                        <select name="mobile_linked">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="q-group"
-                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem;">
-                        <span>Self-attested documents ready?</span>
-                        <select name="self_attested_docs" class="glass"
-                            style="padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="q-group-sidebar">
+                        <span>Self-attested copies?</span>
+                        <select name="self_attested_docs">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
                 </form>
-                <div style="margin-top: 2rem; text-align: right;">
-                    <button id="run-analysis" class="btn btn-primary" style="padding: 1rem 2.5rem;">Calculate Approval
-                        Probability</button>
+            </section>
+
+            <!-- Main Content: Filters & Schemes -->
+            <div class="results-main">
+                <div class="filter-bar animate-fade-in" style="margin-bottom: 2rem;">
+                    <input type="text" id="scheme-search" placeholder="Search by scheme name or benefit..."
+                        style="flex: 2;">
+                    <select id="scheme-sort">
+                        <option value="relevance">Sort by Relevance</option>
+                        <option value="popularity">Sort by Popularity</option>
+                    </select>
+                </div>
+
+                <!-- Scheme Results Grid -->
+                <div id="schemes-grid" class="schemes-grid">
+                    <!-- Dynamic Content -->
                 </div>
             </div>
-        </header>
-
-        <div id="schemes-grid" class="schemes-grid">
-            <!-- Cards will be injected here -->
-            <div class="loading-state">
-                <div class="spinner"></div>
-                <p>Analyzing your eligibility...</p>
-            </div>
         </div>
+    </main>
+
+    <!-- Citizen Pulse Toast -->
+    <div id="live-pulse">
+        <div class="pulse-dot"></div>
+        <div id="pulse-content" style="font-size: 0.9rem; font-weight: 600; color: var(--ashoka-navy);"></div>
     </div>
+
+    <footer
+        style="text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-soft); margin-top: 5rem; color: #6B7280;">
+        <p>&copy; 2026 Yojana.AI - Indian Citizen Digital Empowerment.</p>
+    </footer>
 
     <script src="js/results.js"></script>
 </body>
