@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const result = await res.json();
                 schemeScores = result.scores; // { scheme_id: { score, risk_level, suggestions } }
-                console.log("DEBUG: Per-scheme scores received:", schemeScores);
+
 
                 // Refresh rendering with new per-scheme data
                 applyFiltersAndRender();
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function fetchResults(profile) {
-        console.log("DEBUG: Fetching results for:", profile.name, "Lang:", profile.language);
+
         updateStaticUI(profile.language);
 
         grid.innerHTML = `
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const sortSelect = document.getElementById('scheme-sort');
         const sortCriteria = sortSelect ? sortSelect.value : 'relevance';
 
-        console.log("DEBUG: Applying filters. Term:", term, "Sort:", sortCriteria);
+
 
         // 1. Search Filter
         let filtered = currentSchemes.filter(s => {

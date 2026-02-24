@@ -77,7 +77,20 @@ COMMON_TERMS = {
         "Merit-cum-Means Minority Scholarship": "मेरिट-सह-साधन अल्पसंख्यक छात्रवृत्ति",
         "USTTAD (Minority Artisans)": "उस्ताद (अल्पसंख्यक शिल्पकार)",
         "SVAMITVA Scheme": "स्वामित्व योजना",
-        "PM-Kisan Maandhan Yojana": "पीएम-किसान मानधन योजना"
+        "PM-Kisan Maandhan Yojana": "पीएम-किसान मानधन योजना",
+        # Footer Terms
+        "Platform": "प्लेटफ़ॉर्म",
+        "Other Links": "अन्य लिंक",
+        "Legal": "कानूनी",
+        "Developer Contact": "डेवलपर संपर्क",
+        "Disclaimer": "डिस्क्लेमर",
+        "FAQs": "अक्सर पूछे जाने वाले प्रश्न",
+        "AI Methodology": "एआई कार्यप्रणाली",
+        "User Guide": "उपयोगकर्ता मार्गदर्शिका",
+        "Terms & Conditions": "नियम और शर्तें",
+        "Privacy Policy": "गोपनीयता नीति",
+        "Data Protection": "डेटा सुरक्षा",
+        "Accessibility": "सुलभता"
     },
     "bn": {
         "Aadhaar Card": "আধার কার্ড",
@@ -143,7 +156,20 @@ COMMON_TERMS = {
         "Merit-cum-Means Minority Scholarship": "মেরিট-কাম-মিনস সংখ্যালঘু বৃত্তি",
         "USTTAD (Minority Artisans)": "ওস্তাদ (সংখ্যালঘু কারিগর)",
         "SVAMITVA Scheme": "স্বামিত্ব প্রকল্প",
-        "PM-Kisan Maandhan Yojana": "পিএম-কিষাণ মানধন যোজনা"
+        "PM-Kisan Maandhan Yojana": "পিএম-কিষাণ মানধন যোজনা",
+        # Footer Terms
+        "Platform": "প্ল্যাটফর্ম",
+        "Other Links": "অন্যান্য লিঙ্ক",
+        "Legal": "আইনি",
+        "Developer Contact": "ডেভেলপার যোগাযোগ",
+        "Disclaimer": "দাবিত্যাগ",
+        "FAQs": "সাধারণ জিজ্ঞাসা",
+        "AI Methodology": "এআই পদ্ধতি",
+        "User Guide": "ব্যবহারকারী নির্দেশিকা",
+        "Terms & Conditions": "শর্তাবলী",
+        "Privacy Policy": "গোপনীয়তা নীতি",
+        "Data Protection": "ডেটা সুরক্ষা",
+        "Accessibility": "সহজলভ্যতা"
     },
     "ta": {
         "Aadhaar Card": "ஆதார் அட்டை",
@@ -209,7 +235,20 @@ COMMON_TERMS = {
         "Merit-cum-Means Minority Scholarship": "தகுதி மற்றும் வருமான அடிப்படையிலான சிறுபான்மையினர் உதவித்தொகை",
         "USTTAD (Minority Artisans)": "உஸ்தாத் (சிறுபான்மையினக் கைவினைஞர்கள்)",
         "SVAMITVA Scheme": "சுவாமித்வா திட்டம்",
-        "PM-Kisan Maandhan Yojana": "பிஎம்-கிசான் மான்தன் யோஜனா"
+        "PM-Kisan Maandhan Yojana": "பிஎம்-கிசான் மான்தன் யோஜனா",
+        # Footer Terms
+        "Platform": "தளம்",
+        "Other Links": "பிற இணைப்புகள்",
+        "Legal": "சட்டபூர்வமான",
+        "Developer Contact": "டெவலப்பர் தொடர்பு",
+        "Disclaimer": "மறுப்பு",
+        "FAQs": "அடிக்கடி கேட்கப்படும் கேள்விகள்",
+        "AI Methodology": "AI முறை",
+        "User Guide": "பயனர் வழிகாட்டி",
+        "Terms & Conditions": "விதிமுறைகள் மற்றும் நிபந்தனைகள்",
+        "Privacy Policy": "தனியுரிமைக் கொள்கை",
+        "Data Protection": "தரவு பாதுகாப்பு",
+        "Accessibility": "அணுகல்தன்மை"
     },
     "mr": {
         "Aadhaar Card": "आधार कार्ड",
@@ -275,7 +314,20 @@ COMMON_TERMS = {
         "Merit-cum-Means Minority Scholarship": "गुणवत्ता-निहाय अल्पसंख्याक शिष्यवृत्ती",
         "USTTAD (Minority Artisans)": "उस्ताद (अल्पसंख्याक कारागीर)",
         "SVAMITVA Scheme": "स्वामित्व योजना",
-        "PM-Kisan Maandhan Yojana": "पीएम-किसान मानधन योजना"
+        "PM-Kisan Maandhan Yojana": "पीएम-किसान मानधन योजना",
+        # Footer Terms
+        "Platform": "प्लॅटफॉर्म",
+        "Other Links": "इतर दुवे",
+        "Legal": "कायदेशीर",
+        "Developer Contact": "डेव्हलपर संपर्क",
+        "Disclaimer": "डिस्क्लेमर",
+        "FAQs": "वारंवार विचारले जाणारे प्रश्न",
+        "AI Methodology": "एआय कार्यपद्धती",
+        "User Guide": "वापरकर्ता मार्गदर्शक",
+        "Terms & Conditions": "अटी आणि शर्ती",
+        "Privacy Policy": "गोपनीयता धोरण",
+        "Data Protection": "डेटा सुरक्षा",
+        "Accessibility": "सुलभता"
     }
 }
 

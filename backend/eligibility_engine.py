@@ -22,11 +22,16 @@ class EligibilityEngine:
             except Exception as e:
                 print(f"Error loading model: {e}")
 
+    RECOMMENDED_SCHEME_IDS = [
+        'pm_kisan', 'swami_vivekananda_scholarship', 'mudra_loan', 
+        'kanyashree', 'ayushman_bharat', 'pm_ujjwala', 
+        'startup_india_learning', 'pm_awas_yojana'
+    ]
+
     def predict_eligibility(self, profile: UserProfile, db: Session) -> List[SchemeResult]:
         eligible_ids = []
         
         # 1. ML Prediction (Primary)
-        # ... (same ML logic as before, just for IDs)
         if self.model_data:
             try:
                 input_df = pd.DataFrame([{
@@ -49,17 +54,10 @@ class EligibilityEngine:
                         input_encoded[col] = 0 
 
                 preds = self.model_data['model'].predict(input_encoded)
-                # Note: This list must match the one in train_model.py
-                # In production, we'd fetch these IDs from a Config/DB table
-                scheme_ids = [
-                    'pm_kisan', 'swami_vivekananda_scholarship', 'mudra_loan', 
-                    'kanyashree', 'ayushman_bharat', 'pm_ujjwala', 
-                    'startup_india_learning', 'pm_awas_yojana'
-                ]
                 
                 for idx, val in enumerate(preds[0]):
                     if val == 1:
-                        eligible_ids.append(scheme_ids[idx])
+                        eligible_ids.append(self.RECOMMENDED_SCHEME_IDS[idx])
             except Exception as e:
                 print(f"ML prediction failed: {e}")
 
