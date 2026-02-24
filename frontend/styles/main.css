@@ -2,7 +2,7 @@
     --primary-saffron: #FF7A00;
     --gov-green: #046A38;
     --ashoka-navy: #1E3A8A;
-    --bg-warm: #FAFAF5;
+    --bg-warm: #F6F9F7;
     --card-bg: #FFFFFF;
     --border-soft: #E5E7EB;
     --success-green: #059669;
@@ -29,9 +29,13 @@
 }
 
 .premium-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-    border-color: var(--primary-saffron);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.12);
+    border-color: var(--gov-green);
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.2) rotate(5deg);
 }
 
 .glass-panel {
@@ -42,6 +46,60 @@
     box-shadow: var(--shadow-premium);
 }
 
+.institutional-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(4, 106, 56, 0.12);
+    color: #046A38;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.info-callout {
+    background: #ECF7EF;
+    border-left: 4px solid #046A38;
+    padding: 14px;
+    border-radius: 10px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.error-alert-gov {
+    background: #FEE2E2;
+    border-left: 5px solid #DC2626;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 1rem 0;
+    color: #991B1B;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: scrollReveal 0.5s ease-out forwards;
+}
+
+@keyframes scrollReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -50,10 +108,15 @@
 
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-warm);
+    background-color: #F6F9F7;
+    background:
+        radial-gradient(circle at top left, rgba(255, 122, 0, 0.06), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(4, 106, 56, 0.06), transparent 60%),
+        #F6F9F7;
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* --- Layout & Utility --- */
@@ -78,7 +141,7 @@ h4 {
 
 /* --- Navigation --- */
 nav {
-    background-color: rgba(250, 250, 245, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 2px solid var(--gov-green);
@@ -87,11 +150,11 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -133,18 +196,19 @@ nav {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     font-size: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .btn-primary {
-    background-color: var(--gov-green);
+    background: linear-gradient(90deg, #FF7A00, #046A38);
     color: var(--white);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .btn-primary:hover {
-    background: var(--ashoka-navy);
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(4, 106, 56, 0.3);
+    box-shadow: 0 10px 20px -3px rgba(4, 106, 56, 0.25);
+    filter: brightness(1.1);
 }
 
 .btn.glass {
@@ -261,34 +325,40 @@ nav {
 }
 
 .analyzer-card-top {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-xl);
+    background: linear-gradient(90deg, rgba(255, 122, 0, 0.05), rgba(4, 106, 56, 0.05));
+    border-radius: 16px;
     padding: 2.5rem;
-    box-shadow: var(--shadow-premium);
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.panel-divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 122, 0, 0.1), rgba(4, 106, 56, 0.1));
+    margin: 1.5rem 0;
+    border: none;
 }
 
 .analyzer-grid-top {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-}
-
-
-
-.analyzer-header h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--ashoka-navy), var(--gov-green));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    padding: 1rem 0;
 }
 
 .q-group-sidebar {
-    margin-bottom: 1.25rem;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+}
+
+.q-group-sidebar:hover {
+    background: white;
+    border-color: var(--gov-green);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .q-group-sidebar span {
@@ -301,14 +371,13 @@ nav {
 
 .q-group-sidebar select {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.6rem;
     background: white;
     border: 1px solid var(--border-soft);
-    border-radius: var(--radius-lg);
+    border-radius: 8px;
     font-family: inherit;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: border-color 0.2s;
 }
 
 .q-group-sidebar select:focus {

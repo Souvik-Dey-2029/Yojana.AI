@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             q_mobile_linked: "क्या आधार मोबाइल से जुड़ा है?",
             q_self_attested: "क्या स्व-सत्यापित दस्तावेज तैयार हैं?",
             yes: "हाँ",
-            no: "नहीं"
+            no: "नहीं",
+            ai_match: "✨ एआई मैच"
         },
         bn: {
             title: "আপনার জন্য যোগ্য স্কিম",
@@ -77,7 +78,66 @@ document.addEventListener('DOMContentLoaded', async () => {
             q_mobile_linked: "আধার কি মোবাইলের সাথে লিঙ্কযুক্ত?",
             q_self_attested: "স্ব-প্রত্যয়িত নথিগুলি কি প্রস্তুত?",
             yes: "হ্যাঁ",
-            no: "না"
+            no: "না",
+            ai_match: "✨ এআই ম্যাচ"
+        },
+        ta: {
+            title: "உங்களுக்கான தகுதியுள்ள திட்டங்கள்",
+            subtitle: "உங்கள் சுயவிவரத்தின் அடிப்படையில், நீங்கள் விண்ணப்பிக்கக்கூடிய திட்டங்கள் இங்கே உள்ளன.",
+            search_placeholder: "பெயர் அல்லது முக்கிய வார்த்தை மூலம் திட்டங்களைத் தேடுங்கள்...",
+            sort_relevance: "வரிசை: பொருத்தம்",
+            sort_popularity: "வரிசை: பிரபலம்",
+            analyzer_title: "🧠 விண்ணப்ப வெற்றி ஆய்வாளர்",
+            analyzer_sub: "ஆவணங்களின் இணக்கத்தின் அடிப்படையில் ஒவ்வொரு திட்டத்திற்கும் உங்கள் ஒப்புதலுக்கான வாய்ப்பைக் கணக்கிட இந்த 8 எளிய கேள்விகளுக்குப் பதிலளிக்கவும்.",
+            calculate_btn: "ஒப்புதல் வாய்ப்பைக் கணக்கிடுங்கள்",
+            analyzing_btn: "ஆய்வு செய்யப்படுகிறது...",
+            recalculate_btn: "மீண்டும் கணக்கிடுங்கள்",
+            required_docs: "தேவையான ஆவணங்கள்",
+            apply_now: "இப்பொழுதே விண்ணப்பிக்கவும்",
+            ai_guide: "AI வழிகாட்டி",
+            deadline: "காலக்கெடு",
+            approval: "ஒப்புதல்",
+            ai_suggestions: "AI இணக்க பரிந்துரைகள்",
+            q_aadhaar_name: "அனைத்து ஆவணங்களிலும் ஆதார் பெயர் ஒன்றாக உள்ளதா?",
+            q_income_valid: "வருமானச் சான்றிதழ் 12 மாதங்களுக்குள் வழங்கப்பட்டதா?",
+            q_bank_dbt: "வங்கி கணக்கு DBT இயக்கப்பட்டதா?",
+            q_address_match: "ஆதார் மற்றும் ரேஷன் கார்டில் முகவரி பொருந்துகிறதா?",
+            q_category_valid: "வகைச் சான்றிதழ் செல்லுபடியாகுமா?",
+            q_photo_correct: "வழிகாட்டுதல்களின்படி பாஸ்போர்ட் அளவு புகைப்படம் உள்ளதா?",
+            q_mobile_linked: "ஆதார் மொபைலுடன் இணைக்கப்பட்டுள்ளதா?",
+            q_self_attested: "சுய சான்றொப்பம் பெற்ற ஆவணங்கள் தயாராக உள்ளனவா?",
+            yes: "ஆம்",
+            no: "இல்லை",
+            ai_match: "✨ AI பொருத்தம்"
+        },
+        mr: {
+            title: "तुमच्यासाठी पात्र योजना",
+            subtitle: "तुमच्या प्रोफाइलवर आधारित, तुम्ही अर्ज करू शकता अशा योजना येथे आहेत.",
+            search_placeholder: "नाव किंवा कीवर्डद्वारे योजना शोधा...",
+            sort_relevance: "क्रमवारी: प्रासंगिकता",
+            sort_popularity: "क्रमवारी: लोकप्रियता",
+            analyzer_title: "🧠 अर्ज यश विश्लेषक",
+            analyzer_sub: "कागदपत्रांच्या पूर्ततेवर आधारित प्रत्येक योजनेसाठी तुमच्या मंजुरीच्या शक्यतेचा अंदाज घेण्यासाठी या ८ सोप्या प्रश्नांची उत्तरे द्या.",
+            calculate_btn: "मंजुरीची शक्यता मोजा",
+            analyzing_btn: "विश्लेषण केले जात आहे...",
+            recalculate_btn: "पुन्हा मोजा",
+            required_docs: "आवश्यक कागदपत्रे",
+            apply_now: "आता अर्ज करा",
+            ai_guide: "AI मार्गदर्शक",
+            deadline: "डेडलाईन",
+            approval: "मंजुरी",
+            ai_suggestions: "AI अनुपालन सूचना",
+            q_aadhaar_name: "सर्व कागदपत्रांमध्ये आधारवरील नाव सारखे आहे का?",
+            q_income_valid: "उत्पन्न प्रमाणपत्र १२ महिन्यांच्या आतील आहे का?",
+            q_bank_dbt: "बँक खाते DBT सक्षम आहे का?",
+            q_address_match: "आधार आणि रेशन कार्डमधील पत्ता जुळतो का?",
+            q_category_valid: "वर्ग प्रमाणपत्र वैध आहे का?",
+            q_photo_correct: "मार्गदर्शक तत्त्वांनुसार पासपोर्ट आकाराचा फोटो आहे का?",
+            q_mobile_linked: "आधार मोबाईलशी लिंक आहे का?",
+            q_self_attested: "स्व-साक्षांकित कागदपत्रे तयार आहेत का?",
+            yes: "हो",
+            no: "नाही",
+            ai_match: "✨ AI मॅच"
         }
     };
 
@@ -250,10 +310,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         grid.innerHTML = '';
 
+        const aiMatchLabel = l.ai_match || "✨ AI Match";
+
         schemes.forEach((scheme, index) => {
             const card = document.createElement('div');
             card.className = 'scheme-card animate-fade-in';
             card.style.animationDelay = `${index * 0.08}s`;
+
+            const aiMatchBadge = scheme.is_ml_recommended ? `<span class="badge badge-ai" style="background: var(--gov-green); color: white; margin-left: 0.5rem; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px;">${aiMatchLabel}</span>` : '';
+
+            /* TOP RIGHT STATUS TAG (Official Badge Style) */
+            let topStatusTag = '';
+            const badgeStyle = 'style="background: rgba(4, 106, 56, 0.12); color: #046A38; padding: 4px 10px; border-radius: 6px; font-size: 12px;"';
+            if (scheme.is_recommended) {
+                topStatusTag = `<span class="status-badge" ${badgeStyle}>Recommended</span>`;
+            } else if (schemeScores && schemeScores[scheme.id] && schemeScores[scheme.id].score > 80) {
+                topStatusTag = `<span class="status-badge" ${badgeStyle}>High Approval Chance</span>`;
+            } else {
+                topStatusTag = `<span class="status-badge" ${badgeStyle}>Eligible</span>`;
+            }
 
             let approvalUI = '';
             let suggestionBox = '';
@@ -296,10 +371,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             card.innerHTML = `
-                <div class="scheme-match-badge" style="background: ${statusColor}">${matchStatusText}</div>
-                <div class="scheme-icon-wrapper" style="font-size: 3rem; background: #f8fafc; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 1.5rem;">${scheme.icon || '🏛️'}</div>
+                ${topStatusTag}
+                <div class="scheme-match-badge" style="background: ${statusColor}; border-radius: 4px; font-weight: 800; font-size: 0.7rem;">${matchStatusText}</div>
+                <div class="scheme-icon-wrapper" style="font-size: 3rem; background: #f8fafc; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.03);">${scheme.icon || '🏛️'}</div>
                 
-                <h3 style="margin: 0; font-size: 1.4rem; line-height: 1.3;">${scheme.name}</h3>
+                <h3 style="margin: 0; font-size: 1.4rem; line-height: 1.3; color: var(--ashoka-navy);">${scheme.name}</h3>
                 <p style="font-size: 0.95rem; color: #6B7280; margin: 0.75rem 0 1.25rem;">${scheme.description}</p>
                 
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
@@ -312,17 +388,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${suggestionBox}
 
                 <div style="margin-top: 1.5rem; border-top: 1px solid #f3f4f6; padding-top: 1.5rem;">
-                    <div class="docs-title">${l.required_docs}</div>
-                    <ul class="docs-list" style="columns: 2; column-gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="docs-title" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 0.75rem;">${l.required_docs}</div>
+                    <ul class="docs-list" style="columns: 2; column-gap: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #4B5563;">
                         ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
                     </ul>
                 </div>
 
                 <div class="card-footer" style="display: flex; gap: 0.75rem; margin-top: auto; padding-top: 1rem;">
-                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.9rem;">
                         <span>📄</span> ${l.ai_guide}
                     </button>
-                    <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="flex: 1.2; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="flex: 1.2; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.9rem;">
                         <span>Apply</span> <span>🚀</span>
                     </a>
                 </div>
