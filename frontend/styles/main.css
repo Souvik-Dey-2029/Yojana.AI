@@ -45,10 +45,10 @@ body {
     background-color: #F4F7F9;
     /* --- VIVID LAYERED TRICOLOR MESH --- */
     background:
-        radial-gradient(at 0% 0%, var(--saffron-tint) 0px, transparent 55%),
-        radial-gradient(at 100% 100%, var(--green-tint) 0px, transparent 55%),
-        radial-gradient(at 100% 0%, var(--green-tint) 0px, transparent 40%),
-        radial-gradient(at 0% 100%, var(--saffron-tint) 0px, transparent 40%),
+        radial-gradient(at 0% 0%, rgba(255, 122, 0, 0.04) 0px, transparent 55%),
+        radial-gradient(at 100% 100%, rgba(4, 106, 56, 0.04) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(4, 106, 56, 0.04) 0px, transparent 40%),
+        radial-gradient(at 0% 100%, rgba(255, 122, 0, 0.04) 0px, transparent 40%),
         radial-gradient(at 50% 50%, var(--navy-tint) 0px, transparent 70%),
         #F4F7F9;
     background-attachment: fixed;
@@ -318,13 +318,15 @@ nav .premium-select {
 
 /* --- Hero Section --- */
 .hero {
-    min-height: 85vh;
+    min-height: auto;
+    /* Removed forced 85vh to allow natural tightening */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 80px 1.5rem;
+    padding: 30px 1.5rem 60px;
+    /* Reduced top padding significantly */
     background: transparent;
     position: relative;
 }
@@ -1061,12 +1063,27 @@ nav .premium-select {
         padding: 24px;
     }
 
-    /* Hero Responsive (Task 7) */
+    .schemes-grid,
+    .analyzer-grid-top,
+    .pricing-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    /* Hero Responsive (Task 8) */
     .hero-grid {
         grid-template-columns: 1fr !important;
-        gap: 2.5rem !important;
+        gap: 3rem !important;
         text-align: center !important;
-        padding-bottom: 2rem !important;
+        padding: 3rem 0 !important;
+    }
+
+    .hero-content-left h1 {
+        font-size: 34px !important;
+    }
+
+    .hero-carousel-right {
+        order: 2;
     }
 
     .hero-cta-group {
@@ -1074,19 +1091,39 @@ nav .premium-select {
     }
 }
 
-/* --- HERO REFACTOR (Task 4, 6) --- */
+/* --- HERO REFACTOR (Tasks 1-8) --- */
 .hero-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 5rem;
+    grid-template-columns: 1fr 1.3fr;
+    /* Shifted balance to favor the visual */
+    gap: 60px;
+    /* Increased gap for more breathing room */
     align-items: center;
-    padding: 5rem 0 7rem;
+    padding: 2.5rem 0 5rem;
+    /* Reduced top padding from 6rem to 2.5rem */
+}
+
+.hero-content-left {
+    max-width: 580px;
+    text-align: center;
+    /* Centering text for balanced alignment */
+    margin: 0 auto;
+    /* Centering block within the column */
 }
 
 .hero-content-left h1 {
-    font-size: 3.8rem;
-    line-height: 1.1;
-    margin-bottom: 2rem;
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #1E3A8A;
+}
+
+.text-navy {
+    color: #1E3A8A;
+}
+
+.text-saffron {
+    color: #FF7A00;
 }
 
 .hero-subtext {
@@ -1097,23 +1134,32 @@ nav .premium-select {
 
 .hero-cta-group {
     display: flex;
-    gap: 1.5rem;
+    gap: 16px;
+    margin-top: 20px;
+    justify-content: center;
+    /* Centering buttons */
+}
+
+.hero-carousel-right {
+    background: white;
+    padding: 8px;
+    /* Reduced from 12px to maximize image perceived size */
+    border-radius: 18px;
+    box-shadow: 0px 10px 32px rgba(0, 0, 0, 0.15);
+    /* Slightly deeper shadow for larger visual */
 }
 
 .hero-carousel-container {
     position: relative;
-    border-radius: 32px;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 40px 80px -20px rgba(0, 0, 80, 0.15);
-    background: white;
-    aspect-ratio: 16/9;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transform: perspective(1000px) rotateY(-2deg);
-    transition: transform 0.5s ease;
+    background: #f1f5f9;
+    aspect-ratio: 16/10;
+    transition: transform 0.3s ease;
 }
 
 .hero-carousel-container:hover {
-    transform: perspective(1000px) rotateY(0deg) scale(1.01);
+    transform: translateY(-2px);
 }
 
 .hero-slider {
