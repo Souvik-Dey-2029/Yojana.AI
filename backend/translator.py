@@ -11,6 +11,36 @@ SUPPORTED_LANGUAGES = {
     "mr": "marathi"
 }
 
+# Industry-specific translations for consistency
+COMMON_TERMS = {
+    "hi": {
+        "Aadhaar Card": "आधार कार्ड",
+        "Aadhaar": "आधार",
+        "Income Certificate": "आय प्रमाण पत्र",
+        "Ration Card": "राशन कार्ड",
+        "Bank Passbook": "बैंक पासबुक",
+        "Required Documents": "आवश्यक दस्तावेज",
+        "Apply Now": "अभी आवेदन करें",
+        "AI Guide": "एआई गाइड",
+        "Deadline": "समय सीमा",
+        "Benefits": "लाभ",
+        "Description": "विवरण"
+    },
+    "bn": {
+        "Aadhaar Card": "আধার কার্ড",
+        "Aadhaar": "আধার",
+        "Income Certificate": "আয় শংসাপত্র",
+        "Ration Card": "রেশন কার্ড",
+        "Bank Passbook": "ব্যাঙ্ক পাসবুক",
+        "Required Documents": "প্রয়োজনীয় নথি",
+        "Apply Now": "এখনই আবেদন করুন",
+        "AI Guide": "এআই গাইড",
+        "Deadline": "শেষ তারিখ",
+        "Benefits": "উপকারিতা",
+        "Description": "বিবরণ"
+    }
+}
+
 # Simple persistent cache
 CACHE_FILE = "translation_cache.json"
 
@@ -36,6 +66,11 @@ def translate_text(text: str, target_lang: str) -> str:
     if target_lang == "en" or target_lang not in SUPPORTED_LANGUAGES:
         return text
     
+    # 1. Check common terms dictionary
+    if target_lang in COMMON_TERMS and text in COMMON_TERMS[target_lang]:
+        return COMMON_TERMS[target_lang][text]
+
+    # 2. Check simple persistent cache
     cache_key = f"{target_lang}:{text}"
     if cache_key in TRANSLATION_CACHE:
         return TRANSLATION_CACHE[cache_key]
