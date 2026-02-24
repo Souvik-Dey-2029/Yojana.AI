@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const data = await response.json();
             currentSchemes = data.eligible_schemes;
+            localStorage.setItem('eligibilityResults', JSON.stringify(currentSchemes));
 
             // Show analyzer section if schemes found
             if (currentSchemes.length > 0 && analyzerSection) {
@@ -316,52 +317,53 @@ document.addEventListener('DOMContentLoaded', async () => {
             const card = document.createElement('div');
             card.className = 'scheme-card animate-fade-in';
             card.style.animationDelay = `${index * 0.08}s`;
+            card.dataset.schemeId = scheme.id;
 
-            const aiMatchBadge = scheme.is_ml_recommended ? `<span class="badge-ai">${aiMatchLabel}</span>` : '';
+            const aiMatchBadge = scheme.is_ml_recommended ? `<span class="badge-ai" style="font-size: 0.65rem; margin-left: 0.5rem;">${aiMatchLabel}</span>` : '';
 
-            /* TOP RIGHT STATUS TAG (Official Badge Style) */
-            let topStatusTag = '';
-            if (scheme.is_recommended) {
-                topStatusTag = `<span class="status-badge">Recommended</span>`;
-            } else if (schemeScores && schemeScores[scheme.id] && schemeScores[scheme.id].score > 80) {
-                topStatusTag = `<span class="status-badge">High Approval Chance</span>`;
-            } else {
-                topStatusTag = `<span class="status-badge">Eligible</span>`;
-            }
+            // Status Tag Logic
+            let topStatusTag = 'Eligible';
+            if (scheme.is_recommended) topStatusTag = 'Recommended';
+            else if (schemeScores && schemeScores[scheme.id] && schemeScores[scheme.id].score > 80) topStatusTag = 'High Match';
 
-            let approvalUI = '';
-            let suggestionBox = '';
             let matchStatusText = "Eligibility Guaranteed";
             let statusColor = "var(--gov-green)";
+            let scoreValue = 100;
 
-            // Default state without analysis
             if (!schemeScores || !schemeScores[scheme.id]) {
                 matchStatusText = "Scan to Verify";
                 statusColor = "var(--ashoka-navy)";
+                scoreValue = null;
             } else {
                 const sData = schemeScores[scheme.id];
                 statusColor = sData.risk_level === 'LOW' ? 'var(--gov-green)' : (sData.risk_level === 'MEDIUM' ? 'var(--medium-saffron)' : 'var(--danger-red)');
                 matchStatusText = sData.risk_level === 'LOW' ? "High Probability" : (sData.risk_level === 'MEDIUM' ? "Moderate Match" : "Attention Required");
+                scoreValue = sData.score;
+            }
 
-                approvalUI = `
-                    <div style="margin-top: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 800; color: ${statusColor}; margin-bottom: 0.5rem;">
-                            <span>${l.approval} Probability</span>
-                            <span>${sData.score}%</span>
-                        </div>
-                        <div class="approval-meter-premium">
-                            <div class="approval-meter-fill-premium" style="width: ${sData.score}%; background: ${statusColor};"></div>
-                        </div>
+            const probUI = scoreValue !== null ? `
+                <div style="margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; color: ${statusColor}; margin-bottom: 0.4rem;">
+                        <span>Success Rate</span>
+                        <span>${scoreValue}%</span>
                     </div>
-                `;
+                    <div class="approval-meter-premium" style="height: 4px; background: rgba(0,0,0,0.05);">
+                        <div class="approval-meter-fill-premium" style="width: ${scoreValue}%; background: ${statusColor}; height: 100%; border-radius: 99px;"></div>
+                    </div>
+                </div>
+            ` : `<div style="margin-top: 1rem; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Verify doc compliance to see score</div>`;
 
+            // Suggestions Box
+            let suggestionBox = '';
+            if (schemeScores && schemeScores[scheme.id]) {
+                const sData = schemeScores[scheme.id];
                 if (sData.risk_level !== 'LOW' && sData.suggestions.length > 0) {
                     suggestionBox = `
-                        <div class="ai-suggestions">
-                            <div style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        <div class="ai-suggestions" style="background: #FFFBEB; border: 1px solid #FEF3C7; padding: 1.25rem; border-radius: 12px; margin-top: 1.5rem;">
+                            <div style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; text-transform: uppercase;">
                                 <span>📋</span> ${l.ai_suggestions}
                             </div>
-                            <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.25rem; margin: 0; line-height: 1.5;">
+                            <ul style="font-size: 0.85rem; color: #92400E; padding-left: 1.25rem; margin: 0; line-height: 1.5;">
                                 ${sData.suggestions.map(s => `<li>${s}</li>`).join('')}
                             </ul>
                         </div>
@@ -370,41 +372,42 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             card.innerHTML = `
-                ${topStatusTag}
-                <div class="scheme-match-badge" style="background: ${statusColor};">${matchStatusText}</div>
-                <div class="scheme-icon-wrapper">${scheme.icon || '🏛️'}</div>
-                
-                <h3 style="margin: 0; font-size: 1.5rem; line-height: 1.3; color: var(--ashoka-navy);">${scheme.name}${aiMatchBadge}</h3>
-                <p style="font-size: 1rem; color: var(--text-muted); margin: 1rem 0 1.5rem;">${scheme.description}</p>
-                
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                    <div class="benefit-pill">
-                        <span>💰</span> ${scheme.benefits}
+                <div class="card-header-compact" style="border-bottom: none; padding-bottom: 1.5rem;">
+                    <div class="scheme-icon-circle">${scheme.icon || '🏛️'}</div>
+                    <div class="card-info-compact" style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3 class="card-title-compact" style="letter-spacing: -0.01em; margin-bottom: 0.25rem;">${scheme.name}${aiMatchBadge}</h3>
+                        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
+                            <span class="probability-chip" style="background: ${statusColor}12; color: ${statusColor}; border: 1px solid ${statusColor}20;">${matchStatusText}</span>
+                            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+                                <span style="font-size: 1.1rem;">💰</span> ${scheme.benefits.split(' ')[0]} Assistance
+                            </span>
+                        </div>
                     </div>
                 </div>
-
-                ${approvalUI}
-                ${suggestionBox}
-
-                <div style="margin-top: 2rem; border-top: 1px solid var(--border-soft); padding-top: 1.5rem;">
-                    <div class="docs-title" style="font-size: 0.8rem; font-weight: 800; color: var(--ashoka-navy); text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-bottom: 1rem;">${l.required_docs}</div>
-                    <ul class="docs-list">
-                        ${scheme.required_documents.map(doc => `<li>${doc}</li>`).join('')}
-                    </ul>
-                </div>
-
-                <div class="card-footer" style="display: flex; gap: 0.75rem; margin-top: auto; padding-top: 1rem;">
-                    <button onclick="downloadPDFGuide('${scheme.id}')" id="btn-guide-${scheme.id}" class="btn glass" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.9rem;">
-                        <span>📄</span> ${l.ai_guide}
-                    </button>
-                    <a href="${scheme.apply_url}" target="_blank" class="btn btn-primary" style="flex: 1.2; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.9rem;">
-                        <span>Apply</span> <span>🚀</span>
-                    </a>
-                </div>
-                <div style="font-size: 0.75rem; color: #9CA3AF; margin-top: 1rem; text-align: center; font-weight: 500;">
-                    ${l.deadline}: ${scheme.deadline}
+                
+                <div style="padding: 0 2.25rem 2.25rem;">
+                    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; opacity: 0.8;">
+                        ${scheme.description}
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.75rem; color: var(--primary-saffron); font-weight: 800; text-transform: uppercase;">View Full Details →</span>
+                        ${scoreValue !== null ? `
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="font-size: 0.75rem; font-weight: 800; color: ${statusColor}">${scoreValue}% Match</span>
+                                <div class="approval-meter-premium" style="width: 60px; height: 6px !important; margin: 0;">
+                                    <div class="approval-meter-fill-premium" style="width: ${scoreValue}%; background: ${statusColor}; height: 100%;"></div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
                 </div>
             `;
+
+            // Navigation Logic
+            card.addEventListener('click', () => {
+                window.location.href = `scheme-details.html?id=${scheme.id}`;
+            });
+
             grid.appendChild(card);
         });
     }
