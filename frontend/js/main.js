@@ -32,16 +32,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedLang = langToggle.value;
             localStorage.setItem('userLanguage', selectedLang);
 
-            // If we're on the results page, the results.js will handle the refresh.
-            // For other pages, we can just reload or let it be for now since they are mostly static.
+            // [FIX] Update userProfile if it exists to keep everything in sync
+            const profile = JSON.parse(localStorage.getItem('userProfile'));
+            if (profile) {
+                profile.language = selectedLang;
+                localStorage.setItem('userProfile', JSON.stringify(profile));
+            }
+
+            // [FIX] Localize hero text if on homepage
+            localizeHero(selectedLang);
+
             if (window.location.pathname.includes('results.html')) {
-                // results.js has its own listener, so we don't need to do much here
-                // but let's make sure it's consistent.
-            } else {
-                // If on homepage or others, we might want to refresh to show localized text if we add that later.
-                // For now, just keeping the state in sync is enough.
+                // Handled in results.js
             }
         });
+
+        // Initial localization for hero
+        localizeHero(savedLang);
+    }
+
+    function localizeHero(lang) {
+        const hero = document.querySelector('.hero h1');
+        if (!hero) return;
+
+        const HERO_TEXTS = {
+            hi: "नागरिकों के लिए <span>डिजिटल</span> सहायता इंजन",
+            bn: "নাগরিকদের জন্য <span>ডিজিটাল</span> সহায়তা ইঞ্জিন",
+            ta: "மக்களுக்கான <span>டிஜிட்டல்</span> உதவி இயந்திரம்",
+            mr: "नागरिकांसाठी <span>डिजिटल</span> मदत इंजिन",
+            en: "Digital Public <span>Assistance</span> Engine"
+        };
+
+        if (HERO_TEXTS[lang]) {
+            hero.innerHTML = HERO_TEXTS[lang];
+        }
     }
 
     // --- Static Ticker Management ---
