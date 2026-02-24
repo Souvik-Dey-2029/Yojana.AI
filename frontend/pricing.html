@@ -5,93 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - Yojana.AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <style>
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
+            margin-top: 3rem;
             width: 100%;
-            max-width: 1200px;
-        }
-
-        @media (max-width: 992px) {
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .price-card.featured {
-                transform: none;
-            }
+            max-width: 1100px;
         }
 
         .price-card {
-            padding: 3rem;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
             position: relative;
-            overflow: hidden;
         }
 
         .price-card.featured {
-            border: 2px solid var(--primary);
+            border: 2px solid var(--gov-green);
             transform: scale(1.05);
-            background: rgba(99, 102, 241, 0.05);
+            background: #F0F9F4;
         }
 
         .price {
             font-size: 3rem;
             font-weight: 800;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
+            color: var(--gov-green);
         }
 
         .price span {
             font-size: 1rem;
-            color: var(--text-secondary);
+            color: var(--text-main);
+            opacity: 0.7;
         }
 
         .features-list {
             list-style: none;
             text-align: left;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+            flex-grow: 1;
         }
 
         .features-list li {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
+            font-size: 0.95rem;
         }
 
         .features-list li::before {
-            content: "✓";
-            color: var(--accent);
+            content: "🛡️";
             margin-right: 0.75rem;
-            font-weight: bold;
         }
 
-        .badge {
+        .price-badge {
             position: absolute;
             top: 1rem;
-            right: -2rem;
-            background: var(--primary);
-            padding: 0.5rem 3rem;
-            transform: rotate(45deg);
-            font-size: 0.8rem;
-            font-weight: bold;
+            right: 1rem;
+            background: var(--gov-green);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        @media (max-width: 480px) {
-            .pricing-grid {
-                gap: 1.5rem;
-            }
-
-            .price-card {
-                padding: 2rem;
-            }
-
-            main.container {
-                padding-top: 6rem !important;
+        @media (max-width: 768px) {
+            .price-card.featured {
+                transform: none;
+                margin-bottom: 2rem;
             }
         }
     </style>
@@ -108,61 +96,61 @@
         </div>
     </nav>
 
-    <main class="container"
-        style="padding-top: 10rem; padding-bottom: 6rem; width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-        <div class="text-center" style="max-width: 800px; margin-bottom: 2rem;">
-            <h1 class="animate-fade-in" style="margin-bottom: 1.5rem;">Investment in <span
-                    class="floating">Information</span>.</h1>
-            <p class="animate-fade-in" style="animation-delay: 0.2s; font-size: 1.25rem;">Choose the professional plan
-                that fits your journey towards accessibility.</p>
-        </div>
+    <main class="container text-center" style="padding: 120px 0 80px;">
+        <h1 class="animate-fade-in">Fair & Transparent <span>Support</span></h1>
+        <p class="animate-fade-in" style="animation-delay: 0.1s; margin-top: 1rem;">Choose a plan that helps you
+            navigate public benefits with full AI assistance.</p>
 
-        <div class="pricing-grid">
+        <div class="pricing-grid animate-fade-in" style="animation-delay: 0.2s; margin-left: auto; margin-right: auto;">
             <!-- Free -->
-            <div class="price-card glass reveal-on-scroll">
-                <h3>Free</h3>
+            <div class="price-card premium-card">
+                <h3>Vikas (Basic)</h3>
                 <div class="price">₹0<span>/mo</span></div>
                 <ul class="features-list">
-                    <li>31+ Premium Schemes Search</li>
+                    <li>Access to 30+ Central Schemes</li>
                     <li>Basic Eligibility Matching</li>
-                    <li>Multi-Language (15+ Dialects)</li>
-                    <li>Community Success Forum</li>
+                    <li>Native Language Support</li>
+                    <li>Community News Portal</li>
                 </ul>
-                <a href="eligibility.html" class="btn glass" style="width: 100%;">Get Started</a>
+                <a href="eligibility.html" class="btn glass" style="width: 100%;">Start Free</a>
             </div>
 
             <!-- Pro -->
-            <div class="price-card glass featured reveal-on-scroll" style="transition-delay: 0.2s;">
-                <div class="badge">POPULAR</div>
-                <h3>Pro</h3>
+            <div class="price-card featured premium-card glass-panel" style="border: 3px solid var(--gov-green);">
+                <div class="price-badge">Most Popular</div>
+                <h3>Sewa Plus (Pro)</h3>
                 <div class="price">₹49<span>/mo</span></div>
                 <ul class="features-list">
-                    <li><strong>Application Success Predictor</strong></li>
-                    <li><strong>Personalized AI Roadmaps (PDF)</strong></li>
-                    <li>ML-Based Compliance Feedback</li>
-                    <li>SMS/Email Deadline Alerts</li>
-                    <li>Priority AI Consultation</li>
+                    <li><strong>Approval Success Predictor</strong></li>
+                    <li><strong>Personalized Application PDF</strong></li>
+                    <li>Document Compliance Feedback</li>
+                    <li>Mobile Deadline Alerts</li>
+                    <li>Direct Digital Consultation</li>
                 </ul>
-                <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Unlock AI
-                    Power</button>
+                <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Subscribe
+                    Securely</button>
             </div>
 
             <!-- NGO -->
-            <div class="price-card glass reveal-on-scroll" style="transition-delay: 0.4s;">
-                <h3>NGO / Portal</h3>
+            <div class="price-card premium-card">
+                <h3>Jan Sewa (Portal)</h3>
                 <div class="price">₹499<span>/mo</span></div>
                 <ul class="features-list">
-                    <li><strong>Bulk Success Prediction</strong></li>
-                    <li>Village Compliance Dashboard</li>
-                    <li>PDF Roadmap White-labeling</li>
-                    <li>Document Storage (10GB)</li>
-                    <li>Full API & Webhook Access</li>
+                    <li>Multi-Citizen Analysis Tool</li>
+                    <li>Village Progress Dashboard</li>
+                    <li>Bulk PDF Checklist Exports</li>
+                    <li>Institutional Verification Hub</li>
+                    <li>Full Civic Data API Access</li>
                 </ul>
-                <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Scale Your
-                    Impact</button>
+                <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Contact for
+                    Portals</button>
             </div>
         </div>
     </main>
+
+    <footer>
+        <p>&copy; 2026 Yojana.AI - Strengthening India's digital welfare assistance.</p>
+    </footer>
 
     <script src="js/main.js"></script>
     <script>

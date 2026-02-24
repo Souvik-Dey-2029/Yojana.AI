@@ -10,10 +10,13 @@
     <style>
         .payment-container {
             max-width: 500px;
-            margin: 8rem auto;
+            margin: 120px auto 80px;
             padding: 3rem;
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-civic);
+            border-radius: var(--radius-xl);
+            text-align: center;
         }
 
         .gateway-logo {
@@ -22,16 +25,18 @@
             justify-content: center;
             gap: 10px;
             margin-bottom: 2rem;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ashoka-navy);
         }
 
         .order-summary {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--bg-warm);
             padding: 1.5rem;
             border-radius: 1rem;
             margin-bottom: 2rem;
             text-align: left;
+            border: 1px solid var(--border-soft);
         }
 
         .form-group {
@@ -43,16 +48,17 @@
             display: block;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .form-group input {
             width: 100%;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--white);
+            border: 1px solid var(--border-soft);
             border-radius: 0.75rem;
-            color: white;
+            color: var(--text-main);
             font-family: inherit;
         }
 
@@ -65,15 +71,19 @@
 
         .method {
             padding: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-soft);
             border-radius: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--bg-warm);
         }
 
         .method.active {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--gov-green);
+            background: #F0F9F4;
+            color: var(--gov-green);
         }
 
         #processing-screen {
@@ -83,8 +93,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-dark);
-            z-index: 100;
+            background: var(--bg-warm);
+            z-index: 1000;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -93,64 +103,72 @@
         .spinner-large {
             width: 80px;
             height: 80px;
-            border: 6px solid rgba(255, 255, 255, 0.1);
-            border-top: 6px solid var(--primary);
+            border: 6px solid #E5E7EB;
+            border-top: 6px solid var(--gov-green);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 
-<body class="bg-dark">
+<body>
     <nav>
         <a href="index.html" class="logo">Yojana<span>.AI</span></a>
     </nav>
 
-    <div class="payment-container glass reveal-on-scroll" style="opacity: 1; transform: translateY(0); z-index: 10;">
-        <div class="gateway-logo">
-            <span style="font-size: 1.5rem;">🔒</span> Secure Checkout
-        </div>
-
-        <div class="order-summary">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span>Plan</span>
-                <strong id="summary-plan">Pro</strong>
+    <div class="container">
+        <div class="payment-container premium-card glass-panel animate-fade-in">
+            <div class="gateway-logo">
+                <span style="font-size: 1.5rem;">🔒</span> Secure Citizen Gateway
             </div>
-            <div style="display: flex; justify-content: space-between;">
-                <span>Amount</span>
-                <strong style="color: var(--accent);" id="summary-price">₹49/mo</strong>
+
+            <div class="order-summary">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Service Plan</span>
+                    <strong id="summary-plan" style="color: var(--ashoka-navy);">Pro</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Subscription Fee</span>
+                    <strong style="color: var(--gov-green);" id="summary-price">₹49/mo</strong>
+                </div>
             </div>
+
+            <div class="payment-methods">
+                <div class="method active">UPI Apps</div>
+                <div class="method">Cards / Netbanking</div>
+            </div>
+
+            <div class="form-group">
+                <label>Payer Name / UPI ID</label>
+                <input type="text" placeholder="e.g. citizen@upi">
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; padding: 1.25rem;" onclick="processPayment()">Confirm &
+                Activate Plan</button>
+
+            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-main); opacity: 0.6;">
+                Secure payment portal for Yojana.AI digital services.
+            </p>
         </div>
-
-        <div class="payment-methods">
-            <div class="method active">UPI / Apps</div>
-            <div class="method">Cards</div>
-        </div>
-
-        <div class="form-group">
-            <label>Cardholder Name / UPI ID</label>
-            <input type="text" placeholder="e.g. souvik@okaxis">
-        </div>
-
-        <button class="btn btn-primary" style="width: 100%; padding: 1.25rem;" onclick="processPayment()">Complete
-            Payment</button>
-
-        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary); opacity: 0.6;">
-            This is a non-functional simulation. No actual money will be charged.
-        </p>
     </div>
 
     <div id="processing-screen">
         <div class="spinner-large"></div>
-        <h2 style="margin-top: 2rem;">Verifying Transaction...</h2>
-        <p style="color: var(--text-secondary);">Connecting to Secure Gateway</p>
+        <h2 style="margin-top: 2rem; color: var(--ashoka-navy);">Verifying Transaction...</h2>
+        <p style="color: var(--text-main);">Establishing secure connection to Bharat Gateway</p>
     </div>
 
     <script src="js/main.js"></script>
     <script>
         const tx = JSON.parse(localStorage.getItem('pendingTransaction'));
         if (tx) {
-            document.getElementById('summary-plan').innerText = tx.plan;
+            document.getElementById('summary-plan').innerText = `${tx.plan} (Sewa Plus)`;
             document.getElementById('summary-price').innerText = `₹${tx.price}/mo`;
         }
 
@@ -161,14 +179,10 @@
             setTimeout(() => {
                 screen.innerHTML = `
                     <div style="font-size: 5rem;">✅</div>
-                    <h2 style="margin-top: 1rem;">Payment Successful!</h2>
-                    <p style="color: var(--text-secondary);">Your subscription is now active.</p>
+                    <h2 style="margin-top: 1rem; color: var(--gov-green);">Transaction Approved</h2>
+                    <p style="color: var(--text-main); margin-bottom: 2rem;">Your national benefits assistant is now active.</p>
+                    <a href="results.html" class="btn btn-primary">Go to Results</a>
                 `;
-
-                setTimeout(() => {
-                    localStorage.setItem('isPro', 'true');
-                    window.location.href = 'results.html';
-                }, 2000);
             }, 3000);
         }
     </script>
