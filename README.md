@@ -48,6 +48,10 @@ python ml/train_rejection_model.py
 
 ### 5. Run the Application
 ```bash
+python run_server.py
+```
+Alternatively, use uvicorn directly from the root:
+```bash
 python -m uvicorn backend.main:app --reload
 ```
 Server will be live at `http://127.0.0.1:8000`.
