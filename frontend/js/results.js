@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     let currentSchemes = []; // Local cache of eligible schemes
+    let schemeScores = JSON.parse(localStorage.getItem('schemeScores')) || null;
 
     // UI Localizations
     const LOCALIZATIONS = {
@@ -188,7 +189,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const analyzerSection = document.getElementById('analyzer-section');
     const runAnalysisBtn = document.getElementById('run-analysis');
     // Per-scheme scores: { scheme_id: { score, risk_level, suggestions } }
-    let schemeScores = null;
+    // Per-scheme scores: { scheme_id: { score, risk_level, suggestions } }
+    // schemeScores is now initialized above from localStorage at start
 
     if (runAnalysisBtn) {
         runAnalysisBtn.addEventListener('click', async () => {
@@ -330,7 +332,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             let matchStatusText = "Eligibility Guaranteed";
             let statusColor = "var(--gov-green)";
-            let scoreValue = 100;
+            let scoreValue = null; // Fix: Default to null to avoid % glitch
 
             if (!schemeScores || !schemeScores[scheme.id]) {
                 matchStatusText = "Scan to Verify";

@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // AI Analysis
         const sScore = schemeScores[schemeId];
         const statusWidget = document.getElementById('probability-widget');
-        if (sScore) {
+        if (sScore && typeof sScore.score === 'number') {
             document.getElementById('ai-analysis-box').style.display = 'block';
             const statusColor = sScore.risk_level === 'LOW' ? 'var(--gov-green)' : (sScore.risk_level === 'MEDIUM' ? 'var(--medium-saffron)' : 'var(--danger-red)');
 
