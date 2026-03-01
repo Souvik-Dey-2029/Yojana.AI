@@ -71,6 +71,19 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        .free-badge {
+            background: var(--gov-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
@@ -93,55 +106,61 @@
             </h1>
             <p class="animate-fade-in"
                 style="color: var(--text-muted); font-size: 1.25rem; max-width: 750px; margin: 1.5rem auto 0; font-weight: 500;">
-                Choose a plan that
-                helps you navigate public benefits with official assistance and compliance tools.</p>
+                Empowering every citizen with affordable, reliable public assistance.
+                <br><span style="color: var(--gov-green); font-weight: 800;">Special Launch Offer: First Month Free for
+                    all Premium Features!</span>
+            </p>
         </div>
 
         <div class="institutional-panel scroll-reveal">
             <div class="pricing-grid" style="margin-left: auto; margin-right: auto;">
                 <!-- Free -->
                 <div class="price-card premium-card">
-                    <h3>Vikas (Basic)</h3>
+                    <h3>Jan Seva (Basic)</h3>
                     <div class="price">₹0<span>/mo</span></div>
                     <ul class="features-list">
-                        <li>Access to 50+ Central Schemes</li>
-                        <li>Basic Eligibility Matching</li>
+                        <li>Unlimited Eligibility Checks</li>
+                        <li>Access to 100+ Central Schemes</li>
                         <li>Native Language Support</li>
                         <li>Community News Portal</li>
+                        <li>Basic Digital Literacy Guides</li>
                     </ul>
-                    <a href="eligibility.html" class="btn glass" style="width: 100%;">Start Free</a>
+                    <a href="eligibility.html" class="btn glass" style="width: 100%;">Start Now</a>
                 </div>
 
                 <!-- Pro -->
                 <div class="price-card featured premium-card"
                     style="border: 3px solid var(--gov-green); background: #f0faf4;">
                     <div class="price-badge">Most Popular</div>
-                    <h3>Sewa Plus (Pro)</h3>
-                    <div class="price">₹49<span>/mo</span></div>
+                    <h3>Sewa Plus (Verified)</h3>
+                    <div class="price">₹29<span>/mo</span>
+                        <div class="free-badge">1st Month Free</div>
+                    </div>
                     <ul class="features-list">
                         <li><strong>Approval Success Predictor</strong></li>
                         <li><strong>Personalized Application PDF</strong></li>
                         <li>Document Compliance Feedback</li>
-                        <li>Mobile Deadline Alerts</li>
-                        <li>Direct Digital Consultation</li>
+                        <li>Priority Scheme Update Alerts</li>
+                        <li>Digital Verification Support</li>
                     </ul>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout('Pro', 49)">Subscribe
-                        Securely</button>
+                    <button class="btn btn-primary" style="width: 100%;"
+                        onclick="startCheckout('Verified', 29)">Activate
+                        Free Month</button>
                 </div>
 
-                <!-- NGO -->
+                <!-- Institutional -->
                 <div class="price-card premium-card">
-                    <h3>Jan Sewa (Portal)</h3>
-                    <div class="price">₹499<span>/mo</span></div>
+                    <h3>Gram Vikas (Institutional)</h3>
+                    <div class="price">₹299<span>/mo</span></div>
                     <ul class="features-list">
                         <li>Multi-Citizen Analysis Tool</li>
                         <li>Village Progress Dashboard</li>
                         <li>Bulk PDF Checklist Exports</li>
                         <li>Institutional Verification Hub</li>
-                        <li>Full Civic Data API Access</li>
+                        <li>Priority Data Concierge</li>
                     </ul>
-                    <button class="btn glass" style="width: 100%;" onclick="startCheckout('NGO', 499)">Contact for
-                        Portals</button>
+                    <button class="btn glass" style="width: 100%;" onclick="startCheckout('Institutional', 299)">Get
+                        Institutional Access</button>
                 </div>
             </div>
         </div>
