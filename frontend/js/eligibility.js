@@ -25,11 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
         let isValid = true;
         inputs.forEach(input => {
+            let isFieldValid = true;
             if (!input.value) {
+                isFieldValid = false;
+            } else if (input.type === 'number') {
+                const val = parseFloat(input.value);
+                if (val < 0) {
+                    isFieldValid = false;
+                } else if (input.id === 'age' && (val < 1 || val > 120)) {
+                    // Age must be realistic (1-120)
+                    isFieldValid = false;
+                    input.title = 'Please enter a valid age between 1 and 120.';
+                } else if (input.id === 'income' && val > 1000) {
+                    // Income sanity cap: 1000 Lakhs = 10 Crore
+                    isFieldValid = false;
+                    input.title = 'Income seems unrealistic. Please enter value in Lakhs.';
+                }
+            }
+
+            if (!isFieldValid) {
                 input.style.borderColor = 'red';
                 isValid = false;
             } else {
                 input.style.borderColor = 'var(--glass-border)';
+                input.title = '';
             }
         });
         return isValid;

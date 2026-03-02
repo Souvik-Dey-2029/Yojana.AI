@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     let currentSchemes = []; // Local cache of eligible schemes
-    let schemeScores = JSON.parse(localStorage.getItem('schemeScores')) || null;
+    let schemeScores = null; // Always start fresh to hide % until assessed
+    localStorage.removeItem('schemeScores'); // Clear any stale cached scores
 
     // UI Localizations
     const LOCALIZATIONS = {
