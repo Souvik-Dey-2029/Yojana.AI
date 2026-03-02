@@ -341,7 +341,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 const sData = schemeScores[scheme.id];
                 statusColor = sData.risk_level === 'LOW' ? 'var(--gov-green)' : (sData.risk_level === 'MEDIUM' ? 'var(--medium-saffron)' : 'var(--danger-red)');
-                matchStatusText = sData.risk_level === 'LOW' ? "High Probability" : (sData.risk_level === 'MEDIUM' ? "Moderate Match" : "Attention Required");
+
+                // Terminology based on compliance ratio + risk level for genuineness
+                if (sData.risk_level === 'LOW') {
+                    matchStatusText = "High Probability";
+                } else if (sData.risk_level === 'MEDIUM') {
+                    matchStatusText = "Moderate Match";
+                } else {
+                    // Only use "Attention Required" if compliance is actually low
+                    matchStatusText = (sData.compliance_ratio < 0.7) ? "Attention Required" : "Processing Delay Likely";
+                }
                 scoreValue = sData.score;
             }
 

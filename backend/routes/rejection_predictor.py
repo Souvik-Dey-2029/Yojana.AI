@@ -368,18 +368,24 @@ def _compute_scheme_score(compliance: dict, scheme_id: str) -> dict:
 
     compliance_ratio = compliant / len(relevant_fields)
 
-    # Score = base_acceptance * compliance_ratio, with a minimum floor
-    # If all relevant docs are fine, score = base_acceptance
-    # If some are missing, score drops proportionally
-    score = base * compliance_ratio
+    # NEW FORMULA: More genuine and rewarding for compliance
+    # Score = (Base Acceptance * 0.5) + (Compliance Ratio * 48%)
+    # This ensures that perfect compliance (ratio=1) results in (Base*0.5 + 48)
+    # E.g. for a scheme with base 60: (30 + 48) = 78% (LOW RISK)
+    score = (base * 0.5) + (compliance_ratio * 48)
 
-    # Add a small floor so score never goes to 0 (admin can always help)
-    score = max(score, 8.0)
-    score = min(score, 98.0)
+    # Perfect Compliance Bonus: push most schemes over the 75% threshold if all docs are ready
+    if compliance_ratio == 1.0:
+        score += 2.0
 
+    # Add a floor/ceiling for realism
+    score = max(score, 10.0)
+    score = min(score, 99.0)
+
+    # Risk level categorization based on score
     if score >= 75:
         risk_level = "LOW"
-    elif score >= 45:
+    elif score >= 50:
         risk_level = "MEDIUM"
     else:
         risk_level = "HIGH"
@@ -388,6 +394,7 @@ def _compute_scheme_score(compliance: dict, scheme_id: str) -> dict:
         "score": round(score, 1),
         "risk_level": risk_level,
         "suggestions": suggestions[:4],
+        "compliance_ratio": compliance_ratio  # Return for frontend terminology sync
     }
 
 
