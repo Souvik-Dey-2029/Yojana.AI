@@ -1,4 +1,101 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Global Loader Implementation ---
+    const initLoader = () => {
+        // Create Loader HTML
+        const loader = document.createElement('div');
+        loader.id = 'global-loader';
+        loader.innerHTML = `
+            <div class="loader-pane top"></div>
+            <div class="loader-pane bottom"></div>
+            <div class="loader-content">
+                <div class="loader-brand" id="loader-brand">Yojana AI</div>
+                <div class="loader-percentage" id="loader-perc">0<span>%</span></div>
+                <div class="loader-status-container">
+                    <div class="loader-status" id="loader-status">Initializing</div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(loader);
+        document.body.classList.add('loading');
+
+        // Trigger brand animation
+        setTimeout(() => loader.classList.add('active'), 100);
+
+        const percText = document.getElementById('loader-perc');
+        const statusText = document.getElementById('loader-status');
+        let count = 0;
+
+        const statuses = [
+            { threshold: 0, text: "Initializing" },
+            { threshold: 30, text: "Securing Portal" },
+            { threshold: 60, text: "Processing Data" },
+            { threshold: 85, text: "Finalizing Reveal" }
+        ];
+
+        const updateCounter = () => {
+            if (count < 100) {
+                // Smooth Non-Linear Counter
+                const increment = count < 60 ? (Math.random() * 5 + 2) : (Math.random() * 1.5 + 0.5);
+                count = Math.min(100, count + increment);
+
+                const roundedCount = Math.floor(count);
+                percText.innerHTML = `${roundedCount}<span>%</span>`;
+
+                // Status Update
+                const newStatus = [...statuses].reverse().find(s => roundedCount >= s.threshold);
+                if (newStatus && statusText.innerText !== newStatus.text) {
+                    statusText.style.animation = 'none';
+                    statusText.offsetHeight; // trigger reflow
+                    statusText.innerText = newStatus.text;
+                    statusText.style.animation = null;
+                }
+
+                setTimeout(updateCounter, 30 + (count / 2));
+            } else {
+                startRevealSequence();
+            }
+        };
+
+        const startRevealSequence = () => {
+            // Step 1: Broaden Aperture
+            loader.classList.add('completing');
+
+            setTimeout(() => {
+                // Step 2: Split and Zoom
+                loader.classList.add('loaded');
+                document.body.classList.add('reveal-zoom');
+
+                setTimeout(() => {
+                    document.body.classList.remove('loading');
+                    // Clean up
+                    setTimeout(() => {
+                        if (loader.parentNode) loader.parentNode.removeChild(loader);
+                    }, 1200);
+                }, 500);
+            }, 600);
+        };
+
+        updateCounter();
+    };
+
+    const shouldShowLoader = () => {
+        const isFirstVisit = !sessionStorage.getItem('yojana_loader_shown');
+        const isHomeFromEligibility = (
+            (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('Yojna/')) &&
+            document.referrer.includes('eligibility.html')
+        );
+
+        if (isFirstVisit || isHomeFromEligibility) {
+            sessionStorage.setItem('yojana_loader_shown', 'true');
+            return true;
+        }
+        return false;
+    };
+
+    if (shouldShowLoader()) {
+        initLoader();
+    }
+
     // Scroll Reveal Logic
     const observerOptions = {
         threshold: 0.15,
