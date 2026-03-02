@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Protection - Yojana.AI</title>
+    <meta name="description"
+        content="How Yojana.AI protects your data in compliance with India's Digital Personal Data Protection Act 2023.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .legal-content {
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .legal-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--ashoka-navy);
+        }
+
+        .legal-content p {
+            margin-bottom: 1.25rem;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .data-card {
+            background: var(--bg-soft);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+        }
+
+        .data-card h3 {
+            color: var(--ashoka-navy);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-card p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="institutional-panel animate-fade-in">
+            <h1 class="section-title" style="margin-bottom: 0.5rem;">Data Protection</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">How we collect, protect, and handle your personal
+                information under India's DPDPA 2023.</p>
+
+            <div class="legal-content">
+                <h2>Our Commitment</h2>
+                <p>Yojana.AI is committed to safeguarding your personal data in full compliance with the <strong>Digital
+                        Personal Data Protection Act (DPDPA) 2023</strong> of India. We collect only the minimum
+                    information needed to determine your eligibility for government welfare schemes.</p>
+
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h3>&#128274; Encrypted Storage</h3>
+                        <p>All data submitted through our platform is encrypted in transit (TLS 1.3) and at rest
+                            (AES-256).</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>&#128683; No Sale of Data</h3>
+                        <p>We never sell, rent, or share your personal information with third-party commercial entities.
+                        </p>
+                    </div>
+                    <div class="data-card">
+                        <h3>&#128336; Session-Only Processing</h3>
+                        <p>Eligibility checks are processed in real-time. Profile data is not retained beyond your
+                            active session unless you opt-in.</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>&#9989; Right to Erasure</h3>
+                        <p>You may request deletion of any data associated with your session at any time by contacting
+                            us.</p>
+                    </div>
+                </div>
+
+                <h2>What Data We Collect</h2>
+                <p>To match you with eligible government schemes, we collect the following profile attributes during
+                    your eligibility check:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; line-height: 2;">
+                    <li>Age, gender, and household size</li>
+                    <li>State of residence and category (SC/ST/OBC/General)</li>
+                    <li>Annual household income and occupation type</li>
+                    <li>Land holding (for agricultural scheme eligibility)</li>
+                </ul>
+                <p>We do <strong>not</strong> collect Aadhaar numbers, PAN numbers, bank account details, or any
+                    government-issued ID during the eligibility check process.</p>
+
+                <h2>How We Use Your Data</h2>
+                <p>Your inputs are used solely for matching your profile against the official eligibility criteria of
+                    government welfare schemes catalogued in our database. The match is computed locally within the
+                    session and no profile is stored on our servers beyond the duration of your browser session.</p>
+
+                <h2>Data Retention</h2>
+                <p>Session data (your eligibility profile) is automatically discarded when you close your browser tab.
+                    Aggregate, anonymised statistics (e.g., "X users checked PMAY eligibility today") may be retained
+                    for platform improvement, with no linkage to individual users.</p>
+
+                <h2>Your Rights Under DPDPA 2023</h2>
+                <p>As a data principal under the Digital Personal Data Protection Act 2023, you have the right to:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; line-height: 2;">
+                    <li><strong>Access</strong> — Know what data we hold about you</li>
+                    <li><strong>Correction</strong> — Request correction of inaccurate data</li>
+                    <li><strong>Erasure</strong> — Request deletion of your data</li>
+                    <li><strong>Grievance Redressal</strong> — Lodge a complaint with us or the Data Protection Board
+                    </li>
+                </ul>
+
+                <h2>Contact the Data Fiduciary</h2>
+                <p>For any data-related requests or concerns, please contact:</p>
+                <div class="info-callout" style="margin-top: 1rem;">
+                    <strong>Souvik Dey</strong> &mdash; Data Fiduciary, Yojana.AI<br>
+                    Email: <a href="mailto:souvik.business18@gmail.com"
+                        style="color: var(--primary-saffron);">souvik.business18@gmail.com</a><br>
+                    Last Updated: March 2026
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="footer-quick-access">
+            <div class="container">
+                <div class="quick-access-grid">
+                    <a href="index.html" class="footer-card">
+                        <div class="footer-card-icon">&#127963;&#65039;</div>
+                        <div class="footer-card-text">Government<br>Services</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="results.html" class="footer-card">
+                        <div class="footer-card-icon">&#127919;</div>
+                        <div class="footer-card-text">Scheme<br>Analytics</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="eligibility.html" class="footer-card">
+                        <div class="footer-card-icon">&#128737;&#65039;</div>
+                        <div class="footer-card-text">Check<br>Eligibility</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="state-portals.html" class="footer-card">
+                        <div class="footer-card-icon">&#127757;</div>
+                        <div class="footer-card-text">State Specific<br>Portals</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1.5rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine empowering Indian citizens through transparent data and AI-driven
+                    eligibility checks.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oops_i_debugged_it?igsh=MXFkb3Zyb2tvZmQyZw==" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">&#120143;</a>
+                    <a href="https://www.linkedin.com/in/souvik-dey-400497366/" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">in</a>
+                    <a href="https://github.com/Souvik-Dey-2029" target="_blank" rel="noopener noreferrer"
+                        class="social-icon">git</a>
+                </div>
+                <div class="footer-last-updated">Last updated: 02-03-2026</div>
+            </div>
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul class="footer-links">
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="methodology.html">AI Methodology</a></li>
+                    <li><a href="user-guide.html">User Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Developer Contact</h3>
+                <div class="contact-info">
+                    <p><strong>Souvik Dey</strong></p>
+                    <p>Haldia, West Bengal &ndash; 721657</p>
+                    <p>Email: <a href="mailto:souvik.business18@gmail.com"
+                            style="color: var(--primary-saffron);">souvik.business18@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Yojana.AI</title>
+    <meta name="description"
+        content="Step-by-step guide on how to use Yojana.AI to discover and apply for government welfare schemes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .guide-content {
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .guide-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--ashoka-navy);
+        }
+
+        .guide-content p {
+            margin-bottom: 1.25rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: var(--bg-soft);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-saffron);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            line-height: 1;
+        }
+
+        .step-card h3 {
+            color: var(--ashoka-navy);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .step-card p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8F0, #FFF3E0);
+            border-left: 4px solid var(--primary-saffron);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box strong {
+            color: var(--primary-saffron);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="institutional-panel animate-fade-in">
+            <h1 class="section-title" style="margin-bottom: 0.5rem;">User Guide</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">How to get the most out of Yojana.AI in a few
+                simple steps.</p>
+
+            <div class="guide-content">
+                <h2>How It Works</h2>
+                <p>Yojana.AI uses a combination of AI-driven eligibility matching and official government data to help
+                    Indian citizens discover schemes they may qualify for. The entire process is free, private, and
+                    takes under 3 minutes.</p>
+
+                <div class="step-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>📋 Fill Your Profile</h3>
+                        <p>Enter basic details: age, income, occupation, state, and category. No personal ID is required
+                            at this stage.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>🤖 AI Matching</h3>
+                        <p>Our ML engine compares your profile against 50+ government scheme eligibility rules and
+                            generates a match score.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>📊 View Results</h3>
+                        <p>See all eligible schemes ranked by success probability. Each card shows required documents
+                            and deadlines.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>📥 Download Guide</h3>
+                        <p>Generate a personalized PDF roadmap with step-by-step instructions for applying to your top
+                            schemes.</p>
+                    </div>
+                </div>
+
+                <h2>Understanding Your Match Score</h2>
+                <p>Each scheme is assigned a <strong>Success Probability (%)</strong> based on how closely your profile
+                    aligns with the official eligibility criteria. A score above <strong>70%</strong> means you are
+                    highly likely to qualify, while scores between 40-70% indicate partial eligibility that may require
+                    additional verification.</p>
+
+                <div class="tip-box">
+                    <strong>💡 Tip:</strong> Update your profile with accurate income and land-holding data to get the
+                    most precise scoring. The engine re-ranks results dynamically as you make changes.
+                </div>
+
+                <h2>Selecting a Language</h2>
+                <p>Yojana.AI supports Hindi, Bengali, Tamil, Marathi, and English. Use the language selector in the
+                    top-right corner of the results page to switch languages. Scheme names, descriptions, and benefit
+                    details will all be translated automatically.</p>
+
+                <h2>Checking Scheme Details</h2>
+                <p>Click on any scheme card in the results page to open the full detail view. This includes the official
+                    scheme summary, applicable ministry, maximum benefit amount, required documents, and a direct link
+                    to the official government portal to begin your application.</p>
+
+                <h2>Downloading the PDF Report</h2>
+                <p>On the results page, click <strong>"Download Report"</strong>. A personalized PDF is generated with
+                    your top eligible schemes, a step-by-step application checklist, and key deadline reminders. This
+                    feature is available on all plans.</p>
+
+                <div class="info-callout" style="margin-top: 3rem;">
+                    Last Updated: March 2026. For support, email <a href="mailto:souvik.business18@gmail.com"
+                        style="color: var(--primary-saffron);">souvik.business18@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+                        <div class="footer-quick-access">
+            <div class="container">
+                <div class="quick-access-grid">
+                    <a href="index.html" class="footer-card">
+                        <div class="footer-card-icon">&#127963;&#65039;</div>
+                        <div class="footer-card-text">Government<br>Services</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="results.html" class="footer-card">
+                        <div class="footer-card-icon">&#127919;</div>
+                        <div class="footer-card-text">Scheme<br>Analytics</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="eligibility.html" class="footer-card">
+                        <div class="footer-card-icon">&#128737;&#65039;</div>
+                        <div class="footer-card-text">Check<br>Eligibility</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="state-portals.html" class="footer-card">
+                        <div class="footer-card-icon">&#127757;</div>
+                        <div class="footer-card-text">State Specific<br>Portals</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-main-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1.5rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine empowering Indian citizens through transparent data and AI-driven
+                    eligibility checks.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oops_i_debugged_it?igsh=MXFkb3Zyb2tvZmQyZw==" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                    <a href="https://www.linkedin.com/in/souvik-dey-400497366/" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">in</a>
+                    <a href="https://github.com/Souvik-Dey-2029" target="_blank" rel="noopener noreferrer"
+                        class="social-icon">git</a>
+                </div>
+                <div class="footer-last-updated">Last updated: 02-03-2026</div>
+            </div>
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul class="footer-links">
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="methodology.html">AI Methodology</a></li>
+                    <li><a href="user-guide.html">User Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Developer Contact</h3>
+                <div class="contact-info">
+                    <p><strong>Souvik Dey</strong></p>
+                    <p>Haldia, Gandhinagar</p>
+                    <p>West Bengal – 721657</p>
+                    <p>Email: <a href="mailto:souvik.business18@gmail.com"
+                            style="color: var(--primary-saffron);">souvik.business18@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

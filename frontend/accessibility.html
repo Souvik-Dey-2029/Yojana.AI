@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Statement - Yojana.AI</title>
+    <meta name="description"
+        content="Yojana.AI accessibility statement — our commitment to WCAG 2.1 AA compliance and inclusive digital design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .legal-content {
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .legal-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--ashoka-navy);
+        }
+
+        .legal-content p {
+            margin-bottom: 1.25rem;
+        }
+
+        .access-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .access-feature {
+            background: var(--bg-soft);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .access-feature h3 {
+            font-size: 1rem;
+            color: var(--ashoka-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .access-feature p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .compliance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f0fdf4;
+            border: 1px solid var(--gov-green);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            color: var(--gov-green);
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="institutional-panel animate-fade-in">
+            <h1 class="section-title" style="margin-bottom: 0.5rem;">Accessibility Statement</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Our commitment to inclusive design and accessible
+                government services for every citizen.</p>
+            <div class="compliance-badge">&#9989; WCAG 2.1 Level AA — Target Compliance</div>
+
+            <div class="legal-content">
+                <h2>Our Commitment</h2>
+                <p>Yojana.AI is committed to ensuring digital accessibility for all citizens, including those with
+                    disabilities. We strive to comply with the <strong>Web Content Accessibility Guidelines (WCAG) 2.1
+                        at Level AA</strong>, as recommended by the World Wide Web Consortium (W3C) and in alignment
+                    with the Government of India's Guidelines for Indian Government Websites (GIGW).</p>
+
+                <div class="access-feature-grid">
+                    <div class="access-feature">
+                        <h3>&#9729;&#65039; Screen Reader Support</h3>
+                        <p>All interactive elements are labelled for ARIA compatibility with NVDA, VoiceOver, and
+                            TalkBack.</p>
+                    </div>
+                    <div class="access-feature">
+                        <h3>&#9189;&#65039; High Contrast Mode</h3>
+                        <p>Text meets WCAG AA minimum 4.5:1 contrast ratio. Our saffron and navy palette is verified.
+                        </p>
+                    </div>
+                    <div class="access-feature">
+                        <h3>&#9875;&#65039; Keyboard Navigation</h3>
+                        <p>All pages can be navigated fully using only the keyboard. Focus indicators are clearly
+                            visible.</p>
+                    </div>
+                    <div class="access-feature">
+                        <h3>&#128242; Mobile Accessible</h3>
+                        <p>All pages are fully responsive and touch-accessible for screen sizes from 320px upwards.</p>
+                    </div>
+                    <div class="access-feature">
+                        <h3>&#127760; Language Support</h3>
+                        <p>Available in English, Hindi, Bengali, Tamil, and Marathi to serve all Indian citizens.</p>
+                    </div>
+                    <div class="access-feature">
+                        <h3>&#128196; No CAPTCHA Barriers</h3>
+                        <p>The eligibility check process requires no CAPTCHAs or inaccessible verification steps.</p>
+                    </div>
+                </div>
+
+                <h2>Known Limitations</h2>
+                <p>While we strive for full WCAG 2.1 AA compliance, the following areas are still being improved:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; line-height: 2;">
+                    <li>Some data visualisations (e.g., the radial match probability indicator) may not have full screen
+                        reader equivalents yet. A text-based alternative is always provided.</li>
+                    <li>Third-party embedded fonts (Google Fonts) may not load in offline environments. A system font
+                        fallback is applied.</li>
+                    <li>PDF generation uses client-side JavaScript. If JavaScript is disabled, PDF generation will not
+                        function. A plain text summary is available instead.</li>
+                </ul>
+
+                <h2>Technical Standards</h2>
+                <p>Yojana.AI is built using semantic HTML5 and follows these standards:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; line-height: 2;">
+                    <li>WCAG 2.1 Success Criteria at Level A and AA</li>
+                    <li>ARIA 1.1 landmarks and roles where applicable</li>
+                    <li>Progressive enhancement — core content accessible without CSS or JavaScript</li>
+                    <li>Government of India GIGW guidelines</li>
+                </ul>
+
+                <h2>Feedback and Contact</h2>
+                <p>If you experience any accessibility barriers on Yojana.AI, or if you require content in an
+                    alternative accessible format, please contact us. We aim to respond within 5 working days.</p>
+
+                <div class="info-callout" style="margin-top: 1.5rem;">
+                    <strong>Accessibility Contact:</strong> Souvik Dey<br>
+                    Email: <a href="mailto:souvik.business18@gmail.com"
+                        style="color: var(--primary-saffron);">souvik.business18@gmail.com</a><br>
+                    Last Reviewed: March 2026
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="footer-quick-access">
+            <div class="container">
+                <div class="quick-access-grid">
+                    <a href="index.html" class="footer-card">
+                        <div class="footer-card-icon">&#127963;&#65039;</div>
+                        <div class="footer-card-text">Government<br>Services</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="results.html" class="footer-card">
+                        <div class="footer-card-icon">&#127919;</div>
+                        <div class="footer-card-text">Scheme<br>Analytics</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="eligibility.html" class="footer-card">
+                        <div class="footer-card-icon">&#128737;&#65039;</div>
+                        <div class="footer-card-text">Check<br>Eligibility</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="state-portals.html" class="footer-card">
+                        <div class="footer-card-icon">&#127757;</div>
+                        <div class="footer-card-text">State Specific<br>Portals</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1.5rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine empowering Indian citizens through transparent data and AI-driven
+                    eligibility checks.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oops_i_debugged_it?igsh=MXFkb3Zyb2tvZmQyZw==" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">&#120143;</a>
+                    <a href="https://www.linkedin.com/in/souvik-dey-400497366/" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">in</a>
+                    <a href="https://github.com/Souvik-Dey-2029" target="_blank" rel="noopener noreferrer"
+                        class="social-icon">git</a>
+                </div>
+                <div class="footer-last-updated">Last updated: 02-03-2026</div>
+            </div>
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul class="footer-links">
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="methodology.html">AI Methodology</a></li>
+                    <li><a href="user-guide.html">User Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Developer Contact</h3>
+                <div class="contact-info">
+                    <p><strong>Souvik Dey</strong></p>
+                    <p>Haldia, West Bengal &ndash; 721657</p>
+                    <p>Email: <a href="mailto:souvik.business18@gmail.com"
+                            style="color: var(--primary-saffron);">souvik.business18@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

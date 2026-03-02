@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Specific Portals - Yojana.AI</title>
+    <meta name="description"
+        content="Directory of all Indian state government portals for welfare scheme applications and public services.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .portals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .portal-card {
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .portal-card:hover {
+            border-color: var(--gov-green);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .portal-flag {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .portal-info h3 {
+            font-size: 1rem;
+            color: var(--ashoka-navy);
+            margin-bottom: 0.2rem;
+        }
+
+        .portal-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .portal-arrow {
+            margin-left: auto;
+            color: var(--gov-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            border: 2px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 2rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar:focus {
+            border-color: var(--gov-green);
+        }
+
+        .central-portal-card {
+            background: linear-gradient(135deg, var(--ashoka-navy), #1e3a8a);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .central-portal-card .icon {
+            font-size: 3rem;
+        }
+
+        .central-portal-card h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .central-portal-card p {
+            opacity: 0.8;
+            margin: 0 0 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="mobile-menu-toggle"><span></span><span></span><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="animate-fade-in">
+            <h1 class="section-title" style="margin-bottom: 0.5rem;">State Specific Portals</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">Official government portals for all Indian states
+                and union territories. Apply directly for state welfare schemes.</p>
+
+            <!-- Central Portal -->
+            <div class="central-portal-card">
+                <div class="icon">&#127968;</div>
+                <div>
+                    <h2>myScheme &mdash; National Portal</h2>
+                    <p>One-stop portal to discover and apply for 1000+ central government schemes across all ministries.
+                    </p>
+                    <a href="https://myscheme.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+                        style="display: inline-block; padding: 0.6rem 1.4rem;">Visit myScheme.gov.in &#8594;</a>
+                </div>
+            </div>
+
+            <input type="text" class="search-bar" id="portalSearch" placeholder="&#128269; Search for a state..."
+                onkeyup="filterPortals()">
+
+            <div class="portals-grid" id="portalsGrid">
+                <!-- Row 1 -->
+                <a href="https://janma.karnataka.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Karnataka</h3>
+                        <p>Seva Sindhu — Integrated Services Portal</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://mahaonline.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Maharashtra</h3>
+                        <p>MahaOnline — One Stop Shop</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://edistrict.up.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Uttar Pradesh</h3>
+                        <p>e-District UP — Citizen Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://wb.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>West Bengal</h3>
+                        <p>WB Government — Public Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://rajssp.raj.nic.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Rajasthan</h3>
+                        <p>Rajasthan SSP — Social Security Schemes</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://edistrict.tn.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Tamil Nadu</h3>
+                        <p>e-Sevai — District e-Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://ap.meeseva.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Andhra Pradesh</h3>
+                        <p>Meeseva — Citizen Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://ts.meeseva.telangana.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Telangana</h3>
+                        <p>Meeseva Telangana — Services Portal</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://janaarogya.mp.nic.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Madhya Pradesh</h3>
+                        <p>MP Online — Citizen Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://gujarat.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Gujarat</h3>
+                        <p>Digital Gujarat — Citizen Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://services.india.gov.in/service/listing?ln=en&cat_id=21&state_id=7" target="_blank"
+                    rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Bihar</h3>
+                        <p>RTPS Bihar — Public Service</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://edistrict.punjabgovt.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Punjab</h3>
+                        <p>e-District Punjab</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://haryanasaralportal.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Haryana</h3>
+                        <p>Saral Haryana — Integrated Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://edistrict.kerala.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Kerala</h3>
+                        <p>e-District Kerala — Akshaya</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://edistrict.odisha.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Odisha</h3>
+                        <p>Ama Seba — e-District Odisha</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://jharsewa.jharkhand.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Jharkhand</h3>
+                        <p>Jharsewa — e-Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://himachal.nic.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Himachal Pradesh</h3>
+                        <p>HP Government Portal</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://uttarakhand.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Uttarakhand</h3>
+                        <p>Apuni Sarkar — e-Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://services.india.gov.in/service/listing?ln=en&cat_id=21&state_id=11" target="_blank"
+                    rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>Chhattisgarh</h3>
+                        <p>CG Government — Public Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+                <a href="https://serviceonline.gov.in" target="_blank" rel="noopener" class="portal-card">
+                    <div class="portal-flag">&#127470;&#127475;</div>
+                    <div class="portal-info">
+                        <h3>All States &amp; UTs</h3>
+                        <p>ServiceOnline.gov.in — National e-Services</p>
+                    </div>
+                    <div class="portal-arrow">&#8594;</div>
+                </a>
+            </div>
+
+            <div class="info-callout" style="margin-top: 2rem;">
+                <strong>Note:</strong> All links above are official government portals. Yojana.AI is not affiliated with
+                these portals. Always check official government announcements for the most current scheme details and
+                deadlines.
+            </div>
+        </div>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="footer-quick-access">
+            <div class="container">
+                <div class="quick-access-grid">
+                    <a href="index.html" class="footer-card">
+                        <div class="footer-card-icon">&#127963;&#65039;</div>
+                        <div class="footer-card-text">Government<br>Services</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="results.html" class="footer-card">
+                        <div class="footer-card-icon">&#127919;</div>
+                        <div class="footer-card-text">Scheme<br>Analytics</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="eligibility.html" class="footer-card">
+                        <div class="footer-card-icon">&#128737;&#65039;</div>
+                        <div class="footer-card-text">Check<br>Eligibility</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                    <a href="state-portals.html" class="footer-card">
+                        <div class="footer-card-icon">&#127757;</div>
+                        <div class="footer-card-text">State Specific<br>Portals</div>
+                        <span style="opacity: 0.5;">&#8594;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1.5rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine empowering Indian citizens through transparent data and AI-driven
+                    eligibility checks.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oops_i_debugged_it?igsh=MXFkb3Zyb2tvZmQyZw==" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">&#120143;</a>
+                    <a href="https://www.linkedin.com/in/souvik-dey-400497366/" target="_blank"
+                        rel="noopener noreferrer" class="social-icon">in</a>
+                    <a href="https://github.com/Souvik-Dey-2029" target="_blank" rel="noopener noreferrer"
+                        class="social-icon">git</a>
+                </div>
+                <div class="footer-last-updated">Last updated: 02-03-2026</div>
+            </div>
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul class="footer-links">
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="methodology.html">AI Methodology</a></li>
+                    <li><a href="user-guide.html">User Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="data-protection.html">Data Protection</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Developer Contact</h3>
+                <div class="contact-info">
+                    <p><strong>Souvik Dey</strong></p>
+                    <p>Haldia, West Bengal &ndash; 721657</p>
+                    <p>Email: <a href="mailto:souvik.business18@gmail.com"
+                            style="color: var(--primary-saffron);">souvik.business18@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function filterPortals() {
+            const val = document.getElementById('portalSearch').value.toLowerCase();
+            document.querySelectorAll('#portalsGrid .portal-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(val) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+
+</html>
