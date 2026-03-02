@@ -4,9 +4,10 @@ Main entry point for the FastAPI application, handling database initialization,
 routing, and static file serving.
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import Response
 from backend.routes import eligibility, schemes, pdf, monetization, rejection_predictor
 from backend.database import engine, Base
 from backend import db_models
@@ -32,6 +33,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# No-cache middleware: forces browsers to always fetch fresh HTML
+@app.middleware("http")
+async def no_cache_middleware(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.endswith(".html") or request.url.path == "/" or not "." in request.url.path.split("/")[-1]:
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
 
 # Include Routes
 app.include_router(eligibility.router, prefix="/api")
