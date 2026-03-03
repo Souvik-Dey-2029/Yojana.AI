@@ -48,3 +48,9 @@ tmp/
 *.json
 !backend/schemes/*.json
 ml/*.joblib
+ml/*.csv
+backend/yojana.db
+translation_cache.json
+backend/yojana.db
+translation_cache.json
+ml/*.csv
