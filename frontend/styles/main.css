@@ -415,11 +415,12 @@ nav .premium-select {
     overflow: hidden;
     white-space: nowrap;
     border-top: 3px solid var(--primary-saffron);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 10;
-    margin-top: -1.2rem;
-    /* Pull up to overlap with hero/panel top margin */
+    margin-top: 70px;
+    /* Push below the fixed navbar (~70px tall) */
 }
 
 .pulse-ticker {
@@ -442,6 +443,14 @@ nav .premium-select {
 
     100% {
         transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .pulse-ticker-wrapper {
+        margin-top: 56px;
+        /* Mobile navbar is shorter (~56px with 0.75rem padding) */
+        font-size: 0.85rem;
     }
 }
 
