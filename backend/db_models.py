@@ -24,6 +24,7 @@ class Scheme(Base):
     category = Column(String) # e.g., "Education", "Agri", "Social"
     popularity = Column(Integer, default=0) # Integration of sorting feature
     guidance_steps = Column(JSON) # List of specific application steps
+    is_dbt = Column(Boolean, default=False)  # Direct Benefit Transfer — cash paid to bank account
 
 class UserSubscription(Base):
     __tablename__ = "subscriptions"

@@ -21,6 +21,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmkisan.gov.in/",
         "category": "Agriculture",
         "popularity": 95,
+        "is_dbt": True,
         "guidance_steps": [
             "Visit the official PM-Kisan portal.",
             "Click on 'New Farmer Registration' and enter your Aadhaar number.",
@@ -44,6 +45,7 @@ SCHEMES_LIST = [
         "apply_url": "https://svmcm.wbhed.gov.in/",
         "category": "Education",
         "popularity": 88,
+        "is_dbt": True,
         "guidance_steps": [
             "Register on the SVMCM portal with your academic details.",
             "Login and fill the detailed application form.",
@@ -66,6 +68,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.mudra.org.in/",
         "category": "Finance",
         "popularity": 92,
+        "is_dbt": False,
         "guidance_steps": [
             "Identify the category (Shishu, Kishore, Tarun) based on loan amount.",
             "Download the Mudra loan application form from the website.",
@@ -90,13 +93,14 @@ SCHEMES_LIST = [
         "deadline": "Dec 31",
         "apply_url": "https://www.wbkanyashree.gov.in/",
         "category": "Social Welfare",
-        "popularity": 85
+        "popularity": 85,
+        "is_dbt": True
     },
     {
         "id": "ayushman_bharat",
         "name": "Ayushman Bharat (PM-JAY)",
         "icon": "🏥",
-        "description": "World's largest health insurance scheme fully financed by the government.",
+        "description": "World's largest health assurance scheme for poor and vulnerable families, based on Socio-Economic Caste Census (SECC) data.",
         "benefits": "Health cover of ₹5 Lakh per family per year for secondary and tertiary care hospitalization.",
         "max_income": 600000,
         "eligible_states": ["All"],
@@ -104,9 +108,10 @@ SCHEMES_LIST = [
         "eligible_categories": ["All"],
         "required_documents": ["Aadhaar", "Ration Card", "Identity Proof"],
         "deadline": "Open",
-        "apply_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1951508",
+        "apply_url": "https://pmjay.gov.in/",
         "category": "Health",
-        "popularity": 98
+        "popularity": 98,
+        "is_dbt": False
     },
     {
         "id": "pm_awas_yojana",
@@ -123,11 +128,12 @@ SCHEMES_LIST = [
         "apply_url": "https://pmaymis.gov.in/",
         "category": "Housing",
         "popularity": 96,
+        "is_dbt": False,
         "guidance_steps": [
-            "Check the eligible category (EWS, LIG, MIG).",
-            "Apply online or through a registered bank/HFC.",
-            "Submit the declaration bahwa you do not own a pucca house.",
-            "Once approved, credit link subsidy will be added to your loan account."
+            "Check the eligible category (EWS, LIG, MIG) based on your annual household income.",
+            "Apply online via pmaymis.gov.in or through a registered bank/HFC.",
+            "Submit the declaration that you do not own a pucca house.",
+            "Once approved, the credit-linked subsidy will be applied to your home loan account."
         ]
     },
     {
@@ -145,7 +151,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://www.pmuy.gov.in/",
         "category": "Social Welfare",
-        "popularity": 94
+        "popularity": 94,
+        "is_dbt": True
     },
     {
         "id": "mgnrega",
@@ -161,7 +168,8 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "https://nrega.nic.in/",
         "category": "Employment",
-        "popularity": 97
+        "popularity": 97,
+        "is_dbt": True
     },
     {
         "id": "pm_shram_yogi",
@@ -179,7 +187,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://maandhan.in/",
         "category": "Social Welfare",
-        "popularity": 82
+        "popularity": 82,
+        "is_dbt": True
     },
     {
         "id": "nsap_pension",
@@ -196,7 +205,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://nsap.nic.in/",
         "category": "Social Welfare",
-        "popularity": 80
+        "popularity": 80,
+        "is_dbt": True
     },
     {
         "id": "pm_matru_vandana",
@@ -213,7 +223,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana",
         "category": "Health",
-        "popularity": 86
+        "popularity": 86,
+        "is_dbt": True
     },
     {
         "id": "stand_up_india",
@@ -229,7 +240,8 @@ SCHEMES_LIST = [
         "deadline": "Open",
         "apply_url": "https://www.standupmitra.in/",
         "category": "Finance",
-        "popularity": 78
+        "popularity": 78,
+        "is_dbt": False
     },
     {
         "id": "pm_vishwakarma",
@@ -245,7 +257,8 @@ SCHEMES_LIST = [
         "deadline": "Open",
         "apply_url": "https://pmvishwakarma.gov.in/",
         "category": "Skill Development",
-        "popularity": 89
+        "popularity": 89,
+        "is_dbt": True
     },
     {
         "id": "sukanya_samriddhi",
@@ -263,7 +276,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://www.indiapost.gov.in/",
         "category": "Finance",
-        "popularity": 91
+        "popularity": 91,
+        "is_dbt": False
     },
     {
         "id": "pm_poshan",
@@ -281,7 +295,8 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "https://pmposhan.education.gov.in/",
         "category": "Social Welfare",
-        "popularity": 93
+        "popularity": 93,
+        "is_dbt": False
     },
     {
         "id": "startup_india_learning",
@@ -297,7 +312,8 @@ SCHEMES_LIST = [
         "deadline": "Always Open",
         "apply_url": "https://www.startupindia.gov.in/content/sih/en/learning-and-development_v2.html",
         "category": "Education",
-        "popularity": 75
+        "popularity": 75,
+        "is_dbt": False
     },
     {
         "id": "atal_pension",
@@ -315,7 +331,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://npscra.nsdl.co.in/scheme-details.php",
         "category": "Social Welfare",
-        "popularity": 81
+        "popularity": 81,
+        "is_dbt": True
     },
     # --- New 14 Schemes ---
     {
@@ -333,6 +350,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmsvanidhi.mohua.gov.in/",
         "category": "Finance",
         "popularity": 84,
+        "is_dbt": True,
         "guidance_steps": [
             "Keep your mobile-linked Aadhaar ready.",
             "Apply via the PM SVANidhi portal or mobile app.",
@@ -356,6 +374,7 @@ SCHEMES_LIST = [
         "apply_url": "https://nrlm.gov.in/",
         "category": "Skill Development",
         "popularity": 87,
+        "is_dbt": True,
         "guidance_steps": [
             "Join or be an active member of a local SHG.",
             "Express interest in skill training to the SHG leader.",
@@ -379,6 +398,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmsuryaghar.gov.in/",
         "category": "Welfare",
         "popularity": 96,
+        "is_dbt": True,
         "guidance_steps": [
             "Register on the PM Surya Ghar portal.",
             "Submit your consumer number and electricity board details.",
@@ -401,6 +421,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmjdy.gov.in/",
         "category": "Finance",
         "popularity": 99,
+        "is_dbt": False,
         "guidance_steps": [
             "Visit any bank branch or Bank Mitras (Business Correspondents).",
             "Fill out the account opening form.",
@@ -424,7 +445,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://jansuraksha.gov.in/",
         "category": "Finance",
-        "popularity": 88
+        "popularity": 88,
+        "is_dbt": True
     },
     {
         "id": "pm_suraksha_bima",
@@ -442,7 +464,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://jansuraksha.gov.in/",
         "category": "Finance",
-        "popularity": 89
+        "popularity": 89,
+        "is_dbt": True
     },
     {
         "id": "pm_shri",
@@ -458,7 +481,8 @@ SCHEMES_LIST = [
         "deadline": "Admission Based",
         "apply_url": "https://pmshrischools.education.gov.in/",
         "category": "Education",
-        "popularity": 79
+        "popularity": 79,
+        "is_dbt": False
     },
     {
         "id": "naps_apprenticeship",
@@ -475,7 +499,8 @@ SCHEMES_LIST = [
         "deadline": "Open",
         "apply_url": "https://www.apprenticeshipindia.gov.in/",
         "category": "Employment",
-        "popularity": 81
+        "popularity": 81,
+        "is_dbt": True
     },
     {
         "id": "antyodaya_anna",
@@ -491,7 +516,8 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "https://nfsa.gov.in/",
         "category": "Food Security",
-        "popularity": 92
+        "popularity": 92,
+        "is_dbt": False
     },
     {
         "id": "pm_pvtg_mission",
@@ -507,7 +533,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://tribal.nic.in/",
         "category": "Social Welfare",
-        "popularity": 73
+        "popularity": 73,
+        "is_dbt": True
     },
     {
         "id": "agnipath_scheme",
@@ -526,6 +553,7 @@ SCHEMES_LIST = [
         "apply_url": "https://joinindianarmy.nic.in/agnipath.htm",
         "category": "Employment",
         "popularity": 95,
+        "is_dbt": True,
         "guidance_steps": [
             "Register on the official defense recruitment portals.",
             "Apply for the specific Agniveer notification.",
@@ -548,7 +576,8 @@ SCHEMES_LIST = [
         "deadline": "March 2025",
         "apply_url": "https://www.indiapost.gov.in/",
         "category": "Finance",
-        "popularity": 83
+        "popularity": 83,
+        "is_dbt": False
     },
     {
         "id": "pm_ebus_sewa",
@@ -564,7 +593,8 @@ SCHEMES_LIST = [
         "deadline": "Project Based",
         "apply_url": "https://mohua.gov.in/",
         "category": "Infrastructure",
-        "popularity": 70
+        "popularity": 70,
+        "is_dbt": False
     },
     {
         "id": "pm_fme_scheme",
@@ -581,6 +611,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmfme.mofpi.gov.in/",
         "category": "Finance",
         "popularity": 76,
+        "is_dbt": True,
         "guidance_steps": [
             "Prepare a detailed project report for your food processing unit.",
             "Apply on the PMFME portal.",
@@ -602,7 +633,8 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "https://pmdaksh.dosje.gov.in/",
         "category": "Skill Development",
-        "popularity": 72
+        "popularity": 72,
+        "is_dbt": True
     },
     {
         "id": "national_overseas_scholarship",
@@ -618,7 +650,8 @@ SCHEMES_LIST = [
         "deadline": "March 31",
         "apply_url": "https://nosmsje.gov.in/",
         "category": "Education",
-        "popularity": 65
+        "popularity": 65,
+        "is_dbt": True
     },
     {
         "id": "pm_fasal_bima",
@@ -635,7 +668,8 @@ SCHEMES_LIST = [
         "deadline": "Seasonal",
         "apply_url": "https://pmfby.gov.in/",
         "category": "Agriculture",
-        "popularity": 94
+        "popularity": 94,
+        "is_dbt": True
     },
     {
         "id": "pm_kusum",
@@ -652,7 +686,8 @@ SCHEMES_LIST = [
         "deadline": "Open",
         "apply_url": "https://pmkusum.mnre.gov.in/",
         "category": "Agriculture",
-        "popularity": 81
+        "popularity": 81,
+        "is_dbt": True
     },
     {
         "id": "e_shram",
@@ -668,7 +703,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://eshram.gov.in/",
         "category": "Social Welfare",
-        "popularity": 97
+        "popularity": 97,
+        "is_dbt": True
     },
     {
         "id": "onorc",
@@ -684,7 +720,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://nfsa.gov.in/",
         "category": "Food Security",
-        "popularity": 98
+        "popularity": 98,
+        "is_dbt": False
     },
     {
         "id": "beti_bachao_beti_padhao",
@@ -701,7 +738,8 @@ SCHEMES_LIST = [
         "deadline": "Awareness Based",
         "apply_url": "https://wcd.nic.in/bbbp-schemes",
         "category": "Social Welfare",
-        "popularity": 91
+        "popularity": 91,
+        "is_dbt": False
     },
     {
         "id": "janani_suraksha",
@@ -718,7 +756,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=841&lid=309",
         "category": "Health",
-        "popularity": 89
+        "popularity": 89,
+        "is_dbt": True
     },
     {
         "id": "mission_indradhanush",
@@ -734,7 +773,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://www.immunizeindia.org/",
         "category": "Health",
-        "popularity": 85
+        "popularity": 85,
+        "is_dbt": False
     },
     {
         "id": "pm_devine",
@@ -750,7 +790,8 @@ SCHEMES_LIST = [
         "deadline": "Project Based",
         "apply_url": "https://mdoner.gov.in/pm-devine",
         "category": "Infrastructure",
-        "popularity": 60
+        "popularity": 60,
+        "is_dbt": True
     },
     {
         "id": "sagy",
@@ -766,7 +807,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://saanjhi.gov.in/",
         "category": "Infrastructure",
-        "popularity": 55
+        "popularity": 55,
+        "is_dbt": False
     },
     {
         "id": "swachh_bharat_token",
@@ -782,7 +824,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://swachhbharatmission.gov.in/",
         "category": "Welfare",
-        "popularity": 93
+        "popularity": 93,
+        "is_dbt": True
     },
     {
         "id": "pm_wani",
@@ -798,7 +841,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://pmwani.cdot.in/",
         "category": "Welfare",
-        "popularity": 68
+        "popularity": 68,
+        "is_dbt": False
     },
     {
         "id": "nats_apprenticeship",
@@ -814,7 +858,8 @@ SCHEMES_LIST = [
         "deadline": "Open",
         "apply_url": "https://nats.education.gov.in/",
         "category": "Skill Development",
-        "popularity": 77
+        "popularity": 77,
+        "is_dbt": True
     },
     {
         "id": "nmms_scholarship",
@@ -830,7 +875,8 @@ SCHEMES_LIST = [
         "deadline": "Nov 30",
         "apply_url": "https://scholarships.gov.in/",
         "category": "Education",
-        "popularity": 82
+        "popularity": 82,
+        "is_dbt": True
     },
     {
         "id": "pre_matric_minority",
@@ -846,7 +892,8 @@ SCHEMES_LIST = [
         "deadline": "Sept 30",
         "apply_url": "https://scholarships.gov.in/",
         "category": "Education",
-        "popularity": 79
+        "popularity": 79,
+        "is_dbt": True
     },
     {
         "id": "post_matric_minority",
@@ -862,7 +909,8 @@ SCHEMES_LIST = [
         "deadline": "Dec 31",
         "apply_url": "https://scholarships.gov.in/",
         "category": "Education",
-        "popularity": 80
+        "popularity": 80,
+        "is_dbt": True
     },
     {
         "id": "merit_cum_means_minority",
@@ -878,7 +926,8 @@ SCHEMES_LIST = [
         "deadline": "Oct 31",
         "apply_url": "https://scholarships.gov.in/",
         "category": "Education",
-        "popularity": 74
+        "popularity": 74,
+        "is_dbt": True
     },
     {
         "id": "usttad_scheme",
@@ -894,7 +943,8 @@ SCHEMES_LIST = [
         "deadline": "Rolling",
         "apply_url": "http://minorityaffairs.gov.in/schemes/usttad",
         "category": "Skill Development",
-        "popularity": 62
+        "popularity": 62,
+        "is_dbt": True
     },
     {
         "id": "svamitva_scheme",
@@ -910,7 +960,8 @@ SCHEMES_LIST = [
         "deadline": "Phase Wise",
         "apply_url": "https://svamitva.nic.in/",
         "category": "Legal",
-        "popularity": 71
+        "popularity": 71,
+        "is_dbt": False
     },
     {
         "id": "pm_kisan_maandhan",
@@ -928,7 +979,8 @@ SCHEMES_LIST = [
         "deadline": "Ongoing",
         "apply_url": "https://maandhan.in/pmkmy",
         "category": "Agriculture",
-        "popularity": 88
+        "popularity": 88,
+        "is_dbt": True
     }
 ]
 

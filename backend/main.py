@@ -8,7 +8,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import Response
-from backend.routes import eligibility, schemes, pdf, monetization, rejection_predictor
+from backend.routes import eligibility, schemes, pdf, monetization, rejection_predictor, dbt
 from backend.database import engine, Base
 from backend import db_models
 from backend.seed import seed_db
@@ -50,6 +50,7 @@ app.include_router(schemes.router, prefix="/api")
 app.include_router(pdf.router, prefix="/api")
 app.include_router(monetization.router, prefix="/api")
 app.include_router(rejection_predictor.router, prefix="/api")
+app.include_router(dbt.router, prefix="/api")
 
 # Serve Frontend
 frontend_path = os.path.join(os.getcwd(), "frontend")

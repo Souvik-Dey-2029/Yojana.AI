@@ -256,6 +256,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             currentSchemes = data.eligible_schemes;
             localStorage.setItem('eligibilityResults', JSON.stringify(currentSchemes));
 
+            // Save scheme IDs to sessionStorage for the DBT checker page
+            const schemeIds = currentSchemes.map(s => s.id);
+            sessionStorage.setItem('eligible_scheme_ids', JSON.stringify(schemeIds));
+
             // Show analyzer section if schemes found
             if (currentSchemes.length > 0 && analyzerSection) {
                 analyzerSection.style.display = 'block';
@@ -424,6 +428,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             grid.appendChild(card);
         });
+
+        // Inject DBT checker CTA if not already present
+        if (!document.getElementById('dbt-checker-cta')) {
+            const dbtBanner = document.createElement('div');
+            dbtBanner.id = 'dbt-checker-cta';
+            dbtBanner.style.cssText = 'grid-column: 1/-1; background: linear-gradient(135deg, rgba(4,106,56,0.06), rgba(255,153,51,0.06)); border: 1px solid rgba(4,106,56,0.15); border-radius: 16px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;';
+            dbtBanner.innerHTML = `
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <span style="font-size:2rem;">🏦</span>
+                    <div>
+                        <div style="font-weight:800; color:var(--ashoka-navy); font-size:0.95rem;">Check DBT Bank Compatibility</div>
+                        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Find which of your eligible schemes pay directly to your bank account.</div>
+                    </div>
+                </div>
+                <a href="dbt-checker.html" class="btn btn-primary" style="white-space:nowrap; font-size:0.88rem; padding:0.65rem 1.4rem;">Check Now →</a>
+            `;
+            grid.appendChild(dbtBanner);
+        }
     }
 
     // Search Logic

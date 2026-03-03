@@ -117,7 +117,8 @@ class EligibilityEngine:
                     deadline=scheme["deadline"],
                     apply_url=scheme["apply_url"],
                     popularity=scheme.get("popularity", 0),
-                    is_ml_recommended=(scheme["id"] in eligible_ids)
+                    is_ml_recommended=(scheme["id"] in eligible_ids),
+                    is_dbt=scheme.get("is_dbt", False)
                 ))
         
         return final_eligible_schemes

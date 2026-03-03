@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBT Compatibility Checker – Yojana.AI</title>
+    <meta name="description"
+        content="Instantly check which of your eligible government schemes pay via Direct Benefit Transfer and confirm your bank's DBT compatibility.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .dbt-hero {
+            padding: 120px 1.5rem 60px;
+            text-align: center;
+        }
+
+        .dbt-hero h1 {
+            font-size: 2.8rem;
+            color: var(--ashoka-navy);
+            margin-bottom: 1rem;
+        }
+
+        .dbt-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .dbt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(4, 106, 56, 0.08);
+            border: 1px solid rgba(4, 106, 56, 0.2);
+            color: var(--gov-green);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .dbt-form-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-premium);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .dbt-hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ashoka-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-soft);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gov-green);
+        }
+
+        .note-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Results */
+        #dbt-results {
+            display: none;
+        }
+
+        .compat-banner {
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            border: 1.5px solid;
+        }
+
+        .compat-banner.success {
+            background: rgba(4, 106, 56, 0.06);
+            border-color: rgba(4, 106, 56, 0.25);
+        }
+
+        .compat-banner.warning {
+            background: rgba(255, 153, 51, 0.06);
+            border-color: rgba(255, 153, 51, 0.3);
+        }
+
+        .compat-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .compat-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--ashoka-navy);
+            margin-bottom: 0.4rem;
+        }
+
+        .compat-detail {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .dbt-scheme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .dbt-scheme-chip {
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .dbt-scheme-chip:hover {
+            border-color: var(--gov-green);
+            box-shadow: 0 4px 14px rgba(4, 106, 56, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .chip-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .chip-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--ashoka-navy);
+            line-height: 1.3;
+        }
+
+        .chip-cat {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.1rem;
+        }
+
+        .chip-dbt-tag {
+            margin-left: auto;
+            padding: 0.2rem 0.5rem;
+            background: rgba(4, 106, 56, 0.08);
+            color: var(--gov-green);
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+        }
+
+        .no-dbt-msg {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            background: var(--bg-warm);
+            border-radius: 14px;
+            margin-bottom: 2rem;
+        }
+
+        /* Seeding Checklist */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checklist-item {
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--primary-saffron);
+            box-shadow: 0 4px 14px rgba(255, 153, 51, 0.08);
+        }
+
+        .checklist-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-saffron), var(--gov-green));
+            color: white;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .checklist-title {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--ashoka-navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .checklist-detail {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stat-strip {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: 99px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--ashoka-navy);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-pill span {
+            color: var(--gov-green);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">Yojana<span>.AI</span></a>
+        <div class="mobile-menu-toggle" id="mobile-toggle">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="eligibility.html" class="btn btn-primary">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="dbt-hero container">
+            <div class="dbt-badge">🏦 Direct Benefit Transfer Checker</div>
+            <h1>Is Your Bank <span style="color:var(--gov-green);">DBT-Ready?</span></h1>
+            <p>Find out which of your eligible schemes pay cash directly to your bank account, and get a personalised
+                Aadhaar seeding checklist.</p>
+        </section>
+
+        <section class="container" style="padding-bottom: 60px;">
+            <div class="dbt-form-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bank-name">Your Bank Name</label>
+                        <select id="bank-name">
+                            <option value="">-- Select Your Bank --</option>
+                            <optgroup label="Public Sector Banks">
+                                <option value="State Bank of India">State Bank of India (SBI)</option>
+                                <option value="Bank of Baroda">Bank of Baroda</option>
+                                <option value="Punjab National Bank">Punjab National Bank (PNB)</option>
+                                <option value="Canara Bank">Canara Bank</option>
+                                <option value="Union Bank of India">Union Bank of India</option>
+                                <option value="Bank of India">Bank of India</option>
+                                <option value="Central Bank of India">Central Bank of India</option>
+                                <option value="Indian Bank">Indian Bank</option>
+                                <option value="Indian Overseas Bank">Indian Overseas Bank</option>
+                                <option value="UCO Bank">UCO Bank</option>
+                                <option value="Bank of Maharashtra">Bank of Maharashtra</option>
+                                <option value="Punjab and Sind Bank">Punjab and Sind Bank</option>
+                                <option value="IDBI Bank">IDBI Bank</option>
+                            </optgroup>
+                            <optgroup label="Private Sector Banks">
+                                <option value="HDFC Bank">HDFC Bank</option>
+                                <option value="ICICI Bank">ICICI Bank</option>
+                                <option value="Axis Bank">Axis Bank</option>
+                                <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                                <option value="Yes Bank">Yes Bank</option>
+                                <option value="IndusInd Bank">IndusInd Bank</option>
+                                <option value="IDFC First Bank">IDFC First Bank</option>
+                                <option value="Federal Bank">Federal Bank</option>
+                                <option value="South Indian Bank">South Indian Bank</option>
+                                <option value="Karur Vysya Bank">Karur Vysya Bank</option>
+                                <option value="Karnataka Bank">Karnataka Bank</option>
+                                <option value="City Union Bank">City Union Bank</option>
+                                <option value="Tamilnad Mercantile Bank">Tamilnad Mercantile Bank</option>
+                                <option value="DCB Bank">DCB Bank</option>
+                                <option value="RBL Bank">RBL Bank</option>
+                                <option value="Dhanlaxmi Bank">Dhanlaxmi Bank</option>
+                                <option value="Nainital Bank">Nainital Bank</option>
+                                <option value="Catholic Syrian Bank">Catholic Syrian Bank</option>
+                            </optgroup>
+                            <optgroup label="Small Finance Banks">
+                                <option value="AU Small Finance Bank">AU Small Finance Bank</option>
+                                <option value="Equitas Small Finance Bank">Equitas Small Finance Bank</option>
+                                <option value="Ujjivan Small Finance Bank">Ujjivan Small Finance Bank</option>
+                                <option value="Jana Small Finance Bank">Jana Small Finance Bank</option>
+                                <option value="Fincare Small Finance Bank">Fincare Small Finance Bank</option>
+                                <option value="Bandhan Bank">Bandhan Bank</option>
+                            </optgroup>
+                            <optgroup label="Payments & Post Office Banks">
+                                <option value="India Post Payments Bank">India Post Payments Bank (IPPB)</option>
+                                <option value="Airtel Payments Bank">Airtel Payments Bank</option>
+                                <option value="Post Office Savings Bank">Post Office Savings Bank</option>
+                            </optgroup>
+                            <optgroup label="Regional Rural Banks">
+                                <option value="Gramin Bank">Regional Rural Bank / Gramin Bank</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="account-type">Account Type</label>
+                        <select id="account-type">
+                            <option value="Savings">Savings Account</option>
+                            <option value="Current">Current Account</option>
+                            <option value="Jan Dhan">Jan Dhan Account</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="check-btn" onclick="runDBTCheck()"
+                    style="width:100%; font-size:1rem;">
+                    🔍 Check DBT Compatibility
+                </button>
+                <p class="note-text">💡 Already checked eligibility? Your DBT-linked schemes will be pre-loaded
+                    automatically.</p>
+            </div>
+
+            <div class="loading-spinner" id="loading">⏳ Checking DBT status…</div>
+
+            <div id="dbt-results">
+                <!-- Injected by JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="mega-footer">
+        <div class="container footer-main-content" style="padding: 2rem 1.5rem;">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 1rem; display: block;">Yojana<span>.AI</span></a>
+                <p>Advanced Public Assistance Engine for Indian citizens.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eligibility.html">Check Eligibility</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Pre-load eligible scheme IDs from sessionStorage (set by results page)
+        const savedSchemeIds = JSON.parse(sessionStorage.getItem('eligible_scheme_ids') || '[]');
+
+        async function runDBTCheck() {
+            const bankName = document.getElementById('bank-name').value.trim();
+            const accountType = document.getElementById('account-type').value;
+
+            if (!bankName) {
+                const sel = document.getElementById('bank-name');
+                sel.style.borderColor = 'var(--primary-saffron)';
+                sel.focus();
+                return;
+            }
+            document.getElementById('bank-name').style.borderColor = '';
+
+            const btn = document.getElementById('check-btn');
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('dbt-results');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Checking…';
+            loading.style.display = 'block';
+            results.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/dbt-check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        bank_name: bankName,
+                        account_type: accountType,
+                        eligible_scheme_ids: savedSchemeIds
+                    })
+                });
+
+                if (!response.ok) throw new Error('Server error');
+                const data = await response.json();
+                renderResults(data);
+
+            } catch (err) {
+                results.innerHTML = `<div class="compat-banner warning">
+                    <div class="compat-icon">⚠️</div>
+                    <div><div class="compat-title">Connection Error</div>
+                    <div class="compat-detail">Could not reach the server. Please ensure the backend is running and try again.</div></div>
+                </div>`;
+                results.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+                btn.disabled = false;
+                btn.textContent = '🔍 Check DBT Compatibility';
+            }
+        }
+
+        function renderResults(data) {
+            const results = document.getElementById('dbt-results');
+            const isDiscovery = savedSchemeIds.length === 0;
+
+            // Compatibility banner
+            const bannerClass = data.is_bank_compatible ? 'success' : 'warning';
+            const bannerIcon = data.is_bank_compatible ? '🏦' : '⚠️';
+            const bannerTitle = data.is_bank_compatible
+                ? `${data.bank_name} — DBT Compatible`
+                : `Bank Not Verified`;
+
+            // Stat strip
+            const statStrip = `
+                <div class="stat-strip">
+                    <div class="stat-pill">DBT-linked schemes found: <span>${data.total_dbt_schemes}</span></div>
+                    <div class="stat-pill">Bank: <span>${data.bank_name}</span></div>
+                    <div class="stat-pill">Account: <span>${data.account_type}</span></div>
+                </div>`;
+
+            // Scheme chips
+            let schemeHTML = '';
+            if (data.dbt_schemes.length === 0) {
+                schemeHTML = `<div class="no-dbt-msg">
+                    ${isDiscovery
+                        ? '🔍 No DBT schemes found. <a href="eligibility.html">Run an eligibility check first</a> to see your personalised DBT schemes.'
+                        : '✅ None of your eligible schemes use DBT — benefits may come as services (e.g. health cover, meals) rather than cash transfers.'}
+                </div>`;
+            } else {
+                schemeHTML = `<div class="dbt-scheme-grid">` +
+                    data.dbt_schemes.map(s => `
+                        <div class="dbt-scheme-chip">
+                            <div class="chip-icon">${s.icon}</div>
+                            <div>
+                                <div class="chip-name">${s.name}</div>
+                                <div class="chip-cat">${s.category}</div>
+                            </div>
+                            <div class="chip-dbt-tag">DBT</div>
+                        </div>`).join('') +
+                    `</div>`;
+            }
+
+            // Seeding checklist
+            const checklistHTML = data.seeding_checklist.map(item => `
+                <div class="checklist-item">
+                    <div class="checklist-num">${item.step}</div>
+                    <div>
+                        <div class="checklist-title">${item.icon} ${item.title}</div>
+                        <div class="checklist-detail">${item.detail}</div>
+                    </div>
+                </div>`).join('');
+
+            results.innerHTML = `
+                <div class="institutional-panel">
+                    <div class="compat-banner ${bannerClass}">
+                        <div class="compat-icon">${bannerIcon}</div>
+                        <div>
+                            <div class="compat-title">${bannerTitle}</div>
+                            <div class="compat-detail">${data.compatibility_note}</div>
+                        </div>
+                    </div>
+
+                    ${statStrip}
+
+                    <div class="section-label">
+                        ${isDiscovery ? '📋 All DBT-Enabled Schemes (Discovery Mode)' : '📋 Your Eligible DBT-Linked Schemes'}
+                    </div>
+                    ${schemeHTML}
+
+                    <div class="section-label" style="margin-top: 2rem;">✅ Aadhaar Bank Seeding Checklist</div>
+                    <div class="checklist">${checklistHTML}</div>
+
+                    <div style="text-align:center; margin-top:2rem;">
+                        <a href="eligibility.html" class="btn btn-primary" style="margin-right:1rem;">Run Eligibility Check</a>
+                        <button class="btn glass" onclick="window.print()">🖨 Print Checklist</button>
+                    </div>
+                </div>`;
+
+            results.style.display = 'block';
+            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // No URL param pre-fill needed — bank is now a dropdown
+    </script>
+</body>
+
+</html>

@@ -25,6 +25,7 @@ class SchemeResult(BaseModel):
     apply_url: str
     popularity: int = 0
     is_ml_recommended: bool = False
+    is_dbt: bool = False
 
 class EligibilityResponse(BaseModel):
     eligible_schemes: List[SchemeResult]
