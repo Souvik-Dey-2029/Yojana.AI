@@ -68,7 +68,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.mudra.org.in/",
         "category": "Finance",
         "popularity": 92,
-        "is_dbt": False,
+        "is_dbt": True,
         "guidance_steps": [
             "Identify the category (Shishu, Kishore, Tarun) based on loan amount.",
             "Download the Mudra loan application form from the website.",
@@ -111,7 +111,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmjay.gov.in/",
         "category": "Health",
         "popularity": 98,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_awas_yojana",
@@ -128,7 +128,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmaymis.gov.in/",
         "category": "Housing",
         "popularity": 96,
-        "is_dbt": False,
+        "is_dbt": True,
         "guidance_steps": [
             "Check the eligible category (EWS, LIG, MIG) based on your annual household income.",
             "Apply online via pmaymis.gov.in or through a registered bank/HFC.",
@@ -241,7 +241,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.standupmitra.in/",
         "category": "Finance",
         "popularity": 78,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_vishwakarma",
@@ -277,7 +277,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.indiapost.gov.in/",
         "category": "Finance",
         "popularity": 91,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_poshan",
@@ -296,7 +296,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmposhan.education.gov.in/",
         "category": "Social Welfare",
         "popularity": 93,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "startup_india_learning",
@@ -313,7 +313,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.startupindia.gov.in/content/sih/en/learning-and-development_v2.html",
         "category": "Education",
         "popularity": 75,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "atal_pension",
@@ -421,7 +421,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmjdy.gov.in/",
         "category": "Finance",
         "popularity": 99,
-        "is_dbt": False,
+        "is_dbt": True,
         "guidance_steps": [
             "Visit any bank branch or Bank Mitras (Business Correspondents).",
             "Fill out the account opening form.",
@@ -482,7 +482,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmshrischools.education.gov.in/",
         "category": "Education",
         "popularity": 79,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "naps_apprenticeship",
@@ -517,7 +517,7 @@ SCHEMES_LIST = [
         "apply_url": "https://nfsa.gov.in/",
         "category": "Food Security",
         "popularity": 92,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_pvtg_mission",
@@ -577,7 +577,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.indiapost.gov.in/",
         "category": "Finance",
         "popularity": 83,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_ebus_sewa",
@@ -594,7 +594,7 @@ SCHEMES_LIST = [
         "apply_url": "https://mohua.gov.in/",
         "category": "Infrastructure",
         "popularity": 70,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_fme_scheme",
@@ -721,7 +721,7 @@ SCHEMES_LIST = [
         "apply_url": "https://nfsa.gov.in/",
         "category": "Food Security",
         "popularity": 98,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "beti_bachao_beti_padhao",
@@ -739,7 +739,7 @@ SCHEMES_LIST = [
         "apply_url": "https://wcd.nic.in/bbbp-schemes",
         "category": "Social Welfare",
         "popularity": 91,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "janani_suraksha",
@@ -774,7 +774,7 @@ SCHEMES_LIST = [
         "apply_url": "https://www.immunizeindia.org/",
         "category": "Health",
         "popularity": 85,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_devine",
@@ -808,7 +808,7 @@ SCHEMES_LIST = [
         "apply_url": "https://saanjhi.gov.in/",
         "category": "Infrastructure",
         "popularity": 55,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "swachh_bharat_token",
@@ -842,7 +842,7 @@ SCHEMES_LIST = [
         "apply_url": "https://pmwani.cdot.in/",
         "category": "Welfare",
         "popularity": 68,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "nats_apprenticeship",
@@ -961,7 +961,7 @@ SCHEMES_LIST = [
         "apply_url": "https://svamitva.nic.in/",
         "category": "Legal",
         "popularity": 71,
-        "is_dbt": False
+        "is_dbt": True
     },
     {
         "id": "pm_kisan_maandhan",
