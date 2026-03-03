@@ -42,14 +42,20 @@ body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
-    background-color: #F4F7F9;
-    /* --- VIVID LAYERED TRICOLOR MESH --- */
+    /* --- INDIAN TRICOLOR TINT --- */
     background:
-        radial-gradient(at 0% 0%, rgba(255, 122, 0, 0.04) 0px, transparent 55%),
-        radial-gradient(at 100% 100%, rgba(4, 106, 56, 0.04) 0px, transparent 55%),
-        radial-gradient(at 100% 0%, rgba(4, 106, 56, 0.04) 0px, transparent 40%),
-        radial-gradient(at 0% 100%, rgba(255, 122, 0, 0.04) 0px, transparent 40%),
-        radial-gradient(at 50% 50%, var(--navy-tint) 0px, transparent 70%),
+        /* Horizontal stripe: saffron top → white → green bottom */
+        linear-gradient(to bottom,
+            rgba(255, 153, 51, 0.13) 0%,
+            transparent 22%,
+            transparent 78%,
+            rgba(19, 136, 8, 0.13) 100%),
+        /* Corner radials for depth */
+        radial-gradient(ellipse at 0% 0%, rgba(255, 153, 51, 0.17) 0px, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(19, 136, 8, 0.17) 0px, transparent 50%),
+        radial-gradient(ellipse at 100% 0%, rgba(19, 136, 8, 0.11) 0px, transparent 40%),
+        radial-gradient(ellipse at 0% 100%, rgba(255, 153, 51, 0.11) 0px, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 0, 128, 0.04) 0px, transparent 65%),
         #F4F7F9;
     background-attachment: fixed;
     min-height: 100vh;
@@ -98,13 +104,24 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    /* Warm saffron-cream — distinct from page bg, matches tricolor border */
+    background: rgba(255, 243, 200, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: var(--shadow-sm);
+    /* Tricolor bottom border: saffron | white | green */
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right,
+            #FF9933 0%,
+            #FF9933 33%,
+            #ffffff 33%,
+            #ffffff 66%,
+            #138808 66%,
+            #138808 100%) 1;
+    box-shadow: 0 2px 20px rgba(255, 153, 51, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
 }
 
