@@ -92,9 +92,10 @@ SCHEME_PROFILES = {
         "doc_count": 2,
     },
     "startup_india_learning": {
-        "fields": [],  # Just needs email, near-certain
-        "base_acceptance": 97,
+        "fields": [],  # Online registration portal — no approval process
+        "base_acceptance": 89,
         "doc_count": 1,
+        "awareness_only": True,  # Score shown as "Registration Likely" not "Approval"
     },
     "atal_pension": {
         "fields": ["aadhaar_name_match", "bank_account_seeded", "mobile_linked"],
@@ -153,7 +154,7 @@ SCHEME_PROFILES = {
     },
     "agnipath_scheme": {
         "fields": ["aadhaar_name_match", "address_match", "photo_correct", "self_attested_docs"],
-        "base_acceptance": 35,
+        "base_acceptance": 30,  # Real defence selection rates are ~30-35%; document-readiness alone does not guarantee selection
         "doc_count": 3,
     },
     "mahila_samman_savings": {
@@ -202,9 +203,10 @@ SCHEME_PROFILES = {
         "doc_count": 1,
     },
     "beti_bachao_beti_padhao": {
-        "fields": ["aadhaar_name_match", "address_match"],
+        "fields": [],
         "base_acceptance": 91,
         "doc_count": 1,
+        "awareness_only": True,  # Government awareness campaign — no individual cash approval
     },
     "janani_suraksha": {
         "fields": ["aadhaar_name_match", "bank_account_seeded", "category_certificate_valid"],
@@ -212,9 +214,10 @@ SCHEME_PROFILES = {
         "doc_count": 2,
     },
     "mission_indradhanush": {
-        "fields": ["aadhaar_name_match", "address_match"],
+        "fields": [],
         "base_acceptance": 93,
         "doc_count": 1,
+        "awareness_only": True,  # National immunization drive — no individual approval score applicable
     },
     "pm_devine": {
         "fields": ["aadhaar_name_match", "address_match", "self_attested_docs"],
@@ -233,8 +236,9 @@ SCHEME_PROFILES = {
     },
     "pm_wani": {
         "fields": ["aadhaar_name_match"],
-        "base_acceptance": 95,
+        "base_acceptance": 88,
         "doc_count": 1,
+        "awareness_only": True,  # WiFi access hotspot scheme — no individual approval process
     },
     "nats_apprenticeship": {
         "fields": ["aadhaar_name_match", "photo_correct", "self_attested_docs"],
@@ -317,7 +321,7 @@ class PredictionResults(BaseModel):
 
 class SchemeScore(BaseModel):
     scheme_id: str
-    score: float
+    score: Optional[float]   # None for awareness/campaign schemes
     risk_level: str
     suggestions: List[str]
 
@@ -336,6 +340,15 @@ def _compute_scheme_score(compliance: dict, scheme_id: str) -> dict:
     profile = SCHEME_PROFILES.get(scheme_id, DEFAULT_PROFILE)
     relevant_fields = profile["fields"]
     base = profile["base_acceptance"]
+
+    # For awareness/campaign schemes, approval probability doesn't apply
+    if profile.get("awareness_only"):
+        return {
+            "score": None,
+            "risk_level": "N/A",
+            "suggestions": ["This is an awareness/access scheme. No individual approval is required — just register or visit a participating centre."],
+            "compliance_ratio": 1.0
+        }
 
     # Suggestions for issues found
     suggestions = []
